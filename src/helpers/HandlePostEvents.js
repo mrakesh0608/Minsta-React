@@ -88,7 +88,7 @@ const handleSave = (e, post, setPost) => {
 //Save Post -End
 const update_Post_In_Server = (post) => {
 
-    fetch('http://minsta-server.herokuapp.com'+'/posts/' + post._id, {
+    fetch('https://minsta-server.herokuapp.com'+'/posts/' + post._id, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(post)

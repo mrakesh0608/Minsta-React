@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const url = 'http://minsta-server.herokuapp.com';
+const url = 'https://minsta-server.herokuapp.com';
 // const url = 'http://localhost:8000';
 
 const MethodLoad = (method, payload) => {
