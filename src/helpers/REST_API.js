@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+const url = 'http://minsta-server.herokuapp.com';
+
 const MethodLoad = (method, payload) => {
     
     if (method === "GET" || method === "DELETE") {
@@ -24,7 +26,7 @@ const REST_API_Async = ({ path, method, payload }) => {
     // console.log(path, load);
     useEffect(() => {
 
-        fetch(path, load)
+        fetch(url+path, load)
             .then(res => {
                 if (!res.ok) throw Error(res.statusText);
                 return res.json()
@@ -49,7 +51,7 @@ const REST_API_Sync = async ({ path, method, payload }) => {
     if(!load.method) return {err:load};
 
     try {
-        const fetchRes = await fetch(path, load);
+        const fetchRes = await fetch(url+path, load);
         const result = await fetchRes.json()
         console.log('Success:', result);
         return { result };
