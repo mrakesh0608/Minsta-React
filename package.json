@@ -1,5 +1,6 @@
 {
-    "proxy":"http://localhost:8000",
+    "proxy100":"http://localhost:8000",
+    "proxy":"https://minsta-server.herokuapp.com",
     "name": "minsta-react",
     "version": "0.1.0",
     "private": true,
