@@ -73,7 +73,7 @@
     height: 100%;
 }
 
-.post-content .img-div img {
+/* .post-content .ani img {
     animation: fadein 1s;
 }
 
@@ -85,7 +85,7 @@
     to {
         opacity: 1;
     }
-}
+} */
 
 /* Post Content Ends */
 
