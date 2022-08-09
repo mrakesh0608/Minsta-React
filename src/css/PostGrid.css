@@ -1,0 +1,80 @@
+#Post-Grid-container {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 2px;
+    column-gap: 2px;
+}
+
+.Post-Grid-container-content {
+    width: 100%;
+    height: 33.3vw;
+}
+
+.Post-Grid-container-content img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: fadein 1.5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.Post-Grid-container-content img:active {
+    transition: 0.3s ease;
+    transform: scale(0.8);
+    opacity: 0.4;
+    object-fit: contain;
+    z-index: 1;
+}
+
+#db-post {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#db-post img {
+    width: 85vw;
+    height: 80vh;
+    object-fit: contain;
+}
+#db-post .close{
+    padding: 10px 14px;
+    z-index: 100;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    border-radius: 50%;
+    background-color: white;
+}
+@media(min-width:650px) {
+    #Post-Grid-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .Post-Grid-container-content {
+        height: 25vw;
+    }
+
+    #db-post img {
+        width: 50vw;
+    }
+}

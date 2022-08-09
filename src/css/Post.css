@@ -1,0 +1,137 @@
+/* Post Start */
+.post {
+    max-width: 100%;
+    border-bottom: 1px rgb(221, 220, 220) solid;
+}
+
+.post-meta {
+    padding: 5px 10px;
+}
+
+.post-meta-icons-div {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+.no-margin-right{
+    margin-right: 0;
+}
+.post img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* Post Meta Head Start*/
+.post-meta-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+}
+
+.post-user-img {
+    padding: 2px;
+    border: 1px var(--textColor) solid;
+    border-radius: 50%;
+}
+
+/* Post Meta Head End*/
+/* Post Content Start */
+.post-content {
+    position: relative;
+    background-color: gray;
+}
+.post-content .img-div{
+    width: 100%;
+    height: 100%;
+}
+/* Post Content Ends */
+
+/* Like Animation Start */
+.ani-like {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    transform: scale(0.5);
+}
+
+/* Like Animation Ends */
+
+/* Post Meta Bottom Start*/
+.post-meta-bottom>div {
+    padding-bottom: 5px;
+}
+
+.post-meta-bottom-1,
+.post-meta-bottom-1-1 {
+    display: flex;
+    align-items: center;
+}
+
+.post-meta-bottom-1 {
+    justify-content: space-between;
+}
+
+.post-meta-bottom-2 .time {
+    font-size: 14px;
+    color: #8E8E8E;
+}
+
+.post-meta-head .username,
+.post-meta-bottom-2 .username {
+    font-weight: 600;
+}
+
+/* Post Meta Bottom End*/
+
+@media(min-width:600px) {
+    .post-content {
+        height: 350px;
+    }
+
+    .post-content-img {
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-content .bgImgblur {
+        height: 98%;
+        width: 100%;
+        filter: blur(8px);
+        z-index: 1;
+        position: absolute;
+        top: 4px;
+        left: 0;
+        object-fit: cover;
+    }
+
+    .post-content img {
+        pointer-events: none;
+        cursor: pointer;
+    }
+}
+
+@media(max-width:600px) {
+    .post-meta-icons-div img {
+        pointer-events: none;
+        cursor: pointer;
+    }
+
+    .post-content img {
+        pointer-events: none;
+        cursor: pointer;
+    }
+
+    .post-content .img-load {
+        height: 250px;
+    }
+}
+
+/* Post End */

@@ -1,0 +1,51 @@
+/* Nav Start */
+.nav-head,
+.nav-bottom {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--bgColor);
+}
+
+.nav-head {
+    justify-content: space-between;
+    border-bottom: 1px gray solid;
+    padding: 5px 10px;
+}
+
+.nav-bottom {
+    justify-content: space-evenly;
+    border-top: 1px gray solid;
+    padding: 5px 0;
+}
+
+.nav-icons img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+@media(max-width:600px) {
+    .nav-icons img {
+        pointer-events: none;
+        cursor: pointer;
+    }
+}
+
+.hideOnScroll {
+    z-index: 5;
+}
+
+.hideOnScroll-head {
+    position: sticky;
+    top: 0;
+}
+
+.hideOnScroll-bottom {
+    position: fixed;
+    bottom: 0;
+}
+
+/*Nav End */

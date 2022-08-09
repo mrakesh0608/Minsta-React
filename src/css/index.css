@@ -1,0 +1,77 @@
+/* Theme Color Starts */
+:root {
+    --bgColor: white;
+    --textColor: black;
+    --invertStrength: 0;
+    --bgLightColor : gainsboro;
+}
+.nav-icons img,
+.more-icons,
+.icons{
+
+    filter: invert(var(--invertStrength));
+}
+.notInvertIcons{
+    filter: invert(0);
+}
+
+/* Theme Color Ends */
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+    transition: all .05s;
+}
+
+body {
+    max-width: 100vw;
+    min-height: 100vh;
+    margin-bottom: 80px;
+    background-color: var(--bgColor);
+    color: var(--textColor);
+}
+
+a {
+    text-decoration: none;
+    color: var(--textColor);
+}
+
+.logo-text {
+    font-family: cursive;
+}
+
+.post-meta-icons-div:active,
+.nav-icons:active {
+    opacity: 0.8;
+    transition: 0.1s ease-in;
+    transform: scale(1.1);
+}
+
+.loading,
+.err-msg,
+.load-more,
+.img-load {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+}
+
+.loading,
+.err-msg {
+    min-height: 80vh;
+}
+
+.loading p,
+.err-msg p {
+    font-size: 20px;
+}
+
+.img-load {
+    background-color: var(--bgLightColor);
+    font-weight: 400;
+}

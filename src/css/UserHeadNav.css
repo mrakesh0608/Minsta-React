@@ -1,0 +1,7 @@
+.user-head-2 {
+    display: flex;
+}
+
+.user-head-2>* {
+    margin-left: 10px;
+}
