@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const url = 'http://minsta-server.herokuapp.com';
+// const url = 'http://localhost:8000';
 
 const MethodLoad = (method, payload) => {
     
@@ -38,6 +39,7 @@ const REST_API_Async = ({ path, method, payload }) => {
                 setError(null);
             })
             .catch(err => {
+                console.error(err);
                 setIsPending(false);
                 setError(err.message);
             });
