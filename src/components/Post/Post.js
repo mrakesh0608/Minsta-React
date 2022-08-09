@@ -72,7 +72,11 @@ const Post = ({ post: data }) => {
             {postMore &&
                 <div className="PostMore">
                     <div className="list">
-                        <div onClick={(e)=>handleDelete(e,post._id)}>Delete this post</div>
+                        <div onClick={(e)=>{
+                            handleDelete(e,post._id);
+                            setPostMore(false);
+                            HideScroll(false);
+                            }}>Delete this post</div>
                         <div onClick={()=>alert('this feature is not working now...')}>Report</div>
                         <div onClick={() => {
                             setPostMore(false);

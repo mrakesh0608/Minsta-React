@@ -3,7 +3,7 @@ import { lazy, useEffect, useState, Suspense } from 'react';
 import NoPostAvailable from 'components/Post/NoPostAvailable';
 
 import { ScrollLoad } from 'helpers/HandleScroll';
-import {REST_API_Async,REST_API_Sync} from 'helpers/REST_API';
+import { REST_API_Async, REST_API_Sync } from 'helpers/REST_API';
 
 const Post = lazy(() => import('./Post'));
 
@@ -11,7 +11,7 @@ const PostList = () => {
 
     const limit = 4;
 
-    const { data: posts, setData: setPosts, isPending, isError } = REST_API_Async({path:'/posts?' + new URLSearchParams({skip: 0,limit: limit}),method:"GET"});
+    const { data: posts, setData: setPosts, isPending, isError } = REST_API_Async({ path: '/posts?' + new URLSearchParams({ skip: 0, limit: limit }), method: "GET" });
 
     const [isScrollLoad, setIsScrollLoad] = useState(false);
     useEffect(() => {
@@ -21,8 +21,8 @@ const PostList = () => {
     const [noMorePosts, setNoMorePosts] = useState(false);
     let pages = 1;
     const LoadMore = async () => {
-        const data = await REST_API_Sync({path:'/posts?skip=' + pages*limit + '&limit=' + limit,method:"GET"});
-        if(data.result){
+        const data = await REST_API_Sync({ path: '/posts?skip=' + pages * limit + '&limit=' + limit, method: "GET" });
+        if (data.result) {
             pages++;
             const NewPosts = data.result;
             if (NewPosts.length === 0) setNoMorePosts(true);
@@ -30,7 +30,7 @@ const PostList = () => {
             // console.log(NewPosts);
             setIsScrollLoad(false);
         }
-        else console.log("error",data);
+        else console.log("error", data);
     }
 
     return (
@@ -49,18 +49,18 @@ const PostList = () => {
                             }
                         </Suspense>
                     }
-                    {!isPending && (isScrollLoad || posts.length < 4) &&
-                        (noMorePosts ? <NoPostAvailable more={'More'} /> : (LoadMore() &&
+                    {!isPending &&
+                        noMorePosts ? <NoPostAvailable more={'More'} /> :
+                        (
+                            (isScrollLoad || (posts && posts.length < 4)) && LoadMore() &&
                             <div className='load-more'>
                                 <h3>Loading ...</h3>
                                 <div style={{ height: '80px' }}></div>
                             </div>
                         )
-                        )
                     }
                 </div>
             }
-
         </div>
     );
 }

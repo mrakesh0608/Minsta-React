@@ -101,15 +101,21 @@ const update_Post_In_Server = (post) => {
 
 //Delete Post
 const handleDelete = (e, id) => {
+    const post = e.target.closest('.post');
+    post.classList.add('disapear');
+
     fetch(url + '/posts/' + id, {method: 'DELETE'})
     .then(res => {
         if (res.ok) {
+            setInterval(()=>{
+                post.remove();
+            },1500);
             console.log('post deleted');
-            e.target.closest('.post').remove()
         }
         else {
             console.log(res);
-            alert('something went wrong');
+            alert('error')
+            post.classList.remove('disapear');
         }
     })
 }

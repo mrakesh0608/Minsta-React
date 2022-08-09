@@ -2,8 +2,17 @@
 .post {
     max-width: 100%;
     border-bottom: 1px rgb(221, 220, 220) solid;
+    transition: all 1s;
 }
-
+.disapear{
+    animation: fadeout 2s;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+}
+@keyframes fadeout {
+    from{height: 200px;}
+    to{height: 0;}
+}
 .post-meta {
     padding: 5px 10px;
 }
@@ -51,6 +60,13 @@
 .post-content .img-div{
     width: 100%;
     height: 100%;
+}
+.post-content .img-div img{
+    animation: fadein 1s;
+}
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 /* Post Content Ends */
 
@@ -102,12 +118,12 @@
     }
 
     .post-content .bgImgblur {
-        height: 98%;
+        height: 95%;
         width: 100%;
         filter: blur(8px);
         z-index: 1;
         position: absolute;
-        top: 4px;
+        top: 8px;
         left: 0;
         object-fit: cover;
     }
@@ -144,9 +160,15 @@
     top: 0;
     z-index: 15;
     
+    animation: fade 0.5s;
+
     display: flex;
     justify-content: center;
     align-items: center;
+}
+@keyframes fade {
+    from{opacity: 0%}
+    to{opacity: 100%;}
 }
 .PostMore .list{
     background-color: var(--bgColor);
