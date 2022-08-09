@@ -1,4 +1,5 @@
 import { iconPath ,url} from './Path';
+
 //Like Start
 const handleLikes = (e, post, setPost) => {
     if (post.liked_users.includes("rakesh")) {
@@ -100,15 +101,16 @@ const update_Post_In_Server = (post) => {
 }
 
 //Delete Post
-const handleDelete = (e, id) => {
+const handleDelete = (e, id,history) => {
     const post = e.target.closest('.post');
     post.classList.add('disapear');
 
     fetch(url + '/posts/' + id, {method: 'DELETE'})
     .then(res => {
         if (res.ok) {
-            setInterval(()=>{
+            setTimeout(()=>{
                 post.remove();
+                history.push('/');
             },1500);
             console.log('post deleted');
         }

@@ -8,7 +8,7 @@ import { handleLikes, handleShare, handleSave ,handleDelete} from 'helpers/Handl
 import { iconPath } from 'helpers/Path';
 import { timeDiff } from 'helpers/timeDiff';
 import { HideScroll } from 'helpers/HandleScroll';
-
+import { useHistory } from 'react-router-dom';
 import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
 
@@ -17,6 +17,7 @@ const Post = ({ post: data }) => {
     const [post, setPost] = useState(data);
 
     const [postMore, setPostMore] = useState(false);
+    const history = useHistory();
 
     return (
         <div className="post" key={post._id}>
@@ -73,7 +74,7 @@ const Post = ({ post: data }) => {
                 <div className="PostMore">
                     <div className="list">
                         <div onClick={(e)=>{
-                            handleDelete(e,post._id);
+                            handleDelete(e,post._id,history);
                             setPostMore(false);
                             HideScroll(false);
                             }}>Delete this post</div>

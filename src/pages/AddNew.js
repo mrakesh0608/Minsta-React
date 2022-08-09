@@ -25,8 +25,9 @@ const AddNew = () => {
 
         const data = await convertBase64(e.target.files[0]);
 
-        setImgData(data);
         setSelectedFile(e.target.files[0]);
+        setQuote(e.target.files[0].name);
+        setImgData(data);
         setIsSelected(true);
         setIsSelectedPending(false);
     };
@@ -78,7 +79,7 @@ const AddNew = () => {
                     {isSelected &&
                         <div>
                             {!uploading && !uploaded && <div>
-                                <label htmlFor="qoute">About
+                                <label htmlFor="qoute">Quote
                                 </label>
                                 <input type="text" name="quote"
                                     value={quote}
