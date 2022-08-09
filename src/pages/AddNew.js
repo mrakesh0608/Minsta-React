@@ -36,7 +36,7 @@ const AddNew = () => {
 
         const imgPostData = { "imgName": selectedFile.name, imgData, "used": false }
 
-        const imgPostResult = await REST_API_Sync({path:'post-img',method:"POST",payload: imgPostData});
+        const imgPostResult = await REST_API_Sync({path:'/post-img',method:"POST",payload: imgPostData});
         // console.log("res-img", imgPostResult);
 
         if (imgPostResult.result) {
@@ -50,11 +50,11 @@ const AddNew = () => {
                 "liked_users": [],
                 "saved_users": []
             }
-            const result2 = await REST_API_Sync({path:'posts',method:"POST",payload: post});
+            const result2 = await REST_API_Sync({path:'/posts',method:"POST",payload: post});
             setUploading(false);
-            setUploaded(result2.result.id);
+            setUploaded(result2.result._id);
             setTimeout(() => {
-                history.push('post/' + result2.result.id);
+                history.push('/posts/' + result2.result._id);
 
             }, 1000);
         }

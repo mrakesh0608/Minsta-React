@@ -135,3 +135,30 @@
 }
 
 /* Post End */
+/* Post More Starts */
+.PostMore{
+    background-color: rgba(0, 0, 0,0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 15;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.PostMore .list{
+    background-color: var(--bgColor);
+    padding: 12px;
+    border-radius: 8px;
+}
+.PostMore .list div{
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--bgLightColor);
+    border-radius: 5px;
+}
+/* Post More Ends */

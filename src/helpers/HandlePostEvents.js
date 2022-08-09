@@ -1,4 +1,4 @@
-import { iconPath } from './Path';
+import { iconPath ,url} from './Path';
 //Like Start
 const handleLikes = (e, post, setPost) => {
     if (post.liked_users.includes("rakesh")) {
@@ -88,14 +88,30 @@ const handleSave = (e, post, setPost) => {
 //Save Post -End
 const update_Post_In_Server = (post) => {
 
-    fetch('https://minsta-server.herokuapp.com'+'/posts/' + post._id, {
+    fetch( url + '/posts/' + post._id, {
         method: 'PATCH',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(post)
 
     }).then(res => {
         if (res.ok) console.log('post updated')
-        // else console.log(res);
+        else console.log(res);
     })
 }
-export { handleLikes, handleShare, handleSave };
+
+//Delete Post
+const handleDelete = (e, id) => {
+    fetch(url + '/posts/' + id, {method: 'DELETE'})
+    .then(res => {
+        if (res.ok) {
+            console.log('post deleted');
+            e.target.closest('.post').remove()
+        }
+        else {
+            console.log(res);
+            alert('something went wrong');
+        }
+    })
+}
+
+export { handleLikes, handleShare, handleSave, handleDelete };

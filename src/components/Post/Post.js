@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { PostImg } from './PostImg';
 import 'css/Post.css'
 
-import { handleLikes, handleShare, handleSave } from 'helpers/HandlePostEvents';
+import { handleLikes, handleShare, handleSave ,handleDelete} from 'helpers/HandlePostEvents';
 import { iconPath } from 'helpers/Path';
 import { timeDiff } from 'helpers/timeDiff';
+import { HideScroll } from 'helpers/HandleScroll';
 
 import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
@@ -14,6 +15,9 @@ PreLoad();
 const Post = ({ post: data }) => {
 
     const [post, setPost] = useState(data);
+
+    const [postMore, setPostMore] = useState(false);
+
     return (
         <div className="post" key={post._id}>
             <div className="post-meta post-meta-head">
@@ -23,7 +27,12 @@ const Post = ({ post: data }) => {
                     </div>
                     <div><a href={"/user/" + post.username} className='username'>{post.username}</a></div>
                 </div>
-                <div className="post-meta-icons-div no-margin-right"><img src={iconPath + 'more.png'} alt="more" className='icons' /></div>
+                <div className="post-meta-icons-div no-margin-right" onClick={(e) => {
+                    HideScroll(true);
+                    setPostMore(true);
+                }}>
+                    <img src={iconPath + 'more.png'} alt="more" className='icons' />
+                </div>
             </div>
 
             <PostImg post={post} setPost={setPost} />
@@ -38,7 +47,7 @@ const Post = ({ post: data }) => {
                                 : <img src={iconPath + 'like.png'} alt="Like" className='icons' />
                             }
                         </div>
-                        <Link to={'/post/' + post._id}>
+                        <Link to={'/posts/' + post._id}>
                             <div className="post-meta-icons-div comment">
                                 <img src={iconPath + 'comment.png'} alt="Comment" className='icons' />
                             </div>
@@ -60,6 +69,18 @@ const Post = ({ post: data }) => {
                     <div className='time'>{timeDiff(post.createdAt)}</div>
                 </div>
             </div>
+            {postMore &&
+                <div className="PostMore">
+                    <div className="list">
+                        <div onClick={(e)=>handleDelete(e,post._id)}>Delete this post</div>
+                        <div onClick={()=>alert('this feature is not working now...')}>Report</div>
+                        <div onClick={() => {
+                            setPostMore(false);
+                            HideScroll(false);
+                        }}>Cancel</div>
+                    </div>
+                </div>
+            }
         </div>
     );
 }

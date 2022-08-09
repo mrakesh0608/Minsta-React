@@ -34,7 +34,7 @@ function App() {
 
                         <Route exact path='/add-new'><AddNew /></Route>
                         <Route exact path='/messenger'><Messenger /></Route>
-                        <Route exact path='/post/:id'><PostDetails /></Route>
+                        <Route exact path='/posts/:id'><PostDetails /></Route>
 
                         <Route exact path='/login'><LogIn /></Route>
                         <Route exact path='/signup'><SignUp /></Route>
