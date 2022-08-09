@@ -4,15 +4,23 @@
     border-bottom: 1px rgb(221, 220, 220) solid;
     transition: all 1s;
 }
-.disapear{
+
+.disapear {
     animation: fadeout 2s;
     animation-fill-mode: forwards;
     overflow: hidden;
 }
+
 @keyframes fadeout {
-    from{height: 200px;}
-    to{height: 0;}
+    from {
+        height: 200px;
+    }
+
+    to {
+        height: 0;
+    }
 }
+
 .post-meta {
     padding: 5px 10px;
 }
@@ -22,9 +30,11 @@
     height: 25px;
     margin-right: 10px;
 }
-.no-margin-right{
+
+.no-margin-right {
     margin-right: 0;
 }
+
 .post img {
     display: block;
     width: 100%;
@@ -57,17 +67,26 @@
     position: relative;
     background-color: gray;
 }
-.post-content .img-div{
+
+.post-content .img-div {
     width: 100%;
     height: 100%;
 }
-.post-content .img-div img{
+
+.post-content .img-div img {
     animation: fadein 1s;
 }
+
 @keyframes fadein {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
+
 /* Post Content Ends */
 
 /* Like Animation Start */
@@ -152,30 +171,39 @@
 
 /* Post End */
 /* Post More Starts */
-.PostMore{
-    background-color: rgba(0, 0, 0,0.5);
+.PostMore {
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    z-index: 15;
     
-    animation: fade 0.5s;
-
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: fixed;
+    top: 0;
+    z-index: 15;
+    animation: fade 0.5s;
 }
+
 @keyframes fade {
-    from{opacity: 0%}
-    to{opacity: 100%;}
+    from {
+        opacity: 0%
+    }
+    
+    to {
+        opacity: 100%;
+    }
 }
-.PostMore .list{
+
+.PostMore .list {
     background-color: var(--bgColor);
     padding: 12px;
     border-radius: 8px;
+    border: 1px solid var(--textColor);
 }
-.PostMore .list div{
+
+.PostMore .list div {
     margin: 10px;
     padding: 10px;
     text-align: center;
@@ -183,4 +211,5 @@
     background-color: var(--bgLightColor);
     border-radius: 5px;
 }
+
 /* Post More Ends */
