@@ -54,7 +54,7 @@
 }
 .auth-form input::placeholder{
     color: var(--textColor);
-    opacity: 0.6;
+    opacity: 0.8;
 }
 .auth-form button{
     width: 100%;

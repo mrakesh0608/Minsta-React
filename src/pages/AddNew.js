@@ -47,7 +47,12 @@ const AddNew = () => {
             "quote": quote
         }
 
-        fetchData({ path: '/posts', method: "POST", payload: newPost }).then(res => {
+        fetchData({ 
+            path: '/posts', 
+            method: "POST", 
+            payload: newPost 
+        }).
+        then(res => {
             setUploading(false);
             setUploaded(res._id);
             setTimeout(() => navigate('/posts/' + res._id), 1000);

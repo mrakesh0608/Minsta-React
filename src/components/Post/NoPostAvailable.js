@@ -5,10 +5,13 @@ import AddNew from 'icons/add-new.png';
 const NoPostAvailable = ({ more }) => {
 
     return (
-        <div className='loading'>
+        <div className='loading' style={more ?
+            { minHeight: '40vh' } : {}
+        }>
             <h2>
-                {window.location.pathname === '/' ? 'End of Posts' : ''}
-                {window.location.pathname === '/explore' ? 'No ' + more + ' Posts Available' : ''}
+                {window.location.pathname === '/' ?
+                    more ? 'End of Posts' : 'No Posts' : ''}
+                {window.location.pathname === '/explore' ? 'No ' + (more?more:'') + ' Posts Available' : ''}
                 {(window.location.pathname).substring(0, 6) === '/user/' ? 'End of Posts' : ''}
                 {window.location.pathname === '/user' ?
                     more ? 'End of Your Posts' : 'Share Your First Post' : ''}
@@ -21,7 +24,7 @@ const NoPostAvailable = ({ more }) => {
                     Upload your new Post in
                     <br />
                     <br />
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <img src={AddNew} alt="Add +" style={{
                             // display: 'block',
                             textAlign: 'center',

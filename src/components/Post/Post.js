@@ -1,11 +1,13 @@
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import PostImg from './PostImg';
 import userImg from 'icons/Tabs/user.png';
 import 'css/Post.css';
 
-import { handleLikes, handleShare, handleSave ,handleDelete} from 'helpers/HandlePostEvents';
+import useFetch from 'hooks/useFetch';
+import usePostEvents from 'hooks/usePostEvents';
+
 import { iconPath } from 'helpers/Path';
 import { timeDiff } from 'helpers/timeDiff';
 import { HideScroll } from 'helpers/HandleScroll';
@@ -15,9 +17,10 @@ PreLoad();
 const Post = ({ post: data }) => {
 
     const [post, setPost] = useState(data);
-
     const [postMore, setPostMore] = useState(false);
-    const navigate = useNavigate();
+    
+    const {fetchData,isError} = useFetch();
+    const {handleLikes, handleShare, handleSave ,handleDelete}=usePostEvents({fetchData});
 
     return (
         <div className="post" key={post._id}>
@@ -36,8 +39,8 @@ const Post = ({ post: data }) => {
                 </div>
             </div>
 
-            <PostImg post={post} setPost={setPost} />
-
+            <PostImg post={post} setPost={setPost} handleLikes={handleLikes}/>
+            {isError && <div className='err-msg' style={{minHeight:'100px'}}>{isError}</div>}
             <div className="post-meta post-meta-bottom">
                 <div className="post-meta-bottom-1">
 
@@ -74,7 +77,7 @@ const Post = ({ post: data }) => {
                 <div className="PostMore">
                     <div className="list">
                         <div onClick={(e)=>{
-                            handleDelete(e,post._id,navigate);
+                            handleDelete(e,post._id);
                             setPostMore(false);
                             HideScroll(false);
                             }}>Delete this post</div>

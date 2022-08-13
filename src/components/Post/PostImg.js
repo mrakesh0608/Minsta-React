@@ -1,10 +1,7 @@
 import { useState,useEffect } from 'react';
 import useFetch from 'hooks/useFetch';
 
-import { handleLikes } from 'helpers/HandlePostEvents';
-
-const PostImg = ({ post, setPost }) => {
-
+const PostImg = ({ post, setPost,handleLikes}) => {
     const {fetchData,data: image,isError,isPending} = useFetch();
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
