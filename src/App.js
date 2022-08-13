@@ -41,6 +41,7 @@ function App() {
                             <Route exact path='/signup' element={!user ? <SignUp /> : <Navigate to='/' />} />
 
                             <Route exact path='/user/:id' element={<OtherUser username={user ? user.Username : ''} />} />
+                            <Route path='/notfound/:msg' element={<NotFound />} />
                             <Route path='*' element={<NotFound />} />
                         </Routes>
                     }

@@ -31,9 +31,9 @@ const UserPostTag = ({userId}) => {
             {PostTag === 'Tag' &&
                 <div style={{ textAlign: 'center', padding: '20px' }}>
                     <h2>Tags</h2>
-                    <p><Link to='login' style={{ color: 'blue' }}>Login</Link></p>
+                    <p><Link to='/login' style={{ color: 'blue' }}>Login</Link></p>
                     <p>or</p>
-                    <p><Link to='signup' style={{ color: 'blue' }}>Sign Up</Link></p>
+                    <p><Link to='/signup' style={{ color: 'blue' }}>Sign Up</Link></p>
                 </div>
             }
         </div>

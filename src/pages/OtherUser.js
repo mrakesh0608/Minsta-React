@@ -1,4 +1,4 @@
-import { Link,useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 
@@ -6,7 +6,7 @@ import OtherUserHeadNav from 'components/User/OtherUserHeadNav'
 import UserMeta1 from 'components/User/UserMeta1';
 import UserPostTag from 'components/User/UserPostTag';
 import 'css/User.css';
-import {iconPath} from 'helpers/Path'
+import { iconPath } from 'helpers/Path'
 
 import { HideScroll } from 'helpers/HandleScroll';
 
@@ -14,21 +14,20 @@ const OtherUser = ({ username }) => {
 
     const navigate = useNavigate();
     const { id } = useParams();
-    
-    const { fetchData, data:user,isError, isPending } = useFetch();
+
+    const { fetchData, data: user, isError, isPending } = useFetch();
     const [otherUser, setOtherUser] = useState(false);
-    
+
     useEffect(() => {
-        console.log(id, username);
         if (username === id) navigate('/user');
         else initialize();
     }, [])
 
-    const initialize = ()=>{
-        fetchData({ path: '/user/'+id, method: "GET"})
+    const initialize = () => {
+        fetchData({ path: '/user/' + id, method: "GET" })
         .then(res => {
-            console.log(res);
-            setOtherUser(true);
+            if (res) setOtherUser(true)
+            else navigate('/notfound/No Such User')
         })
     }
 
@@ -47,7 +46,7 @@ const OtherUser = ({ username }) => {
         <div id="otheruser">
             {isError && <div className='err-msg'>{isError}</div>}
             {otherUser &&
-            <OtherUserHeadNav username={user.Username} setUserMore={setUserMore} />
+                <OtherUserHeadNav username={user.Username} setUserMore={setUserMore} />
             }
             {otherUser &&
                 <div id="User-content">
@@ -57,10 +56,10 @@ const OtherUser = ({ username }) => {
                             Followers: user.Followers,
                             Following: user.Following,
                             Name: user.Name,
-                            Username:user.Username
+                            Username: user.Username
                         }} />
                     </div>
-                    <UserPostTag userId={user._id}/>
+                    <UserPostTag userId={user._id} />
                 </div>
 
             }
@@ -73,13 +72,13 @@ const OtherUser = ({ username }) => {
                             <div onClick={() => CloseUserMore()}></div>
                         </div>
                         <Link to='report'>
-                            <img className='more-icons' src={iconPath+'user.png'} alt="settings" />Report...
+                            <img className='more-icons' src={iconPath + 'user.png'} alt="settings" />Report...
                         </Link>
-                        <div onClick={() => {}}>
-                            <img className='more-icons' src={iconPath+'settings.png'} alt="theme" />Block
+                        <div onClick={() => { }}>
+                            <img className='more-icons' src={iconPath + 'settings.png'} alt="theme" />Block
                         </div>
-                        <div onClick={() => {}}>
-                            <img className='more-icons' src={iconPath+'share.png'} alt="theme" />Share this profile
+                        <div onClick={() => { }}>
+                            <img className='more-icons' src={iconPath + 'share.png'} alt="theme" />Share this profile
                         </div>
                     </div>
                 </div>

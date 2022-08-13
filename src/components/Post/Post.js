@@ -5,6 +5,7 @@ import PostImg from './PostImg';
 import userImg from 'icons/Tabs/user.png';
 import 'css/Post.css';
 
+import { useAuthContext } from 'hooks/useAuthContext'
 import useFetch from 'hooks/useFetch';
 import usePostEvents from 'hooks/usePostEvents';
 
@@ -16,6 +17,7 @@ PreLoad();
 
 const Post = ({ post: data }) => {
 
+    const { user } = useAuthContext();
     const [post, setPost] = useState(data);
     const [postMore, setPostMore] = useState(false);
     
@@ -46,7 +48,7 @@ const Post = ({ post: data }) => {
 
                     <div className="post-meta-bottom-1-1">
                         <div className="post-meta-icons-div" onClick={(e) => handleLikes(e, post, setPost)}>
-                            {post.liked_users.includes("rakesh") ?
+                            {post.liked_users.includes(user.Username) ?
                                 <img src={iconPath + 'liked.png'} alt="Like" />
                                 : <img src={iconPath + 'like.png'} alt="Like" className='icons' />
                             }
@@ -63,7 +65,7 @@ const Post = ({ post: data }) => {
 
                     <div>
                         <div className="post-meta-icons-div no-margin-right" onClick={e => handleSave(e, post, setPost)}>
-                            <img src={iconPath + (post.saved_users.includes(post.username) ? 'saved' : 'save') + '.png'} alt="Save" className='icons' />
+                            <img src={iconPath + (post.saved_users.includes(user.Username) ? 'saved' : 'save') + '.png'} alt="Save" className='icons' />
                         </div>
                     </div>
                 </div>

@@ -1,21 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import { iconPath, url } from 'helpers/Path';
+import { useAuthContext } from 'hooks/useAuthContext';
 
 const usePostEvents = ({ fetchData }) => {
-
+    const { user } = useAuthContext();
     const navigate = useNavigate();
 
     //Like Start
     const handleLikes = (e, post, setPost) => {
-        if (post.liked_users.includes("rakesh")) {
+        if (post.liked_users.includes(user.Username)) {
             ani_Like(e, false);
-            post.liked_users = post.liked_users.filter(user => "rakesh" !== user)
+            post.liked_users = post.liked_users.filter(username => user.Username !== username)
             post.likes = post.likes - 1;
         }
         else {
             ani_Like(e, true);
             post.likes = post.likes + 1;
-            post.liked_users.push("rakesh");
+            post.liked_users.push(user.Username);
         }
         // console.log(post);
         setPost({ ...post });
@@ -83,10 +84,10 @@ const usePostEvents = ({ fetchData }) => {
 
     //Save Post - Start
     const handleSave = (e, post, setPost) => {
-        if (post.saved_users.includes(post.username)) {
-            post.saved_users = post.saved_users.filter(username => post.username !== username)
+        if (post.saved_users.includes(user.Username)) {
+            post.saved_users = post.saved_users.filter(username => user.Username !== username)
         }
-        else post.saved_users.push(post.username);
+        else post.saved_users.push(user.Username);
 
         setPost({ ...post });
         update_Post_In_Server(post);

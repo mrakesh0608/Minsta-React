@@ -1,5 +1,3 @@
-import { useLocation } from 'react-router-dom';
-
 import BottomNav from 'components/common/BottomNav';
 
 import Home from 'pages/NavBottom/Home';
@@ -9,8 +7,6 @@ import Notif from 'pages/NavBottom/Notif';
 import User from 'pages/NavBottom/User';
 
 const Tabs = () => {
-
-    useLocation();
 
     return (
         <div>

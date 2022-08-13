@@ -75,6 +75,8 @@ a {
     background-color: var(--bgLightColor);
     font-weight: 400;
 }
-.error{
+.error,
+.err-msg{
+    font-weight: 600;
     color: red;
 }

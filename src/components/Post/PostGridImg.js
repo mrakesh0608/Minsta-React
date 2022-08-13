@@ -16,7 +16,7 @@ const PostGridImg = ({ post, handlePointerDown }) => {
             {isError && <div className='img-load'>{isError}</div>}
             {isPending && <div className='img-load '>Fetching <br /> Image ...</div>}
             {image &&
-                <Link to={'/post/' + post._id}>
+                <Link to={'/posts/' + post._id}>
                     <img src={image.imgData.toString('base64')} alt={post.img_name} />
                 </Link>
             }
