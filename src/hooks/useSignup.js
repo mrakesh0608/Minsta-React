@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext';
+import {url} from 'helpers/Path'
 
 export const useSignup = () => {
     
@@ -12,7 +13,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('http://localhost:8000/auth/signup', {
+        const response = await fetch(url+'/auth/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newUser)

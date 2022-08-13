@@ -3,6 +3,6 @@ const iconPath = originPath + '/icons/';
 const postPath = originPath + '/posts/';
 
 const url = 'https://minsta-server.herokuapp.com';
-// const Server = 'https://json-server-m.herokuapp.com/minsta-react-';
+// const url = 'http://localhost:8000';
 
 export { originPath, iconPath, postPath,url};

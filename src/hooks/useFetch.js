@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext"
-
-// const url = 'https://minsta-server.herokuapp.com';
-const url = 'http://localhost:8000';
+import {url} from 'helpers/Path'
 
 const MethodLoad = (method, payload, token) => {
 
