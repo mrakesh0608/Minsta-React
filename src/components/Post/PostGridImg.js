@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
 
-import {REST_API_Async} from 'helpers/REST_API';
+import useFetch from 'hooks/useFetch';
+import { useEffect } from 'react';
 
 const PostGridImg = ({ post, handlePointerDown }) => {
-    const { data: image, isPending, isError } = REST_API_Async({path:'/post-img/' + post.post_image_id,method:"GET"});
+
+    const {fetchData,data: image,isError,isPending} = useFetch();
+
+    useEffect(()=>{
+        fetchData({path:'/post-img/' + post.imgId,method:"GET"});
+    },[])
 
     return (
         <div className="Post-Grid-container-content" onPointerDown={handlePointerDown}>

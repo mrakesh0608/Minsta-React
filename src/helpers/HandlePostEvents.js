@@ -101,7 +101,7 @@ const update_Post_In_Server = (post) => {
 }
 
 //Delete Post
-const handleDelete = (e, id,history) => {
+const handleDelete = (e, id,navigate) => {
     const post = e.target.closest('.post');
     post.classList.add('disapear');
 
@@ -110,7 +110,7 @@ const handleDelete = (e, id,history) => {
         if (res.ok) {
             setTimeout(()=>{
                 post.remove();
-                history.push('/');
+                navigate('/');
             },1500);
             console.log('post deleted');
         }

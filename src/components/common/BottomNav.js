@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 
 import { HandleScroll } from 'helpers/HandleScroll';
@@ -22,7 +22,7 @@ import userOn from 'icons/Tabs/user-on.png';
 
 const BottomNav = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         HandleScroll();
@@ -30,19 +30,19 @@ const BottomNav = () => {
 
     return (
         <div id="bottom" className='nav-bottom hideOnScroll hideOnScroll-bottom'>
-            <div id="home" className="nav-icons" onClick={() => { history.push('/') }}>
+            <div id="home" className="nav-icons" onClick={() => { navigate('/') }}>
                 <img src={window.location.pathname === '/' ? homeOn : home} alt="home" />
             </div>
-            <div id='explore' className="nav-icons" onClick={() => { history.push('/explore') }}>
+            <div id='explore' className="nav-icons" onClick={() => { navigate('/explore') }}>
                 <img src={window.location.pathname === '/explore' ? exploreOn : explore} alt="explore" />
             </div>
-            <div id='reels' className="nav-icons" onClick={() => { history.push('/reels') }}>
+            <div id='reels' className="nav-icons" onClick={() => { navigate('/reels') }}>
                 <img src={window.location.pathname === '/reels' ? reelOn : reel} alt="reels" />
             </div>
-            <div id='notif' className="nav-icons" onClick={() => { history.push('/notif') }}>
+            <div id='notif' className="nav-icons" onClick={() => { navigate('/notif') }}>
                 <img src={window.location.pathname === '/notif' ? heartOn : heart} alt="heart" />
             </div>
-            <div id='user' className="nav-icons" onClick={() => { history.push('/user') }}>
+            <div id='user' className="nav-icons" onClick={() => { navigate('/user') }}>
                 {window.location.pathname === '/user' ?
                     <img src={userOn} alt="user" style={{ border: '1px solid black', borderRadius: '50%'}} /> :
                     <img src={user} alt="user" />

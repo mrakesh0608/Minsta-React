@@ -1,28 +1,24 @@
 import { useState, useEffect, lazy, Suspense } from "react";
+import useFetch from 'hooks/useFetch';
 
 import NoPostAvailable from 'components/Post/NoPostAvailable';
 import 'css/PostGrid.css';
 
-import { ScrollLoad ,HideScroll} from 'helpers/HandleScroll';
+import { ScrollLoad, HideScroll } from 'helpers/HandleScroll';
 
-import {REST_API_Async,REST_API_Sync} from 'helpers/REST_API';
 const PostGridImg = lazy(() => import('components/Post/PostGridImg'));
 
+const PostGrid = ({pathname}) => {
 
-const PostGrid = ({ username }) => {
+    const limit = 4;
+    const [page,setPage] = useState(0);
 
-    if (username){
-        username = 'username=' + username+'&';
-    }
-    else username = '';
-
-    const limit = 8;
-    const { data: posts, setData: setPosts, isPending, isError } = REST_API_Async({path:'/posts?' + new URLSearchParams({skip: 0,limit: limit}),method:"GET"});
-
+    const { fetchData, isError, isPending } = useFetch();
+    const [posts, setPosts] = useState(null)
+    
     const [pointerPost, setPointerPost] = useState(false);
-
+    
     const handlePointerDown = (e) => {
-
         setTimeout(() => {
             setPointerPost(e.target.src);
             HideScroll(true);
@@ -38,26 +34,38 @@ const PostGrid = ({ username }) => {
     const [isScrollLoad, setIsScrollLoad] = useState(false);
     useEffect(() => {
         ScrollLoad(setIsScrollLoad);
+        LoadMore();
     }, [])
 
     const [noMorePosts, setNoMorePosts] = useState(false);
-    let pages = 1;
+
     const LoadMore = async () => {
-        const data = await REST_API_Sync({path:'posts?skip=' + pages*limit + '&limit=' + limit,method:"GET"});
-        pages++;
-        if(data.result){
-            const NewPosts = data.result;
-            if (NewPosts.length === 0) setNoMorePosts(true);
-            else setPosts([...posts, NewPosts[0]]);
-            setIsScrollLoad(false);
-        }
-        else console.log("error",data);
+        setIsScrollLoad(false);
+        // console.log(page);
+        fetchData({
+            path: pathname + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
+        }).then((res) => {
+            if (res.length === 0|| res.length<4) {
+                if(posts) setPosts([...posts,...res]);
+                else setPosts(res);
+                setNoMorePosts(true);
+                return;
+            }
+            if (posts) setPosts([...posts, ...res]);
+            else setPosts(res);
+            setPage(page+1);
+        })
+        // if(data.result){
+        //     const NewPosts = data.result;
+        //     if (NewPosts.length === 0) setNoMorePosts(true);
+        //     else setPosts([...posts, NewPosts[0]]);
+        //     setIsScrollLoad(false);
+        // }
+        // else console.log("error",data);
     }
 
     return (
         <div id="Post-Grid">
-            {isError && <div className='err-msg'>{isError}</div>}
-            {isPending && <div className='loading'><h3>Fetching Posts ...</h3></div>}
             {posts &&
                 posts.length === 0 ? <NoPostAvailable /> :
                 <div id="Post-Grid-content">
@@ -76,8 +84,8 @@ const PostGrid = ({ username }) => {
                             <img src={pointerPost} alt="db-post" onPointerUp={handlePointerUp} />
                         </div>
                     }
-                    {!isPending && (isScrollLoad || posts.length < 4) &&
-                        (noMorePosts ? <NoPostAvailable more={'More'} /> : (LoadMore() &&
+                    {!isPending && (isScrollLoad || (posts && posts.length < 8)) &&
+                        (noMorePosts ? <NoPostAvailable more={'More'}/> : (LoadMore() &&
                             <div className='load-more'>
                                 <h3>Loading ...</h3>
                                 <div style={{ height: '80px' }}></div>
@@ -87,8 +95,9 @@ const PostGrid = ({ username }) => {
                     }
                 </div>
             }
+            {isError && <div className='err-msg'>{isError}</div>}
+            {isPending && <div className='loading'><h3>Fetching Posts ...</h3></div>}
         </div >
     );
 }
-
 export default PostGrid;

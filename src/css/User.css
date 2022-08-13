@@ -4,23 +4,23 @@
 .user-meta{
     padding: 10px;
 }
-.user-meta-1{
+.user-meta-1-1{
     display: grid;
     grid-template-columns: 40% 60%;
     /* background-color: aqua; */
     align-items: center;
 }
-.user-meta-1 .userimg img{
+.user-meta-1-1 .userimg img{
     border: 1px solid black;
     padding: 3px;
     border-radius: 50%;
 }
-.user-meta-1 .network{
+.user-meta-1-1 .network{
     display: flex;
     justify-content: space-around;
     text-align: center;
 }
-.user-meta-1 .network-count{
+.user-meta-1-1 .network-count{
     font-weight: 600;
 }
 .user-meta-2 .edit-discover{
@@ -130,6 +130,7 @@
     display: grid;
     grid-template-columns: 35px auto;
     align-items: center;
+    cursor: pointer;
 }
 #user-more-list a:active,
 #user-more-list div:active{

@@ -1,3 +1,11 @@
+.user-head-1{
+    display:flex;
+    font-weight: 600;
+    font-size: '20px';
+}
+.user-head-1 >*{
+    margin-right: 10px;
+}
 .user-head-2 {
     display: flex;
 }

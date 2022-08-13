@@ -6,7 +6,7 @@ const Explore = () => {
     return (
         <div id="Explore">
             <Search />
-            <PostGrid />
+            <PostGrid pathname={'/public/posts?'}/>
         </div>
     );
 }

@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import App from './App';
-import './css/index.css';
+import App from 'App';
+import 'css/index.css';
+import 'css/NavHeadBottom.css'
+
+import { AuthContextProvider } from 'context/AuthContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <AuthContextProvider>
+        <App />
+    </AuthContextProvider>
 );

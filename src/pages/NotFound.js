@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const [time, setTime] = useState(5);
 
     useEffect(() => {
@@ -12,10 +12,10 @@ const NotFound = () => {
         setTimeout(() => {
             setTime(time - 1);
 
-            if (time === 1) history.push('/')
+            if (time === 1) navigate('/')
         }, 1000);
 
-    });
+    },[time]);
     return (
         <div id="not-found">
             <div id="not-found-content">

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import {REST_API_Sync} from 'helpers/REST_API';
+import { useSignup } from "hooks/useSignup"
 
 import 'css/Login_SignUp.css';
 
@@ -9,28 +9,16 @@ const SignUp = () => {
 
     const [MobEmail, setMobEmail] = useState('');
     const [Name, setName] = useState('');
-    const [Pass, setPass] = useState('');
-    const [UserName, setUserName] = useState('');
+    const [Password, setPassword] = useState('');
+    const [Username, setUsername] = useState('');
 
-    const [isPending, setIsPending] = useState(false);
-    const history = useHistory();
+    const {signup, error, isLoading} = useSignup();
 
     const handleSubmit = async (e) => {
-        setIsPending(true);
         e.preventDefault();
-        console.log(MobEmail, Name, Pass, UserName);
 
-        const newUser = { MobEmail, Name, Pass, UserName };
-
-        const data = await REST_API_Sync({path:'/users',method:"POST",payload:newUser});
-
-        if(data.result){
-            console.log('new user added');
-            setIsPending(false);
-            alert('Welcome ' + Name);
-            history.push('/');
-        }
-        else console.log(data);
+        const newUser = { MobEmail, Name, Password, Username};
+        await signup(newUser);
     }
 
     return (
@@ -58,19 +46,20 @@ const SignUp = () => {
                         />
                         <input type="text" name="username" required
                             placeholder="Username"
-                            value={UserName}
-                            onChange={e => { setUserName(e.target.value) }}
+                            value={Username}
+                            onChange={e => { setUsername(e.target.value) }}
                             autoComplete="true"
                         />
                         <input type="password" name="password" required
                             placeholder="Password"
-                            value={Pass}
-                            onChange={e => { setPass(e.target.value) }}
+                            value={Password}
+                            onChange={e => { setPassword(e.target.value) }}
                             autoComplete="true"
                         />
                         <p className="TC">By signing up, you agree to our <Link to='/terms'>Terms</Link> , <Link to='/data-policy'>Data Policy</Link> and <Link to='/cookies-policy'>Cookies Policy</Link> .</p>
-                        {!isPending && <button>Sign Up</button>}
-                        {isPending && <button>Signing Up ...</button>}
+                        {error && <div className="error">{error}</div>}
+                        {!isLoading && <button>Sign Up</button>}
+                        {isLoading && <button disabled>Signing Up ...</button>}
                     </form>
                     <p>Have an account? <Link to='/login'>Log in</Link></p>
                 </div>

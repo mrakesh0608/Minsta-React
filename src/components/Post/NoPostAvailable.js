@@ -2,29 +2,40 @@ import { Link } from 'react-router-dom';
 
 import AddNew from 'icons/add-new.png';
 
-const NoPostAvailable = ({more}) => {
+const NoPostAvailable = ({ more }) => {
+
     return (
         <div className='loading'>
-            <h2>No {more} Posts Available</h2>
+            <h2>
+                {window.location.pathname === '/' ? 'End of Posts' : ''}
+                {window.location.pathname === '/explore' ? 'No ' + more + ' Posts Available' : ''}
+                {(window.location.pathname).substring(0, 6) === '/user/' ? 'End of Posts' : ''}
+                {window.location.pathname === '/user' ?
+                    more ? 'End of Your Posts' : 'Share Your First Post' : ''}
+            </h2>
             <br />
-            <br />
-            Upload your new Post in
-            <br />
-            <br />
-            <div style={{display:'flex',alignItems:'center'}}>
-                <img src={AddNew} alt="Add +" style={{
-                    // display: 'block',
-                    textAlign: 'center',
-                    width: '30px',
-                    height: '30px',
-                    marginRight:'10px'
-                }} className='icons'/>
-                Section
-            </div>
-            or
-            <br />
-            <br />
-            <Link to={'/add-new'} style={{color:'blue'}}>Click Here</Link>
+            {(window.location.pathname).substring(0, 6) === '/user/' ? '' :
+                <div>
+                    {window.location.pathname === '/' ? 'Follow more friends to see their posts or' : ''}
+                    <br />
+                    Upload your new Post in
+                    <br />
+                    <br />
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img src={AddNew} alt="Add +" style={{
+                            // display: 'block',
+                            textAlign: 'center',
+                            width: '30px',
+                            height: '30px',
+                            marginRight: '10px'
+                        }} className='icons' />
+                        Section
+                    </div>
+                    or
+                    <br />
+                    <Link to={'/add-new'} style={{ color: 'blue' }}>Click Here</Link>
+                </div>
+            }
         </div>
     );
 }

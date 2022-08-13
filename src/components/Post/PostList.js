@@ -1,42 +1,52 @@
 import { lazy, useEffect, useState, Suspense } from 'react';
+import useFetch from 'hooks/useFetch';
 
 import NoPostAvailable from 'components/Post/NoPostAvailable';
 
 import { ScrollLoad } from 'helpers/HandleScroll';
-import { REST_API_Async, REST_API_Sync } from 'helpers/REST_API';
 
 const Post = lazy(() => import('./Post'));
 
 const PostList = () => {
 
+    const [page,setPage] = useState(0);
     const limit = 4;
 
-    const { data: posts, setData: setPosts, isPending, isError } = REST_API_Async({ path: '/posts?' + new URLSearchParams({ skip: 0, limit: limit }), method: "GET" });
+    const { fetchData, isError, isPending } = useFetch();
+    const [posts, setPosts] = useState(null);
 
     const [isScrollLoad, setIsScrollLoad] = useState(false);
     useEffect(() => {
         ScrollLoad(setIsScrollLoad);
+        LoadMore();
     }, []);
 
     const [noMorePosts, setNoMorePosts] = useState(false);
-    let pages = 1;
     const LoadMore = async () => {
-        const data = await REST_API_Sync({ path: '/posts?skip=' + pages * limit + '&limit=' + limit, method: "GET" });
-        if (data.result) {
-            pages++;
-            const NewPosts = data.result;
-            if (NewPosts.length === 0) setNoMorePosts(true);
-            else setPosts([...posts, NewPosts[0]]);
-            // console.log(NewPosts);
-            setIsScrollLoad(false);
-        }
-        else console.log("error", data);
+        
+        setIsScrollLoad(false);
+
+        fetchData({
+            path: '/public/posts?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
+        })
+        .then((res) => {
+            if(res){
+
+                if (res.length === 0 || res.length < 4) {
+                    if(posts) setPosts([...posts,...res]);
+                    else setPosts(res);
+                    setNoMorePosts(true);
+                    return;
+                }
+                if (posts) setPosts([...posts, ...res]);
+                else setPosts(res);
+                setPage(page+1);
+            }
+        })
     }
 
     return (
         <div className="post-list">
-            {isError && <div className='err-msg'>{isError}</div>}
-            {isPending && <div className='loading'><h3>Fetching Posts ...</h3></div>}
             {posts &&
                 posts.length === 0 ? <NoPostAvailable /> :
                 <div className="post-list-content">
@@ -49,18 +59,19 @@ const PostList = () => {
                             }
                         </Suspense>
                     }
-                    {!isPending &&
-                        noMorePosts ? <NoPostAvailable more={'More'} /> :
-                        (
-                            (isScrollLoad || (posts && posts.length < 4)) && LoadMore() &&
+                    {!isPending && (isScrollLoad || (posts && posts.length < 8)) &&
+                        (noMorePosts ? <NoPostAvailable more={'More'} /> : (LoadMore() &&
                             <div className='load-more'>
                                 <h3>Loading ...</h3>
                                 <div style={{ height: '80px' }}></div>
                             </div>
                         )
+                        )
                     }
                 </div>
             }
+            {isError && <div className='err-msg'>{isError}</div>}
+            {isPending && <div className='loading'><h3>Fetching Posts ...</h3></div>}
         </div>
     );
 }

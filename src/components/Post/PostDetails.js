@@ -3,13 +3,18 @@ import { useParams } from 'react-router-dom';
 import Post from 'components/Post/Post';
 import NotFound from 'pages/NotFound';
 
-import {REST_API_Async} from 'helpers/REST_API';
+import useFetch from 'hooks/useFetch';
+import { useEffect } from 'react';
 
 const PostDetails = () => {
 
     const { id } = useParams();
 
-    const { data: post, isPending, isError } = REST_API_Async({path:('/posts/'+id),method:"GET"});
+    const { fetchData, data:post, isError, isPending } = useFetch();
+
+    useEffect(()=>{
+        fetchData({path:('/posts/'+id),method:"GET"});
+    },[])
 
     return (
         <div className="post-details">

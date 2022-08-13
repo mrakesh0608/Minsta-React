@@ -56,9 +56,10 @@
 }
 
 .post-user-img {
-    padding: 2px;
-    border: 1px var(--textColor) solid;
-    border-radius: 50%;
+    color: black;
+    /* padding: 2px; */
+    /* border: 1px var(--textColor) solid; */
+    /* border-radius: 50%; */
 }
 
 /* Post Meta Head End*/
@@ -137,12 +138,12 @@
     }
 
     .post-content .bgImgblur {
-        height: 95%;
+        height: 94%;
         width: 100%;
         filter: blur(8px);
         z-index: 1;
         position: absolute;
-        top: 8px;
+        top: 10px;
         left: 0;
         object-fit: cover;
     }

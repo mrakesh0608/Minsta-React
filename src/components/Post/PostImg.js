@@ -1,14 +1,16 @@
 import { useState,useEffect } from 'react';
+import useFetch from 'hooks/useFetch';
 
-import {REST_API_Async} from 'helpers/REST_API';
 import { handleLikes } from 'helpers/HandlePostEvents';
 
 const PostImg = ({ post, setPost }) => {
-    const { data: image, isPending, isError } = REST_API_Async({path:'/post-img/' + post.post_image_id,method:"GET"});
+
+    const {fetchData,data: image,isError,isPending} = useFetch();
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+    
     useEffect(() => {
+        fetchData({path:'/post-img/' + post.imgId,method:"GET"});
         window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
     }, [])
 
@@ -19,10 +21,10 @@ const PostImg = ({ post, setPost }) => {
 
             {image &&
                 <div className='img-div'>
-                    <img src={image.imgData.toString('base64')} alt={post.img_name} className='post-content-img' />
+                    <img src={image.imgData.toString('base64')} alt={post.imgName} className='post-content-img' />
 
                     {windowWidth > 600 &&
-                        <img src={image.imgData.toString('base64')} alt={post.img_name} className='bgImgblur' />
+                        <img src={image.imgData.toString('base64')} alt={post.imgName} className='bgImgblur' />
                     }
                 </div>
             }
@@ -30,4 +32,4 @@ const PostImg = ({ post, setPost }) => {
     );
 }
 
-export { PostImg };
+export default PostImg;

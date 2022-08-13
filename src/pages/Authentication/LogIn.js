@@ -1,42 +1,25 @@
 import { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import 'css/Login_SignUp.css';
+import { useLogin } from "hooks/useLogin"
 
-import {REST_API_Sync} from 'helpers/REST_API';
 
 const LogIn = () => {
 
-    const [UserName, setUserName] = useState('');
-    const [Pass, setPass] = useState('');
+    const [Username, setUsername] = useState('');
+    const [Password, setPassword] = useState('');
 
     const [isPending, setIsPending] = useState(false);
     const [InvalidUser, setInValidUser] = useState(false);
 
-    const history = useHistory();
+    const {login, error, isLoading} = useLogin()
 
     const handleSubmit = async (e) => {
         setIsPending(true);
         e.preventDefault();
 
-        const newUser = { UserName, Pass };
-        console.log(newUser);
-
-        const data = await REST_API_Sync({path:'/users',method:"GET"});
-
-        fetch('users?UserName=' + UserName + '&Pass=' + Pass)
-            .then(res => { return res.json() })
-            .then(data => {
-                setIsPending(false);
-                if (data.length === 0) setInValidUser(true);
-                else {
-                    console.log(data);
-                    alert('Welcome ' + data[0].Name);
-                    // history.push('/', { params: UserName });
-                }
-            })
-            .catch(err=>console.log(err));
-
+        await login({MobEmail:Username,Password})
     }
 
     return (
@@ -49,17 +32,18 @@ const LogIn = () => {
                 <div id="login-content">
                     <form onSubmit={handleSubmit} className="auth-form">
                         <input type="text" name="username" required
-                            value={UserName}
+                            value={Username}
                             placeholder="Phone number, username or email"
-                            onChange={e => { setUserName(e.target.value); setInValidUser(false);}}
+                            onChange={e => { setUsername(e.target.value); setInValidUser(false);}}
                             autoComplete="true" minLength={4} maxLength={15}
                         />
                         <input type="password" name="password" required
-                            value={Pass}
+                            value={Password}
                             placeholder="Password"
-                            onChange={e => { setPass(e.target.value); setInValidUser(false);}}
+                            onChange={e => { setPassword(e.target.value); setInValidUser(false);}}
                             autoComplete="true" minLength={4} maxLength={12}
                         />
+                        {error && <div className="error">{error}</div>}
                         {!isPending && InvalidUser && <p style={{ color: 'red' }}>Bad Crediantials</p>}
                         {!isPending && <button>Log In</button>}
                         {isPending && <button>Logining ...</button>}

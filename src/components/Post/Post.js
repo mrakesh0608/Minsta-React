@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 
-import { PostImg } from './PostImg';
-import 'css/Post.css'
+import PostImg from './PostImg';
+import userImg from 'icons/Tabs/user.png';
+import 'css/Post.css';
 
 import { handleLikes, handleShare, handleSave ,handleDelete} from 'helpers/HandlePostEvents';
 import { iconPath } from 'helpers/Path';
 import { timeDiff } from 'helpers/timeDiff';
 import { HideScroll } from 'helpers/HandleScroll';
-import { useHistory } from 'react-router-dom';
 import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
 
@@ -17,16 +17,16 @@ const Post = ({ post: data }) => {
     const [post, setPost] = useState(data);
 
     const [postMore, setPostMore] = useState(false);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     return (
         <div className="post" key={post._id}>
             <div className="post-meta post-meta-head">
                 <div className="post-user">
                     <div className="post-user-img post-meta-icons-div">
-                        <img src={iconPath + 'user.png'} alt="user" className='icons' />
+                        <img src={userImg} alt="user" className='icons' />
                     </div>
-                    <div><a href={"/user/" + post.username} className='username'>{post.username}</a></div>
+                    <div><Link to={"/user/" + post.username} className='username'>{post.username}</Link></div>
                 </div>
                 <div className="post-meta-icons-div no-margin-right" onClick={(e) => {
                     HideScroll(true);
@@ -74,7 +74,7 @@ const Post = ({ post: data }) => {
                 <div className="PostMore">
                     <div className="list">
                         <div onClick={(e)=>{
-                            handleDelete(e,post._id,history);
+                            handleDelete(e,post._id,navigate);
                             setPostMore(false);
                             HideScroll(false);
                             }}>Delete this post</div>
