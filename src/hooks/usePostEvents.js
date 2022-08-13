@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { iconPath, url } from 'helpers/Path';
+import { iconPath} from 'helpers/Path';
 import { useAuthContext } from 'hooks/useAuthContext';
 
 const usePostEvents = ({ fetchData }) => {
