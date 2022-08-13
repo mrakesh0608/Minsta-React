@@ -10,15 +10,12 @@ const LogIn = () => {
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
 
-    const [isPending, setIsPending] = useState(false);
     const [InvalidUser, setInValidUser] = useState(false);
 
-    const {login, error, isLoading} = useLogin()
+    const {login, error, isPending} = useLogin()
 
     const handleSubmit = async (e) => {
-        setIsPending(true);
         e.preventDefault();
-
         await login({MobEmail:Username,Password})
     }
 
@@ -44,7 +41,6 @@ const LogIn = () => {
                             autoComplete="true" minLength={4} maxLength={12}
                         />
                         {error && <div className="error">{error}</div>}
-                        {!isPending && InvalidUser && <p style={{ color: 'red' }}>Bad Crediantials</p>}
                         {!isPending && <button>Log In</button>}
                         {isPending && <button>Logining ...</button>}
                     </form>

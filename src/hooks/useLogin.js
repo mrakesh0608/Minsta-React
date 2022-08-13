@@ -5,12 +5,12 @@ import {url} from 'helpers/Path'
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+    const [isPending, setIsPending] = useState(null)
     const { dispatch } = useAuthContext();
 
     const login = async (user) => {
         console.log(user);
-        setIsLoading(true)
+        setIsPending(true)
         setError(null)
 
         const response = await fetch(url+'/auth/login', {
@@ -21,7 +21,7 @@ export const useLogin = () => {
         const json = await response.json()
 
         if (!response.ok) {
-            setIsLoading(false)
+            setIsPending(false)
             setError(json.error)
         }
         if (response.ok) {
@@ -32,8 +32,8 @@ export const useLogin = () => {
             dispatch({ type: 'LOGIN', payload: json })
 
             // update loading state
-            setIsLoading(false)
+            setIsPending(false)
         }
     }
-    return { login, isLoading, error }
+    return { login, isPending, error }
 }
