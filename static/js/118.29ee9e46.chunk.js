@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkminsta_react=self.webpackChunkminsta_react||[]).push([[118],{118:function(e,n,s){s.r(n);var i=s(184);n.default=function(){return(0,i.jsx)("div",{id:"Messenger",children:(0,i.jsx)("div",{id:"Messenger-content",children:(0,i.jsxs)("div",{id:"soon",className:"loading",children:[(0,i.jsx)("h2",{children:"Messenger"}),(0,i.jsx)("h5",{children:"This feature is currently under development..."})]})})})}}}]);
+//# sourceMappingURL=118.29ee9e46.chunk.js.map
