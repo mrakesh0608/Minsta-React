@@ -22,7 +22,7 @@ function App() {
     const { user, isLoading } = useAuthContext();
     InitApp();
     return (
-        <HashRouter basename={'/Minsta-React'}>
+        <HashRouter basename={'/Minsta-React/'}>
             <div className="App">
 
                 <Suspense fallback={<BrandLogo />
