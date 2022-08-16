@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Minsta-React/static/css/main.7bdb1523.css",
-    "main.js": "/Minsta-React/static/js/main.5d22abf3.js",
+    "main.js": "/Minsta-React/static/js/main.031f2969.js",
     "static/css/431.349c37ab.chunk.css": "/Minsta-React/static/css/431.349c37ab.chunk.css",
     "static/js/431.7f9e5a44.chunk.js": "/Minsta-React/static/js/431.7f9e5a44.chunk.js",
     "static/css/364.776a06d9.chunk.css": "/Minsta-React/static/css/364.776a06d9.chunk.css",
@@ -25,7 +25,7 @@
     "static/media/explore.png": "/Minsta-React/static/media/explore.e319c690264d31018300.png",
     "index.html": "/Minsta-React/index.html",
     "main.7bdb1523.css.map": "/Minsta-React/static/css/main.7bdb1523.css.map",
-    "main.5d22abf3.js.map": "/Minsta-React/static/js/main.5d22abf3.js.map",
+    "main.031f2969.js.map": "/Minsta-React/static/js/main.031f2969.js.map",
     "431.349c37ab.chunk.css.map": "/Minsta-React/static/css/431.349c37ab.chunk.css.map",
     "431.7f9e5a44.chunk.js.map": "/Minsta-React/static/js/431.7f9e5a44.chunk.js.map",
     "364.776a06d9.chunk.css.map": "/Minsta-React/static/css/364.776a06d9.chunk.css.map",
@@ -47,6 +47,6 @@
   },
   "entrypoints": [
     "static/css/main.7bdb1523.css",
-    "static/js/main.5d22abf3.js"
+    "static/js/main.031f2969.js"
   ]
 }
