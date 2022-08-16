@@ -22,7 +22,7 @@ function App() {
     const { user, isLoading } = useAuthContext();
     InitApp();
     return (
-        <BrowserRouter basename='/Minsta-React'>
+        <BrowserRouter>
             <div className="App">
 
                 <Suspense fallback={<BrandLogo />
