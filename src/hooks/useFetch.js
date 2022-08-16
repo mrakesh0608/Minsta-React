@@ -36,7 +36,7 @@ const useFetch = () => {
     const fetchData = async ({ path, method, payload }) => {
         // console.log(path, method, payload);
         setIsPending(true);
-        setData(null);
+        // setData(null);
         setIsError(null);
 
         try {
@@ -59,7 +59,9 @@ const useFetch = () => {
             }
         } catch (error) {
             console.log(error);
+            setData(null);
             setIsError(error.message);
+            return error.message;
         }
     }
     return { fetchData, data, setData, isPending, isError };

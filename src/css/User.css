@@ -23,13 +23,17 @@
 .user-meta-1-1 .network-count{
     font-weight: 600;
 }
-.user-meta-2 .edit-discover{
+.user-meta-2 .edit-discover,
+.follow-msg
+{
     width: 100%;
     display: grid;
     grid-template-columns: 65% 35%;
     margin: 4px 0;
 }
-.user-meta-2 .edit-discover button{
+.user-meta-2 .edit-discover button,
+.follow-msg button
+{
     background-color: #EFEFEF;
     padding: 8px 0;
     outline: none;
@@ -39,8 +43,12 @@
     font-weight: 600;
     cursor: pointer;
 }
+.follow-msg button:first-child,
 .user-meta-2 .edit-discover .edit{
     margin-right: 10px;
+}
+.follow{
+    background-color: var(--minBlue) !important;
 }
 #User-content .discover-people{
     padding: 10px;

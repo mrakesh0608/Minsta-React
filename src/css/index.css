@@ -4,6 +4,7 @@
     --textColor: black;
     --invertStrength: 0;
     --bgLightColor : gainsboro;
+    --minBlue : #0095F6;
 }
 .nav-icons img,
 .more-icons,
@@ -79,4 +80,9 @@ a {
 .err-msg{
     font-weight: 600;
     color: red;
+}
+.updating{
+    text-align: center;
+    background-color: var(--minBlue);
+    color: white;
 }

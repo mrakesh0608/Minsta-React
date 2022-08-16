@@ -12,7 +12,8 @@ const NoPostAvailable = ({ more }) => {
                 {window.location.pathname === '/' ?
                     more ? 'End of Posts' : 'No Posts' : ''}
                 {window.location.pathname === '/explore' ? 'No ' + (more?more:'') + ' Posts Available' : ''}
-                {(window.location.pathname).substring(0, 6) === '/user/' ? 'End of Posts' : ''}
+                {(window.location.pathname).substring(0, 6) === '/user/' ? 
+                more ?'End of Posts':'No Posts' : ''}
                 {window.location.pathname === '/user' ?
                     more ? 'End of Your Posts' : 'Share Your First Post' : ''}
             </h2>
