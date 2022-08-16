@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { useAuthContext } from 'hooks/useAuthContext'
 
@@ -22,7 +22,7 @@ function App() {
     const { user, isLoading } = useAuthContext();
     InitApp();
     return (
-        <BrowserRouter>
+        <HashRouter basename={'/Minsta-React'}>
             <div className="App">
 
                 <Suspense fallback={<BrandLogo />
@@ -47,7 +47,7 @@ function App() {
                     }
                 </Suspense>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 };
 export default App;
