@@ -30,7 +30,7 @@ function App() {
                 }>
                     {!isLoading &&
                         <Routes>
-                            {['/', '/explore', '/reels', '/notif', '/user'].map((path, index) =>
+                            {['/Minsta-React', '/Minsta-React/explore', '/reels', '/notif', '/user'].map((path, index) =>
                                 <Route exact path={path} element={user ? <Tabs /> : <Navigate to='/login' />} key={index} />
                             )}
                             <Route exact path='/add-new' element={user ? <AddNew /> : <Navigate to='/login' />} />
