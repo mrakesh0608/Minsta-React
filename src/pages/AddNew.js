@@ -13,7 +13,7 @@ const AddNew = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
-    const { fetchData, isError, isPending } = useFetch();
+    const { fetchData, data:Post,isError, isPending } = useFetch();
 
     const [imgData, setImgData] = useState(img);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -43,7 +43,6 @@ const AddNew = () => {
             imgData,
             "imgName": selectedFile.name,
             "username": user.Username,
-            "img_name": selectedFile.name,
             "quote": quote
         }
 
@@ -54,7 +53,7 @@ const AddNew = () => {
         }).
         then(res => {
             setUploading(false);
-            setUploaded(res._id);
+            setUploaded(Post._id);
             setTimeout(() => navigate('/posts/' + res._id), 1000);
         })
     };
@@ -96,7 +95,7 @@ const AddNew = () => {
                                 Uploaded
                                 <br />
                                 <br />
-                                <Link to={'post/' + uploaded}><h3>See Post</h3></Link>
+                                <Link to={'/post/' + Post._id}><h3>See Post</h3></Link>
                             </div>
                             }
                         </div>
