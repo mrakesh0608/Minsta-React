@@ -19,7 +19,7 @@ const PostGridImg = ({ post, handlePointerDown,HideScroll}) => {
                 <Link to={'/posts/' + post._id}>
                     <img src={image.imgData.toString('base64')} 
                     alt={post.img_name} 
-                    onClick={()=>{HideScroll(false);console.log("ssfed");}}
+                    onClick={()=>HideScroll(false)}
                     />
                 </Link>
             }
