@@ -19,7 +19,9 @@ const PostGrid = ({ pathname }) => {
     const [pointerPost, setPointerPost] = useState(false);
 
     const handlePointerDown = (e) => {
-        setPointerPost(e.target.src);
+        setTimeout(()=>{
+            setPointerPost(e.target.src);
+        },250);
         setTimeout(() => {
             HideScroll(true);
         }, 2000);
