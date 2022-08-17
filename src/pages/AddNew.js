@@ -54,7 +54,7 @@ const AddNew = () => {
         }).
         then(res => {
             setUploading(false);
-            setTimeout(() => navigate('/posts/' + Post._id), 1000);
+            setTimeout(() => navigate('/posts/' + res._id), 1000);
         })
     };
 
