@@ -81,7 +81,7 @@ const PostGrid = ({ pathname }) => {
                     {pointerPost &&
                         <div id='db-post' onPointerUp={handlePointerUp}>
                             <div className="close">X</div>
-                            <img src={pointerPost} alt="db-post" onPointerUp={handlePointerUp} />
+                            <img src={pointerPost} alt="db-post" />
                         </div>
                     }
                     {!isPending && (isScrollLoad || (posts && posts.length < 8)) &&
