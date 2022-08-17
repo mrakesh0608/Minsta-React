@@ -74,7 +74,7 @@ const AddNew = () => {
                     <br />
                     {isSelected &&
                         <div>
-                            {(!uploading && !uploaded) && <div>
+                            {!uploading && !uploaded && <div>
                                 <label htmlFor="qoute">Quote
                                 </label>
                                 <input type="text" name="quote"
