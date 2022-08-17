@@ -2,6 +2,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 
+import {url} from 'helpers/Path'
+
 import { useAuthContext } from 'hooks/useAuthContext'
 import OtherUserHeadNav from 'components/User/OtherUserHeadNav'
 import UserMeta1 from 'components/User/UserMeta1';
@@ -27,7 +29,7 @@ const OtherUser = ({ username }) => {
         else initialize();
     }, [])
     const doIFollow = ()=>{
-        fetch(`http://localhost:8000/user/doIFollow?Username=${id}&myUsername=${I.Username}`)
+        fetch(`${url}/user/doIFollow?Username=${id}&myUsername=${I.Username}`)
         .then((res)=>{return res.json()})
         .then((json)=>{
             // console.log(json);
