@@ -27,7 +27,7 @@ const PostList = () => {
         setIsScrollLoad(false);
 
         fetchData({
-            path: '/public/posts?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
+            path: '/posts/iFollow?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
         })
         .then((res) => {
             if(res){
