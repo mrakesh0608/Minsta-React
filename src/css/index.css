@@ -81,8 +81,7 @@ a {
     font-weight: 600;
     color: red;
 }
-.updating{
+.load{
     text-align: center;
-    background-color: var(--minBlue);
-    color: white;
+    color: var(--textColor);
 }

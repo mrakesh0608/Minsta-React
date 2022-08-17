@@ -61,10 +61,40 @@ const useFetch = () => {
             console.log(error);
             setData(null);
             setIsError(error.message);
+            setIsPending(false);
             return error.message;
         }
     }
-    return { fetchData, data, setData, isPending, isError };
+
+    const simpleFetch = async ({ path })=>{
+        // console.log(path, method, payload);
+        setIsPending(true);
+        // setData(null);
+        setIsError(null);
+
+        try {
+            const response = await fetch(url + path);
+            const json = await response.json();
+            console.log(json);
+            if (!response.ok) {
+                setIsPending(false)
+                setIsError(json.error);
+            }
+            if (response.ok) {
+                setIsPending(false);
+                setIsError(null);
+                setData(json);
+                return json;
+            }
+        } catch (error) {
+            console.log(error);
+            setIsError(error.message);
+            setIsPending(false);
+            return error.message;
+        }
+    }
+
+    return { fetchData,simpleFetch, data, setData, isPending, isError };
 }
 
 export default useFetch;

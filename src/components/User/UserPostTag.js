@@ -1,11 +1,11 @@
 import { useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import PostGrid from 'components/Post/PostGrid';
 
-import {iconPath} from 'helpers/Path'
+import { iconPath } from 'helpers/Path'
 
-const UserPostTag = ({userId}) => {
+const UserPostTag = ({ userId, token }) => {
 
     const [PostTag, setPostTag] = useState('Post');
 
@@ -16,24 +16,29 @@ const UserPostTag = ({userId}) => {
                     PostTag === 'Post' ? 'btn-active' : 'btn-not-active'}
                     onClick={() => setPostTag('Post')}
                 >
-                    <img src={iconPath+ 'grid.png'} alt="grid" className='icons' />
+                    <img src={iconPath + 'grid.png'} alt="grid" className='icons' />
                     <span>Posts</span>
                 </button>
                 <button className={
                     PostTag === 'Tag' ? 'btn-active' : 'btn-not-active'}
                     onClick={() => setPostTag('Tag')}
                 >
-                    <img src={iconPath+ 'tag.png'} alt="tag" className='icons' />
+                    <img src={iconPath + 'tag.png'} alt="tag" className='icons' />
                     <span>Tags</span>
                 </button>
             </div>
-            {PostTag === 'Post' && <PostGrid pathname={'/posts?userId='+userId+'&'} />}
-            {PostTag === 'Tag' &&
-                <div style={{ textAlign: 'center', padding: '20px' }}>
-                    <h2>Tags</h2>
+            {!token ?
+                <div style={{ textAlign: 'center', padding: '20px', fontSize: '20px' }}>
                     <p><Link to='/login' style={{ color: 'blue' }}>Login</Link></p>
                     <p>or</p>
                     <p><Link to='/signup' style={{ color: 'blue' }}>Sign Up</Link></p>
+                    <p>to see posts of this profile</p>
+                </div> :
+                <div>
+                    {PostTag === 'Post' && <PostGrid pathname={'/posts?userId=' + userId + '&'} />}
+                    {PostTag === 'Tag' && <div style={{ textAlign: 'center', padding: '20px' }}>
+                        <h2>Tags</h2>
+                    </div>}
                 </div>
             }
         </div>

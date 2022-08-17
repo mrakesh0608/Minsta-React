@@ -18,11 +18,6 @@ const OtherUserHeadNav = ({ username, setUserMore }) => {
                 <div>{username}</div>
             </div>
             <div className='user-head-2'>
-                <Link to='/add-new'>
-                    <div className='nav-icons'>
-                        <img src={AddNew} alt="addNew" />
-                    </div>
-                </Link>
                 <div className='nav-icons' onClick={() => {
                     setUserMore(true);
                     HideScroll(true);

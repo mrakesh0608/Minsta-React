@@ -2,8 +2,6 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 
-import {url} from 'helpers/Path'
-
 import { useAuthContext } from 'hooks/useAuthContext'
 import OtherUserHeadNav from 'components/User/OtherUserHeadNav'
 import UserMeta1 from 'components/User/UserMeta1';
@@ -20,26 +18,17 @@ const OtherUser = ({ username }) => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const { fetchData, data: user, isError, isPending } = useFetch();
-    const [iFollow,setIFollow] = useState(false);
-
+    const { fetchData, simpleFetch, data: user, isError, isPending } = useFetch();
 
     useEffect(() => {
         if (username === id) navigate('/user');
         else initialize();
     }, [])
-    const doIFollow = ()=>{
-        fetch(`${url}/user/doIFollow?Username=${id}&myUsername=${I.Username}`)
-        .then((res)=>{return res.json()})
-        .then((json)=>{
-            // console.log(json);
-            setIFollow(json.iFollow);
-        })
-    }
     const initialize = () => {
-        fetchData({ path: `/user/${id}`, method: "GET"}).then(()=>{
-            doIFollow();
-        })
+        if (I)
+            fetchData({ path: `/user/otherUser?Username=${id}&myUsername=${I.Username}`, method: 'GET' })
+        else
+            simpleFetch({ path: `/public/user?Username=${id}` })
     }
 
     const [userMore, setUserMore] = useState(false);
@@ -62,11 +51,10 @@ const OtherUser = ({ username }) => {
                 "update": "following_followers_users",
                 "Username1": I.Username,
                 "Username2": user.Username,
-                "updateAdd": !iFollow
+                "updateAdd": !user.iFollow
             }
         })
             .then(res => {
-                doIFollow();
                 if (res) {
                 }
                 else navigate('/notfound/No Such User')
@@ -81,9 +69,8 @@ const OtherUser = ({ username }) => {
             }
             {isError ?
                 isError === 'No Such User' ? navigate('/notfound/No Such User') :
-                    <div className='err-msg'>{isError}</div> : ( user &&
+                    <div className='err-msg'>{isError}</div> : (user &&
                         <div id="User-content">
-                            {/* {isPending && <div className='updating'><p>Updating ...</p></div>} */}
                             <div className="user-meta">
                                 <UserMeta1 user={{
                                     Posts: user.Posts,
@@ -92,12 +79,15 @@ const OtherUser = ({ username }) => {
                                     Name: user.Name,
                                     Username: user.Username
                                 }} />
-                                <div className='follow-msg'>
-                                    <button onClick={handleFollow} className={iFollow? '' : 'follow'}>{user.Followers && iFollow ? 'Unfollow' : 'Follow'}</button>
+                                {I && <div className='follow-msg'>
+                                    <button onClick={handleFollow} className={user.iFollow ? '' : 'follow'}>
+                                        {user.iFollow ? 'Unfollow' : 'Follow'}
+                                    </button>
                                     <button onClick={() => { navigate('/messenger') }}>Message</button>
                                 </div>
+                                }
                             </div>
-                            <UserPostTag userId={user._id} />
+                            <UserPostTag userId={user._id} token={I} />
                         </div>
                 )}
             {userMore &&
