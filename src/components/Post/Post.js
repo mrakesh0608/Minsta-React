@@ -31,7 +31,7 @@ const Post = ({ post: data }) => {
                     <div className="post-user-img post-meta-icons-div">
                         <img src={userImg} alt="user" className='icons' />
                     </div>
-                    <div><Link to={"/user/" + post.username} className='username'>{post.username}</Link></div>
+                    <div><Link to={`/user/${post.username}`} className='username'>{post.username}</Link></div>
                 </div>
                 <div className="post-meta-icons-div no-margin-right" onClick={(e) => {
                     HideScroll(true);
