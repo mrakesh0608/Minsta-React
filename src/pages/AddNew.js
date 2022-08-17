@@ -54,8 +54,7 @@ const AddNew = () => {
         }).
         then(res => {
             setUploading(false);
-            setUploaded(Post._id);
-            setTimeout(() => navigate('/posts/' + res._id), 1000);
+            setTimeout(() => navigate('/posts/' + Post._id), 1000);
         })
     };
 
@@ -75,7 +74,7 @@ const AddNew = () => {
                     <br />
                     {isSelected &&
                         <div>
-                            {!uploading && !uploaded && <div>
+                            {(!uploading && !uploaded) && <div>
                                 <label htmlFor="qoute">Quote
                                 </label>
                                 <input type="text" name="quote"
@@ -92,7 +91,7 @@ const AddNew = () => {
                                 <h3>Uploading ...</h3>
                             </div>
                             }
-                            {uploaded && <div>
+                            {uploaded && Post && <div>
                                 Uploaded
                                 <br />
                                 <br />
