@@ -40,9 +40,10 @@ const AddNew = () => {
 
         setUploading(true);
         const newPost = {
+            "userId":user._id,
+            "username": user.Username,
             imgData,
             "imgName": selectedFile.name,
-            "username": user.Username,
             "quote": quote
         }
 
