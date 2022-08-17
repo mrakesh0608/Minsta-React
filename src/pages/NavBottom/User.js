@@ -125,7 +125,7 @@ const User = () => {
                                     <div onClick={() => { ToggleDarkTheme() }}>
                                         <img className='more-icons' src="icons/theme.png" alt="theme" />Toggle Dark Theme
                                     </div>
-                                    <div onClick={() => { logout() }}>
+                                    <div onClick={() => { setUserMore(false);logout();}}>
                                         <img className='more-icons' src="icons/logout.png" alt="logout" />Logout
                                     </div>
                                 </div>
