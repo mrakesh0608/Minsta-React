@@ -66,8 +66,8 @@ const OtherUser = ({ username }) => {
             }
         })
             .then(res => {
+                doIFollow();
                 if (res) {
-                    doIFollow();
                 }
                 else navigate('/notfound/No Such User')
             })
