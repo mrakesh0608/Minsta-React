@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useFetch from 'hooks/useFetch';
 import { useEffect } from 'react';
 
-const PostGridImg = ({ post, handlePointerDown }) => {
+const PostGridImg = ({ post, handlePointerDown,HideScroll}) => {
 
     const {fetchData,data: image,isError,isPending} = useFetch();
 
@@ -17,7 +17,10 @@ const PostGridImg = ({ post, handlePointerDown }) => {
             {isPending && <div className='img-load '>Fetching <br /> Image ...</div>}
             {image &&
                 <Link to={'/posts/' + post._id}>
-                    <img src={image.imgData.toString('base64')} alt={post.img_name} />
+                    <img src={image.imgData.toString('base64')} 
+                    alt={post.img_name} 
+                    onClick={()=>{HideScroll(false);console.log("ssfed");}}
+                    />
                 </Link>
             }
         </div>

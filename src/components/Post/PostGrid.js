@@ -8,27 +8,27 @@ import { ScrollLoad, HideScroll } from 'helpers/HandleScroll';
 
 const PostGridImg = lazy(() => import('components/Post/PostGridImg'));
 
-const PostGrid = ({ pathname }) => {
+const PostGrid = ({pathname}) => {
 
     const limit = 4;
-    const [page, setPage] = useState(0);
+    const [page,setPage] = useState(0);
 
     const { fetchData, isError, isPending } = useFetch();
     const [posts, setPosts] = useState(null)
-
+    
     const [pointerPost, setPointerPost] = useState(false);
-
+    
     const handlePointerDown = (e) => {
-        setTimeout(()=>{
-            setPointerPost(e.target.src);
-        },250);
+        HideScroll(true);
         setTimeout(() => {
-            HideScroll(true);
-        }, 2000);
+            setPointerPost(e.target.src);
+        }, 250);
     };
     const handlePointerUp = () => {
-        setPointerPost(false);
         HideScroll(false);
+        setTimeout(() => {
+            setPointerPost(false);
+        }, 200);
     }
 
     const [isScrollLoad, setIsScrollLoad] = useState(false);
@@ -45,15 +45,15 @@ const PostGrid = ({ pathname }) => {
         fetchData({
             path: pathname + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
         }).then((res) => {
-            if (res.length === 0 || res.length < 4) {
-                if (posts) setPosts([...posts, ...res]);
+            if (res.length === 0|| res.length<4) {
+                if(posts) setPosts([...posts,...res]);
                 else setPosts(res);
                 setNoMorePosts(true);
                 return;
             }
             if (posts) setPosts([...posts, ...res]);
             else setPosts(res);
-            setPage(page + 1);
+            setPage(page+1);
         })
         // if(data.result){
         //     const NewPosts = data.result;
@@ -73,7 +73,7 @@ const PostGrid = ({ pathname }) => {
                         <div id="Post-Grid-container">
                             {posts &&
                                 posts.map(post => (
-                                    <PostGridImg key={post._id} post={post} handlePointerDown={handlePointerDown} />
+                                    <PostGridImg key={post._id} post={post} handlePointerDown={handlePointerDown} HideScroll={HideScroll}/>
                                 ))
                             }
                         </div>
@@ -85,7 +85,7 @@ const PostGrid = ({ pathname }) => {
                         </div>
                     }
                     {!isPending && (isScrollLoad || (posts && posts.length < 8)) &&
-                        (noMorePosts ? <NoPostAvailable more={'More'} /> : (LoadMore() &&
+                        (noMorePosts ? <NoPostAvailable more={'More'}/> : (LoadMore() &&
                             <div className='load-more'>
                                 <h3>Loading ...</h3>
                                 <div style={{ height: '80px' }}></div>
