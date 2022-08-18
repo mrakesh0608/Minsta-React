@@ -5,7 +5,7 @@ import 'css/User.css';
 import UserHeadNav from 'components/User/UserHeadNav';
 import UserMeta1 from 'components/User/UserMeta1';
 import UserPostTag from 'components/User/UserPostTag';
-import userImg from 'icons/Tabs/user.png';
+import {userIcon} from 'helpers/importsIcons';
 
 import { useLogout } from 'hooks/useLogout'
 import { useAuthContext } from 'hooks/useAuthContext';
@@ -92,7 +92,7 @@ const User = () => {
                                     userlist.map(user => {
                                         return <Link to={`/user/${user.Username}`} key={user.username} className='discover-people-card'>
                                             <div className='userimg'>
-                                                <img src={userImg} alt="user" className='icons' />
+                                                <img src={userIcon} alt="user" className='icons' />
                                             </div>
                                             <div>{user.Name}</div>
                                             <div>{user.Username}</div>

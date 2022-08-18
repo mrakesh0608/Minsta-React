@@ -9,69 +9,61 @@ const Post = lazy(() => import('./Post'));
 
 const PostList = () => {
 
-    const [page,setPage] = useState(0);
-    const limit = 4;
+    const [page, setPage] = useState(0);
+    const limit = 2;
 
     const { fetchData, isError, isPending } = useFetch();
     const [posts, setPosts] = useState(null);
+    const [noMorePosts, setNoMorePosts] = useState(false);
 
     const [isScrollLoad, setIsScrollLoad] = useState(false);
+    const { ScrollListen } = ScrollLoad(setIsScrollLoad);
+
     useEffect(() => {
-        ScrollLoad(setIsScrollLoad);
+        ScrollListen(true);
         LoadMore();
     }, []);
 
-    const [noMorePosts, setNoMorePosts] = useState(false);
     const LoadMore = async () => {
-        
-        setIsScrollLoad(false);
-
+        ScrollListen(false);
         fetchData({
             path: '/posts/iFollow?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
-        })
-        .then((res) => {
-            if(res){
-
-                if (res.length === 0 || res.length < 4) {
-                    if(posts) setPosts([...posts,...res]);
-                    else setPosts(res);
+        }).then(res => {
+            if (res) {
+                if (posts) setPosts([...posts, ...res]);
+                else setPosts(res);
+                if (res.length === 0 || res.length < limit) {
                     setNoMorePosts(true);
                     return;
                 }
-                if (posts) setPosts([...posts, ...res]);
-                else setPosts(res);
-                setPage(page+1);
+                setPage(page + 1);
+                ScrollListen(true);
             }
         })
     }
 
     return (
         <div className="post-list">
-            {posts &&
-                posts.length === 0 ? <NoPostAvailable /> :
-                <div className="post-list-content">
-                    {posts &&
-                        <Suspense fallback={<div className='loading'><h3>Showing Posts ...</h3></div>}>
-                            {
-                                posts.map(post => (
+            {isError ? <div className='err-msg'>{isError}</div> :
+                (posts &&
+                    (posts.length === 0 ? <NoPostAvailable /> :
+                        <div className="post-list-content">
+                            <Suspense fallback={<div className='loading'><h3>Showing Posts ...</h3></div>}>
+                                {posts.map(post =>
                                     <Post key={post._id} post={post} />
-                                ))
+                                )}
+                            </Suspense>
+                            {!isPending &&
+                                (noMorePosts ? <NoPostAvailable more={'More'} /> :
+                                    ((isScrollLoad || posts.length < 3) &&
+                                        LoadMore()
+                                    )
+                                )
                             }
-                        </Suspense>
-                    }
-                    {!isPending && (isScrollLoad || (posts && posts.length < 8)) &&
-                        (noMorePosts ? <NoPostAvailable more={'More'} /> : (LoadMore() &&
-                            <div className='load-more'>
-                                <h3>Loading ...</h3>
-                                <div style={{ height: '80px' }}></div>
-                            </div>
-                        )
-                        )
-                    }
-                </div>
-            }
-            {isError && <div className='err-msg'>{isError}</div>}
-            {isPending && <div className='loading'><h3>Fetching Posts ...</h3></div>}
+                        </div>
+                    )
+                )}
+            {isPending && <div className={page === 0 ? 'loading' : 'load-more'}><h3>Fetching {page !== 0 && 'More'} Posts ...</h3></div>}
         </div>
     );
 }

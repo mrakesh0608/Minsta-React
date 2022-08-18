@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
-import userImg from 'icons/Tabs/user.png';
+
+import {userIcon} from 'helpers/importsIcons';
 
 const UserMeta1 = ({ user }) => {
     return (
         <div className='user-meta-1'>
             <div className="user-meta-1-1">
                 <div className='userimg'>
-                    <img src={userImg} alt="user" className='icons' />
+                    <img src={userIcon} alt="user" className='icons' />
                 </div>
                 <div className='network'>
                     <a href='#user-posts-tags'>

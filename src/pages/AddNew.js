@@ -4,7 +4,7 @@ import useFetch from 'hooks/useFetch';
 import { useAuthContext } from 'hooks/useAuthContext'
 
 import 'css/AddNew.css';
-import img from 'icons/img.png';
+import {imgIcon} from 'helpers/importsIcons';
 
 import { convertBase64 } from 'helpers/convertBase64';
 
@@ -15,7 +15,7 @@ const AddNew = () => {
 
     const { fetchData, data:Post,isError, isPending } = useFetch();
 
-    const [imgData, setImgData] = useState(img);
+    const [imgData, setImgData] = useState(imgIcon);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
     const [isSelectedPending, setIsSelectedPending] = useState(false);

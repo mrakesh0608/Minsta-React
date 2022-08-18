@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import 'css/UserHeadNav.css';
 
-import AddNew from 'icons/add-new.png';
+import {addNewIcon} from 'helpers/importsIcons';
 
 import { HideScroll } from 'helpers/HandleScroll';
 
@@ -12,7 +12,7 @@ const UserHeadNav = ({ username,setUserMore }) => {
             <div className='user-head-2'>
                 <Link to='/add-new'>
                     <div className='nav-icons'>
-                        <img src={AddNew} alt="addNew" />
+                        <img src={addNewIcon} alt="addNew" />
                     </div>
                 </Link>
                 <div className='nav-icons' onClick={() => {

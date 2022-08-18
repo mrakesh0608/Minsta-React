@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import addNew from 'icons/add-new.png';
-import msg from 'icons/msg.png';
+import {addNewIcon,msgIcon} from 'helpers/importsIcons';
 
 const HomeHeadNav = () => {
 
@@ -11,12 +10,12 @@ const HomeHeadNav = () => {
             <div style={{ display: 'flex' }}>
                 <Link to="/add-new">
                     <div id='add-new' className="nav-icons">
-                        <img src={addNew} alt="addNew" />
+                        <img src={addNewIcon} alt="addNew" />
                     </div>
                 </Link>
                 <Link to="/messenger" style={{marginLeft:'10px'}}>
                     <div id='msg' className="nav-icons">
-                        <img src={msg} alt="msg" />
+                        <img src={msgIcon} alt="msg" />
                     </div>
                 </Link>
             </div>

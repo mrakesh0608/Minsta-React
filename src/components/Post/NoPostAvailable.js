@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import AddNew from 'icons/add-new.png';
+import {addNewIcon} from 'helpers/importsIcons';
 
 const NoPostAvailable = ({ more }) => {
 
@@ -26,7 +26,7 @@ const NoPostAvailable = ({ more }) => {
                     <br />
                     <br />
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img src={AddNew} alt="Add +" style={{
+                        <img src={addNewIcon} alt="Add +" style={{
                             // display: 'block',
                             textAlign: 'center',
                             width: '30px',

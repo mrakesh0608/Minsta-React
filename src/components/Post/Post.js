@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import PostImg from './PostImg';
-import userImg from 'icons/Tabs/user.png';
 import 'css/Post.css';
+import {userIcon} from 'helpers/importsIcons';
 
 import { useAuthContext } from 'hooks/useAuthContext'
 import useFetch from 'hooks/useFetch';
@@ -29,7 +29,7 @@ const Post = ({ post: data }) => {
             <div className="post-meta post-meta-head">
                 <div className="post-user">
                     <div className="post-user-img post-meta-icons-div">
-                        <img src={userImg} alt="user" className='icons' />
+                        <img src={userIcon} alt="user" className='icons' />
                     </div>
                     <div><Link to={`/user/${post.username}`} className='username'>{post.username}</Link></div>
                 </div>

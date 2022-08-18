@@ -2,7 +2,6 @@ import { Link, useNavigate} from 'react-router-dom';
 import 'css/UserHeadNav.css';
 
 import {iconPath} from 'helpers/Path';
-import AddNew from 'icons/add-new.png';
 
 import { HideScroll } from 'helpers/HandleScroll';
 
