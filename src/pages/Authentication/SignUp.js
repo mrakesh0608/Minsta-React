@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useSignup } from "hooks/useSignup"
 
@@ -12,15 +12,12 @@ const SignUp = () => {
     const [Password, setPassword] = useState('');
     const [Username, setUsername] = useState('');
 
-    const {signup, error, isLoading} = useSignup();
+    const { signup, error, isLoading } = useSignup();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const newUser = { MobEmail, Name, Password, Username};
-        await signup(newUser);
+        await signup({ MobEmail, Name, Password, Username });
     }
-
     return (
         <div className='auth-div'>
             <div id="signup" className="auth">
@@ -58,8 +55,10 @@ const SignUp = () => {
                         />
                         <p className="TC">By signing up, you agree to our <Link to='/terms'>Terms</Link> , <Link to='/data-policy'>Data Policy</Link> and <Link to='/cookies-policy'>Cookies Policy</Link> .</p>
                         {error && <div className="error">{error}</div>}
-                        {!isLoading && <button>Sign Up</button>}
-                        {isLoading && <button disabled>Signing Up ...</button>}
+                        {isLoading ?
+                            <button disabled>Signing Up ...</button> :
+                            <button>Sign Up</button>
+                        }
                     </form>
                     <p>Have an account? <Link to='/login'>Log in</Link></p>
                 </div>
@@ -67,5 +66,4 @@ const SignUp = () => {
         </div>
     );
 }
-
 export default SignUp;

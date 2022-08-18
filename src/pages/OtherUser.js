@@ -7,17 +7,16 @@ import OtherUserHeadNav from 'components/User/OtherUserHeadNav'
 import UserMeta1 from 'components/User/UserMeta1';
 import UserPostTag from 'components/User/UserPostTag';
 import 'css/User.css';
-import { iconPath } from 'helpers/Path'
+import { iconPath } from 'helpers/Path';
 
 import { HideScroll } from 'helpers/HandleScroll';
 
 const OtherUser = ({ username }) => {
 
+    const navigate = useNavigate();
     const { user: I } = useAuthContext();
 
-    const navigate = useNavigate();
     const { id } = useParams();
-
     const { fetchData, simpleFetch, data: user, isError, isPending } = useFetch();
 
     useEffect(() => {
@@ -53,43 +52,44 @@ const OtherUser = ({ username }) => {
                 "Username2": user.Username,
                 "updateAdd": !user.iFollow
             }
+        }).then(res => {
+            if (res) { }
+            else navigate('/notfound/No Such User')
         })
-            .then(res => {
-                if (res) {
-                }
-                else navigate('/notfound/No Such User')
-            })
     };
 
     return (
         <div id="otheruser">
             {!user && isPending && <div className='loading'><p>Loading ...</p></div>}
-            {user &&
-                <OtherUserHeadNav username={user.Username} setUserMore={setUserMore} />
-            }
             {isError ?
-                isError === 'No Such User' ? navigate('/notfound/No Such User') :
-                    <div className='err-msg'>{isError}</div> : (user &&
-                        <div id="User-content">
-                            <div className="user-meta">
-                                <UserMeta1 user={{
-                                    Posts: user.Posts,
-                                    Followers: user.Followers,
-                                    Following: user.Following,
-                                    Name: user.Name,
-                                    Username: user.Username
-                                }} />
-                                {I && <div className='follow-msg'>
-                                    <button onClick={handleFollow} className={user.iFollow ? '' : 'follow'}>
-                                        {user.iFollow ? 'Unfollow' : 'Follow'}
+                (isError === 'No Such User' ?
+                    navigate('/notfound/No Such User') :
+                    <div className='err-msg'>{isError}</div>
+                ) :
+                (user &&
+                    <div id="User-content">
+                        <OtherUserHeadNav username={user.Username} setUserMore={setUserMore} />
+                        <div className="user-meta">
+                            <UserMeta1 user={{
+                                Posts: user.Posts,
+                                Followers: user.Followers,
+                                Following: user.Following,
+                                Name: user.Name,
+                                Username: user.Username
+                            }} />
+                            {I &&
+                                <div className='follow-msg'>
+                                    <button onClick={handleFollow} className={isPending ? '' : (user.iFollow ? '' : 'follow')}>
+                                        {isPending ? 'Checking ...' : (user.iFollow ? 'Unfollow' : 'Follow')}
                                     </button>
                                     <button onClick={() => { navigate('/messenger') }}>Message</button>
                                 </div>
-                                }
-                            </div>
-                            <UserPostTag userId={user._id} token={I} />
+                            }
                         </div>
-                )}
+                        <UserPostTag userId={user._id} token={I} />
+                    </div>
+                )
+            }
             {userMore &&
                 <div id='user-more-overlay' onClick={(e) => {
                     if (e.target.id === 'user-more-overlay') CloseUserMore();

@@ -1,11 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useFetch from 'hooks/useFetch';
 import { useAuthContext } from 'hooks/useAuthContext'
 
-import 'css/AddNew.css';
-import {imgIcon} from 'helpers/importsIcons';
+import useFetch from 'hooks/useFetch';
 
+import 'css/AddNew.css';
+
+import { imgIcon } from 'helpers/importsIcons';
 import { convertBase64 } from 'helpers/convertBase64';
 
 const AddNew = () => {
@@ -13,16 +14,16 @@ const AddNew = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
-    const { fetchData, data:Post,isError, isPending } = useFetch();
+    const { fetchData, data: Post, isError, isPending } = useFetch();
 
-    const [imgData, setImgData] = useState(imgIcon);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
     const [isSelectedPending, setIsSelectedPending] = useState(false);
+
+    const [imgData, setImgData] = useState(imgIcon);
     const [quote, setQuote] = useState('');
 
-    const [uploading, setUploading] = useState(false);
-    const [uploaded, setUploaded] = useState(false);
+    const notUploaded = true
 
     const changeHandler = async (e) => {
         setIsSelectedPending(true);
@@ -37,26 +38,14 @@ const AddNew = () => {
     };
 
     const handleSubmission = async () => {
-
-        setUploading(true);
         const newPost = {
-            "userId":user._id,
+            "userId": user._id,
             "username": user.Username,
             imgData,
             "imgName": selectedFile.name,
             "quote": quote
         }
-
-        fetchData({ 
-            path: '/posts', 
-            method: "POST", 
-            payload: newPost 
-        }).
-        then(res => {
-            setUploading(false);
-            setUploaded(true);
-            setTimeout(() => navigate('/posts/' + res._id), 1000);
-        })
+        fetchData({ path: '/posts', method: "POST", payload: newPost });
     };
 
     return (
@@ -71,11 +60,14 @@ const AddNew = () => {
                             <img src={imgData} alt="" className={isSelected ? '' : 'icons'} />
                         }
                     </div>
-                    <br />
-                    <br />
-                    {isSelected &&
+                    <br /><br />
+                    {!isSelected ?
                         <div>
-                            {!(uploading || uploaded) && <div>
+                            <p>Select a file to post</p>
+                            <input type="file" name="file" onChange={changeHandler} />
+                        </div> :
+                        <div>
+                            {(!Post && !isPending && notUploaded) && <div>
                                 <label htmlFor="qoute">Quote
                                 </label>
                                 <input type="text" name="quote"
@@ -87,26 +79,19 @@ const AddNew = () => {
                                 <button onClick={handleSubmission}>Submit</button>
                             </div>
                             }
-                            {uploading && <div>
-                                <p>Quote: {quote}</p>
-                                <h3>Uploading ...</h3>
-                            </div>
-                            }
-                            {uploaded && Post && <div>
-                                Uploaded
-                                <br />
-                                <br />
-                                <Link to={'/post/' + Post._id}><h3>See Post</h3></Link>
-                            </div>
+                            {Post ?
+                                navigate('/posts/' + Post._id) :
+                                (isError ? <div className='err-msg'>{isError}</div> :
+                                    (isPending &&
+                                        <div>
+                                            <p>Quote: {quote}</p>
+                                            <h3>Uploading ...</h3>
+                                        </div>
+                                    )
+                                )
                             }
                         </div>
                     }
-                    {!isSelected && <div>
-                        <p>Select a file to post</p>
-                        <input type="file" name="file" onChange={changeHandler} />
-                    </div>
-                    }
-                    {isError && <div className='err-msg'>{isError}</div>}
                 </div>
             </div>
         </div>
