@@ -10,7 +10,7 @@ import { usePostListContext } from 'hooks/usePostListContext'
 
 const PostDetails = () => {
 
-    const { posts } = usePostListContext();
+    const { posts ,dispatch} = usePostListContext();
 
     const { id } = useParams();
 
@@ -24,7 +24,17 @@ const PostDetails = () => {
                 return;
             }
         }
-        fetchData({ path: ('/posts/' + id), method: "GET" });
+        fetchData({
+            path: ('/posts/' + id),
+            method: "GET"
+        }).then(res => {
+            if (posts) {
+                dispatch({ type: 'ADD_MORE_POSTS', payload: [res] })
+            }
+            else {
+                dispatch({ type: 'SET_POSTS', payload: [res] })
+            }
+        })
     }, [])
 
     return (

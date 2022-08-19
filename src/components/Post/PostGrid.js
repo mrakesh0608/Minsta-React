@@ -5,17 +5,19 @@ import NoPostAvailable from 'components/Post/NoPostAvailable';
 import 'css/PostGrid.css';
 
 import { ScrollLoad, HideScroll } from 'helpers/HandleScroll';
+import { usePostListContext } from 'hooks/usePostListContext'
 
 const PostGridImg = lazy(() => import('components/Post/PostGridImg'));
 
 const PostGrid = ({ pathname }) => {
+
+    const { posts, dispatch } = usePostListContext();
 
     const [page, setPage] = useState(0);
     const limit = 4;
 
     const { fetchData, isError, isPending } = useFetch();
 
-    const [posts, setPosts] = useState(null)
     const [noMorePosts, setNoMorePosts] = useState(false);
     const [pointerPost, setPointerPost] = useState(false);
 
@@ -41,8 +43,12 @@ const PostGrid = ({ pathname }) => {
             path: pathname + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
         }).then(res => {
             if (res) {
-                if (posts) setPosts([...posts, ...res]);
-                else setPosts(res);
+                if (posts) {
+                    dispatch({ type: 'ADD_MORE_POSTS', payload: [...res] })
+                }
+                else {
+                    dispatch({ type: 'SET_POSTS', payload: [...res] })
+                }
                 if (res.length === 0 || res.length < limit) {
                     setNoMorePosts(true);
                     return;

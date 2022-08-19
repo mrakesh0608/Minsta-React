@@ -10,10 +10,17 @@ export const postListReducer = (state, action) => {
             return {
                 posts: action.payload
             }
-        case 'ADD_MORE_POSTS':
+        case 'ADD_MORE_POSTS':{
+            let load= [];
+            action.payload.forEach(post=>{
+                if((action.payload).indexOf(post) === -1){
+                    load.push(post)
+                }
+            })
             return {
-                posts: [...state.posts, ...action.payload]
+                posts: [...state.posts, ...load]
             }
+        }
         case 'DELETE_POST':
             return {
                 posts: state.posts.filter(post => post._id !== action.payload._id)
