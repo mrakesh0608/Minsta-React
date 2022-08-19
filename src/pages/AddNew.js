@@ -20,7 +20,7 @@ const AddNew = () => {
     const [isSelected, setIsSelected] = useState(false);
     const [isSelectedPending, setIsSelectedPending] = useState(false);
 
-    const [imgData, setImgData] = useState(imgIcon);
+    const [imgData, setImgData] = useState([imgIcon]);
     const [quote, setQuote] = useState('');
 
     const notUploaded = true
@@ -28,8 +28,11 @@ const AddNew = () => {
     const changeHandler = async (e) => {
         setIsSelectedPending(true);
 
-        const data = await convertBase64(e.target.files[0]);
-
+        const data = []
+        for(const file of e.target.files){
+            data.push(await convertBase64(file));
+        };
+        console.log(data);
         setSelectedFile(e.target.files[0]);
         setQuote(e.target.files[0].name);
         setImgData(data);
@@ -57,14 +60,17 @@ const AddNew = () => {
                     <div className='upload-img'>
                         {isSelectedPending ?
                             <div className='img-load'>Getting <br /> Image ...</div> :
-                            <img src={imgData} alt="" className={isSelected ? '' : 'icons'} />
+                            <img src={imgData[0]} alt="" className={isSelected ? '' : 'icons'} />
                         }
                     </div>
                     <br /><br />
                     {!isSelected ?
                         <div>
                             <p>Select a file to post</p>
-                            <input type="file" name="file" onChange={changeHandler} />
+                            <input type='file' 
+                            onChange={changeHandler}
+                            multiple 
+                            />
                         </div> :
                         <div>
                             {(!Post && !isPending && notUploaded) && <div>

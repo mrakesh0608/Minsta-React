@@ -10,6 +10,7 @@
 .Post-Grid-container-content {
     width: 100%;
     height: 33.3vw;
+    position: relative;
 }
 
 .Post-Grid-container-content img {
@@ -37,7 +38,16 @@
     object-fit: contain;
     z-index: 1;
 }
-
+.grid-folderPics{
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    background-color: white;
+    border-radius: 50%;
+    /* filter: invert(var(--invertStrength)); */
+}
 #db-post {
     background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
