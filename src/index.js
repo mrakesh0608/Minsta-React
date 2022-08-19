@@ -5,11 +5,17 @@ import App from 'App';
 import 'css/index.css';
 import 'css/NavHeadBottom.css'
 
-import { AuthContextProvider } from 'context/AuthContext'
+import { AuthContextProvider } from 'context/AuthContext';
+import { PostListContextProvider } from 'context/PostListContext';
+import { PostImgContextProvider } from 'context/PostImgContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <AuthContextProvider>
-        <App />
+        <PostListContextProvider>
+            <PostImgContextProvider>
+                <App />
+            </PostImgContextProvider>
+        </PostListContextProvider>
     </AuthContextProvider>
 );

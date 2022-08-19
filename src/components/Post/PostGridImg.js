@@ -6,15 +6,28 @@ import { useRef, useEffect } from 'react';
 import { folderPicsIcon } from 'helpers/importsIcons';
 import eventHoldWait from 'helpers/eventHoldWait';
 
+import { usePostImgContext } from 'hooks/usePostImgContext';
+
 const PostGridImg = ({ post, showPost }) => {
 
+    const { postImgs, dispatch } = usePostImgContext();
+    const { fetchData, data: image, setData: setImg, isError, isPending } = useFetch();
+
     const ref = useRef(null);
-    const { fetchData, data: image, isError, isPending } = useFetch();
-
     useEffect(() => {
-        fetchData({ path: '/post-img/grid/' + post.imgId, method: "GET" });
+        eventHoldWait(ref.current, showPost);
 
-        eventHoldWait(ref.current, showPost)
+        const img = postImgs.find(img => img._id === post.imgId);
+        if (img) {
+            setImg(img);
+            return;
+        }
+        fetchData({
+            path: '/post-img/' + post.imgId,
+            method: "GET"
+        }).then(res => {
+            dispatch({ type: 'ADD_POST_IMG', payload: res })
+        })
     }, [])
 
     return (
@@ -26,7 +39,7 @@ const PostGridImg = ({ post, showPost }) => {
                             <img src={folderPicsIcon} alt="multiple" />
                         </div>
                     }
-                    <img src={image.imgData.toString('base64')}
+                    <img src={image.imgData[0].toString('base64')}
                         alt={post.img_name}
                     />
                 </Link> :

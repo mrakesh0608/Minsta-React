@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { iconPath} from 'helpers/Path';
 import { useAuthContext } from 'hooks/useAuthContext';
+import { usePostListContext } from 'hooks/usePostListContext'
 
 const usePostEvents = ({ fetchData }) => {
     const { user } = useAuthContext();
+    const { dispatch } = usePostListContext();
     const navigate = useNavigate();
 
     //Like Start
@@ -115,7 +117,7 @@ const usePostEvents = ({ fetchData }) => {
             .then(res => {
                 if (res) {
                     setTimeout(() => {
-                        post.remove();
+                        dispatch({ type: 'DELETE_POST', payload: res })
                         navigate('/');
                     }, 1500);
                     console.log('post deleted');

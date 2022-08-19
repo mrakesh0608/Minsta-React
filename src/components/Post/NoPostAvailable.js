@@ -20,7 +20,7 @@ const NoPostAvailable = ({ more }) => {
             <br />
             {(window.location.pathname).substring(0, 6) === '/user/' ? '' :
                 <div>
-                    {window.location.pathname === '/' ? 'Follow more friends to see their posts or' : ''}
+                    {window.location.pathname === '/' ? `Follow ${more?more:''} friends to see their posts or` : ''}
                     <br />
                     Upload your new Post in
                     <br />

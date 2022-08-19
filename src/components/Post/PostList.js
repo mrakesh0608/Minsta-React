@@ -4,16 +4,19 @@ import useFetch from 'hooks/useFetch';
 import NoPostAvailable from 'components/Post/NoPostAvailable';
 
 import { ScrollLoad } from 'helpers/HandleScroll';
-
+import { usePostListContext } from 'hooks/usePostListContext'
 const Post = lazy(() => import('./Post'));
 
+let loadMore;
+
 const PostList = () => {
+
+    const { posts, dispatch } = usePostListContext();
 
     const [page, setPage] = useState(0);
     const limit = 2;
 
     const { fetchData, isError, isPending } = useFetch();
-    const [posts, setPosts] = useState(null);
     const [noMorePosts, setNoMorePosts] = useState(false);
 
     const [isScrollLoad, setIsScrollLoad] = useState(false);
@@ -21,7 +24,8 @@ const PostList = () => {
 
     useEffect(() => {
         ScrollListen(true);
-        LoadMore();
+        loadMore = LoadMore;
+        if (!posts) LoadMore();
     }, []);
 
     const LoadMore = async () => {
@@ -30,8 +34,12 @@ const PostList = () => {
             path: '/posts/iFollow?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
         }).then(res => {
             if (res) {
-                if (posts) setPosts([...posts, ...res]);
-                else setPosts(res);
+                if (posts) {
+                    dispatch({ type: 'ADD_MORE_POSTS', payload: [...res] })
+                }
+                else {
+                    dispatch({ type: 'SET_POSTS', payload: [...res] })
+                }
                 if (res.length === 0 || res.length < limit) {
                     setNoMorePosts(true);
                     return;
@@ -67,4 +75,4 @@ const PostList = () => {
         </div>
     );
 }
-export default PostList;
+export {PostList,loadMore};

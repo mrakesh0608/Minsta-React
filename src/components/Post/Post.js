@@ -25,7 +25,7 @@ const Post = ({ post: data }) => {
     const {handleLikes, handleShare, handleSave ,handleDelete}=usePostEvents({fetchData});
 
     return (
-        <div className="post" key={post._id}>
+        <div className="post" id={post._id} key={post._id}>
             <div className="post-meta post-meta-head">
                 <div className="post-user">
                     <div className="post-user-img post-meta-icons-div">

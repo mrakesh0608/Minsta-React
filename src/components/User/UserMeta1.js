@@ -32,7 +32,7 @@ const UserMeta1 = ({ user }) => {
             </div>
             <div className='user-meta-1-2'>
                 <div style={{ fontWeight: 600 }}>{user.Name}</div>
-                <div className='about'>About</div>
+                <div className='about'>Bio</div>
             </div>
         </div>
     );

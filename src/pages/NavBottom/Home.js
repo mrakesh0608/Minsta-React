@@ -1,5 +1,5 @@
 import HomeHeadNav from 'components/common/HomeHeadNav';
-import PostList from 'components/Post/PostList';
+import {PostList} from 'components/Post/PostList';
 
 const Home = () => {
     return (

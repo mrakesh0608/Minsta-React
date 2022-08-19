@@ -1,13 +1,28 @@
 import { useState, useEffect } from 'react';
 import useFetch from 'hooks/useFetch';
 
+import { usePostImgContext } from 'hooks/usePostImgContext';
+
 const PostImg = ({ post, setPost, handleLikes }) => {
-    const { fetchData, data: image, isError, isPending } = useFetch();
+
+    const { postImgs, dispatch } = usePostImgContext();
+
+    const { fetchData, data: image, setData: setImg, isError, isPending } = useFetch();
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
-        fetchData({ path: '/post-img/' + post.imgId, method: "GET" });
+        const img = postImgs.find(img => img._id === post.imgId);
+        if (img) {
+            setImg(img);
+            return;
+        }
+        fetchData({
+            path: '/post-img/' + post.imgId,
+            method: "GET"
+        }).then(res => {
+            dispatch({ type: 'ADD_POST_IMG', payload: res })
+        })
         window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
     }, [])
 
