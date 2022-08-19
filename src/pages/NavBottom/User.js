@@ -80,10 +80,10 @@ const User = () => {
                         {DisPeo &&
                             (DisPeodata ?
                                 <div className='discover-people'>
-                                    {DisPeodata.map(user =>
+                                    {DisPeodata.map((user, key) =>
                                         <div
                                             onClick={() => navigate(`/user/${user.Username}`)}
-                                            key={user.username}
+                                            key={key}
                                             className='discover-people-card'
                                         >
                                             <div className='userimg'>
@@ -94,7 +94,7 @@ const User = () => {
                                         </div>
                                     )}
                                 </div> :
-                                (isDisPeoError ? <div className='load' style={{color:'red'}}>{isDisPeoError}</div> :
+                                (isDisPeoError ? <div className='load' style={{ color: 'red' }}>{isDisPeoError}</div> :
                                     (isDisPeoPending &&
                                         <div className='load'>Loading ...</div>
                                     )

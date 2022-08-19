@@ -32,11 +32,11 @@ const usePostEvents = ({ fetchData }) => {
 
         let time;
         if (flag) {
-            post.querySelector('.post-content').innerHTML += '<img src="' + iconPath + 'ani_liked.gif" alt="like heart" class="ani-like">';
+            post.querySelector('.post-content-img-container').innerHTML += '<img src="' + iconPath + 'ani_liked.gif" alt="like heart" class="ani-like">';
             time = 850;
         }
         else {
-            post.querySelector('.post-content').innerHTML += '<img src="' + iconPath + 'ani_unliked.gif" alt="like heart" class="ani-like">'
+            post.querySelector('.post-content-img-container').innerHTML += '<img src="' + iconPath + 'ani_unliked.gif" alt="like heart" class="ani-like">'
             time = 800;
         }
 

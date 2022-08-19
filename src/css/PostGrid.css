@@ -39,13 +39,13 @@
     z-index: 1;
 }
 .grid-folderPics{
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     position: absolute;
     right: 4px;
     top: 4px;
-    background-color: white;
-    border-radius: 50%;
+    /* background-color: white; */
+    /* border-radius: 50%; */
     /* filter: invert(var(--invertStrength)); */
 }
 #db-post {
@@ -73,7 +73,9 @@
     top: 40px;
     right: 40px;
     border-radius: 50%;
-    background-color: white;
+    background-color: var(--bgColor);
+    color: var(--textColor);
+    cursor: pointer;
 }
 @media(min-width:650px) {
     #Post-Grid-container {

@@ -1,28 +1,33 @@
 import { Link } from 'react-router-dom';
 
 import useFetch from 'hooks/useFetch';
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
-const PostGridImg = ({ post, handlePointerDown, HideScroll }) => {
+import { folderPicsIcon } from 'helpers/importsIcons';
+import eventHoldWait from 'helpers/eventHoldWait';
 
+const PostGridImg = ({ post, showPost }) => {
+
+    const ref = useRef(null);
     const { fetchData, data: image, isError, isPending } = useFetch();
 
     useEffect(() => {
-        fetchData({ path: '/post-img/' + post.imgId, method: "GET" });
+        fetchData({ path: '/post-img/grid/' + post.imgId, method: "GET" });
+
+        eventHoldWait(ref.current, showPost)
     }, [])
 
     return (
-        <div className="Post-Grid-container-content" onPointerDown={handlePointerDown}>
+        <div className="Post-Grid-container-content" ref={ref}>
             {image ?
                 <Link to={'/posts/' + post._id}>
-                    {image.imgData.length > 1 &&
+                    {image.imgDataLength > 1 &&
                         <div className='grid-folderPics'>
-                            <img src='/icons/folderPics.png' alt="addNew" />
+                            <img src={folderPicsIcon} alt="multiple" />
                         </div>
                     }
-                    <img src={image.imgData[0].toString('base64')}
+                    <img src={image.imgData.toString('base64')}
                         alt={post.img_name}
-                        onClick={() => HideScroll(false)}
                     />
                 </Link> :
                 (isError ? <div className='img-load'>{isError}</div> :

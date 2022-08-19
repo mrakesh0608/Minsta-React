@@ -19,6 +19,8 @@ import userOnIcon from 'icons/Tabs/user-on.png';
 import addNewIcon from 'icons/add-new.png';
 import msgIcon from 'icons/msg.png';
 import imgIcon from 'icons/img.png';
+import folderPicsIcon from 'icons/folderPics.png';
+import searchIcon from 'icons/search.png';
 //Other Ends
 
 export {
@@ -28,5 +30,6 @@ export {
     heartIcon, heartOnIcon,
     userIcon, userOnIcon,
     addNewIcon,msgIcon,
-    imgIcon
+    searchIcon,
+    imgIcon,folderPicsIcon
 }

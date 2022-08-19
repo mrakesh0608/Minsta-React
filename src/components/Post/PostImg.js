@@ -25,34 +25,38 @@ const PostImg = ({ post, setPost, handleLikes }) => {
                 else
                     e.target.scrollLeft = (e.target.scrollLeft + need) - window.screen.width;
             }
-        }, 500);
+        }, 400);
     }
 
     return (
-        <div className='post-content-list'
-            onDoubleClick={(e) => handleLikes(e, post, setPost)}
-            onScroll={(e)=>scrollListen(e)}
-        >
-            {
-                image ?
-                    image.imgData.map((img, key) =>
-                        <div className="post-content" key={key}>
-                            <div className='img-div' >
-                                <img src={img.toString('base64')} alt={post.imgName} className='post-content-img' />
+        <div className='post-content-img-container'>
+            <div className='post-content-list'
+                onDoubleClick={(e) => handleLikes(e, post, setPost)}
+                onScroll={(e) => scrollListen(e)}
+            >
+                {
+                    image ?
+                        image.imgData.map((img, key) =>
+                            <div key={key}
+                                className={'post-content' + (image.imgData.length > 1 ? ' multiple' : '')}
+                            >
+                                <div className='img-div' >
+                                    <img src={img.toString('base64')} alt={post.imgName} className='post-content-img' />
 
-                                {windowWidth > 600 &&
-                                    <img src={img.toString('base64')} alt={post.imgName} className='bgImgblur' />
-                                }
+                                    {windowWidth > 600 &&
+                                        <img src={img.toString('base64')} alt={post.imgName} className='bgImgblur' />
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    ) :
-                    (isError ?
-                        <div className='img-load'>{isError}</div> :
-                        (isPending && <div className='img-load'>Fetching Image ...</div>)
-                    )
-            }
-        </div >
+                        ) :
+                        (isError ?
+                            <div className='img-load'>{isError}</div> :
+                            (isPending && <div className='img-load'>Fetching Image ...</div>)
+                        )
+                }
+            </div >
+            {/* Ani Like Comes Here */}
+        </div>
     );
 }
-
 export default PostImg;
