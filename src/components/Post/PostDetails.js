@@ -27,13 +27,6 @@ const PostDetails = () => {
         fetchData({
             path: ('/posts/' + id),
             method: "GET"
-        }).then(res => {
-            if (posts) {
-                dispatch({ type: 'ADD_MORE_POSTS', payload: [res] })
-            }
-            else {
-                dispatch({ type: 'SET_POSTS', payload: [res] })
-            }
         })
     }, [])
 
