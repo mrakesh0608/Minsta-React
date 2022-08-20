@@ -3,16 +3,17 @@
     --bgColor: white;
     --textColor: black;
     --invertStrength: 0;
-    --bgLightColor : gainsboro;
-    --minBlue : #0095F6;
+    --bgLightColor: gainsboro;
+    --minBlue: #0095F6;
 }
+
 .nav-icons img,
 .more-icons,
-.icons{
-
+.icons {
     filter: invert(var(--invertStrength));
 }
-.notInvertIcons{
+
+.notInvertIcons {
     filter: invert(0);
 }
 
@@ -21,14 +22,14 @@
     margin: 0;
     box-sizing: border-box;
     font-family: system-ui, sans-serif;
-    transition: all .5s;
-    letter-spacing:0.012cm;
+    letter-spacing: 0.012cm;
 }
 
 body {
     max-width: 100vw;
     min-height: 100vh;
-    margin-bottom: 80px;/*need for load more*/
+    margin-bottom: 80px;
+    /*need for load more*/
     background-color: var(--bgColor);
     color: var(--textColor);
 }
@@ -77,12 +78,14 @@ a {
     background-color: var(--bgLightColor);
     font-weight: 400;
 }
+
 .error,
-.err-msg{
+.err-msg {
     font-weight: 600;
     color: red;
 }
-.load{
+
+.load {
     text-align: center;
     color: var(--textColor);
 }

@@ -18,6 +18,6 @@ const eventHoldWait = (target, callback) => {
 
     const activeHoldTimeout = (e) => setTimeout(() => {
         if (isHeld) callback(e);
-    }, 350)
+    }, 300)
 }
 export default eventHoldWait;
