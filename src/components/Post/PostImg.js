@@ -65,10 +65,9 @@ const PostImg = ({ post, setPost, handleLikes }) => {
             clearTimeout(timer);
         }
         timer = setTimeout(() => {
-            if(!isPointerDown){
-                scrollEndFun(e.target)
-                setIsPointerDown(false);
-            }
+            if(isPointerDown) return ;
+            scrollEndFun(e.target)
+            setIsPointerDown(false);
         }, 1000);
     }
 
