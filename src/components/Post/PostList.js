@@ -57,24 +57,29 @@ const PostList = () => {
 
     return (
         <div className="post-list">
-            {isError ? <div className='err-msg'>{isError}</div> :
-                (posts.length === 0 ? <NoPostAvailable /> :
-                    <div className="post-list-content">
-                        <Suspense fallback={<div className='loading'><h3>Showing Posts ...</h3></div>}>
-                            {posts.map(post =>
-                                <Post key={post._id} post={post} />
-                            )}
-                        </Suspense>
-                        {!isPending &&
-                            (noMorePosts ? <NoPostAvailable more={'More'} /> :
-                                ((isScrollLoad || posts.length < 3) &&
-                                    LoadMore()
+            {isError ?
+                <div className='err-msg'>{isError}</div> :
+                ((isPending && page === 0) ?
+                    <div className='loading'><h3>Fetching Posts ...</h3></div> :
+                    (posts.length === 0 ? <NoPostAvailable /> :
+                        <div className="post-list-content">
+                            <Suspense fallback={<div className='loading'><h3>Showing Posts ...</h3></div>}>
+                                {posts.map(post =>
+                                    <Post key={post._id} post={post} />
+                                )}
+                            </Suspense>
+                            {!isPending &&
+                                (noMorePosts ? <NoPostAvailable more={'More'} /> :
+                                    ((isScrollLoad || posts.length < 3) &&
+                                        LoadMore()
+                                    )
                                 )
-                            )
-                        }
-                    </div>
-                )}
-            {isPending && <div className={page === 0 ? 'loading' : 'load-more'}><h3>Fetching {page !== 0 && 'More'} Posts ...</h3></div>}
+                            }
+                        </div>
+                    )
+                )
+            }
+            {(isPending && page !== 0) && <div className='load-more'><h3>Fetching More Posts ...</h3></div>}
         </div>
     );
 }
