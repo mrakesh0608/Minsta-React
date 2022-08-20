@@ -44,19 +44,26 @@ const PostImg = ({ post, setPost, handleLikes }) => {
                 target.scrollLeft = (target.scrollLeft + need) - window.screen.width;
         }
     }
-    const scrollListen = (e) => {
-        setCurrentImg(parseInt(e.target.scrollLeft / window.screen.width));
-    }
 
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
-
+    
     const setCurrentImg = (index) => {
         document.getElementById(`${post._id}-${currentImgIndex}`).style.backgroundColor = 'lightblue';
-
+        
         document.getElementById(`${post._id}-${index}`).style.backgroundColor = 'blue';
         document.getElementById(`${post._id}-${index}`).style.opacity = 1;
         console.log(index);
         setCurrentImgIndex(index);
+    }
+
+    let timer = null;
+    const scrollListen = (e) => {
+        setCurrentImg(parseInt(e.target.scrollLeft / window.screen.width));
+
+        if (timer !== null) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {scrollEndFun(e.target)}, 600);
     }
 
     return (
