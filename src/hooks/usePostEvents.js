@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { iconPath} from 'helpers/Path';
+import { iconPath } from 'helpers/Path';
 import { useAuthContext } from 'hooks/useAuthContext';
 import { usePostListContext } from 'hooks/usePostListContext'
 
@@ -102,10 +102,10 @@ const usePostEvents = ({ fetchData }) => {
             method: 'PATCH',
             payload: post
         })
-        .then(res => {
-            if (res) console.log('post updated')
-            else console.log(res);
-        })
+            .then(res => {
+                if (res) console.log('post updated')
+                else console.log(res);
+            })
     }
 
     //Delete Post
@@ -113,18 +113,20 @@ const usePostEvents = ({ fetchData }) => {
         const post = e.target.closest('.post');
         post.classList.add('disapear');
 
-        fetchData({ path: '/posts/' + id, method: 'DELETE' })
-            .then(res => {
-                if (res) {
-                    setTimeout(() => {
-                        dispatch({ type: 'DELETE_POST', payload: res })
-                        navigate('/');
-                    }, 1500);
-                    console.log('post deleted');
-                } else {
-                    post.classList.remove('disapear');
-                }
-            })
+        fetchData({
+            path: '/posts/' + id,
+            method: 'DELETE'
+        }).then(res => {
+            if (res) {
+                setTimeout(() => {
+                    dispatch({ type: 'DELETE_POST', payload: res })
+                    navigate('/');
+                }, 1500);
+                console.log('post deleted');
+            } else {
+                post.classList.remove('disapear');
+            }
+        })
     }
     return { handleLikes, handleShare, handleSave, handleDelete };
 }

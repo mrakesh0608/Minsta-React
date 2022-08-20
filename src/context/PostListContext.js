@@ -5,7 +5,7 @@ export const PostListContext = createContext();
 export const postListReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_POSTS':{
-            if(!state.posts){
+            if(state.posts.length === 0){
                 return {
                     posts: action.payload
                 }
@@ -25,7 +25,7 @@ export const postListReducer = (state, action) => {
                 posts: state.posts.filter(post => post._id !== action.payload._id)
             }
         case 'REFRESH':{
-            return {posts: null}
+            return {posts: []}
         }
         default:
             return state
@@ -34,7 +34,7 @@ export const postListReducer = (state, action) => {
 
 export const PostListContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(postListReducer, {
-        posts: null
+        posts: []
     })
 
     console.log('PostListContext state:', state)

@@ -8,6 +8,8 @@ import { ScrollLoad, HideScroll } from 'helpers/HandleScroll';
 
 const PostGridImg = lazy(() => import('components/Post/PostGridImg'));
 
+let initPostGrid;
+
 const PostGrid = ({ pathname }) => {
 
     const [page, setPage] = useState(0);
@@ -30,8 +32,17 @@ const PostGrid = ({ pathname }) => {
 
     const [isScrollLoad, setIsScrollLoad] = useState(false);
     const { ScrollListen } = ScrollLoad(setIsScrollLoad);
+
+    const initialize = () => {
+        console.log('initialized');
+        setPosts(null);
+        setPage(0);
+        LoadMore();
+    }
+
     useEffect(() => {
         ScrollListen(true);
+        initPostGrid = initialize;
         LoadMore();
     }, [])
 
@@ -86,4 +97,4 @@ const PostGrid = ({ pathname }) => {
         </div >
     );
 }
-export default PostGrid;
+export { PostGrid, initPostGrid };

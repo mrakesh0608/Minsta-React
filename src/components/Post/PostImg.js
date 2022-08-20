@@ -1,4 +1,4 @@
-import { useRef,useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import useFetch from 'hooks/useFetch';
 
 import { usePostImgContext } from 'hooks/usePostImgContext';
@@ -11,7 +11,7 @@ const PostImg = ({ post, setPost, handleLikes }) => {
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const ref = useRef(null);
-    
+
     useEffect(() => {
         const img = postImgs.find(img => img._id === post.imgId);
         if (img) {
@@ -26,15 +26,36 @@ const PostImg = ({ post, setPost, handleLikes }) => {
         })
         window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
 
-        for (const type of ['mouseup', 'mouseleave', 'mouseout', 'touchend', 'touchcancel']) {
-            document.getElementById(`pcl-${post._id}`).addEventListener(type,()=>{
-                setTimeout(()=>{
+        for (const type of ['mouseup', 'mouseleave', 'mouseout', 'pointerup', 'touchend', 'touchcancel']) {
+            ref.current.addEventListener(type, (e) => {
+                // console.log(e);
+                setTimeout(() => {
                     scrollEndFun(ref.current);
-                },300)
+                }, 300)
             })
         }
     }, [])
-    
+
+    const [isPointerDown, setIsPointerDown] = useState(false);
+    const setNoChange = (e) => {
+        setIsPointerDown(true);
+        // console.log(e.type,isPointerDown);
+    }
+    useEffect(() => {
+        const element = ref.current;
+        if (element) {
+            for (const type of ['mousedown', 'touchstart', 'pointerdown']) {
+                element.addEventListener(type, setNoChange)
+            }
+            return () => {
+                for (const type of ['mousedown', 'touchstart', 'pointerdown']) {
+                    element.removeEventListener(type, setNoChange)
+                }
+            }
+        }
+    }, [ref,isPointerDown, setNoChange])
+
+
     const scrollEndFun = (target) => {
         let need = window.screen.width - (target.scrollLeft % window.screen.width);
         if (need !== window.screen.width) {
@@ -43,13 +64,14 @@ const PostImg = ({ post, setPost, handleLikes }) => {
             else
                 target.scrollLeft = (target.scrollLeft + need) - window.screen.width;
         }
+        setIsPointerDown(false);
     }
 
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
-    
+
     const setCurrentImg = (index) => {
         document.getElementById(`${post._id}-${currentImgIndex}`).style.backgroundColor = 'lightblue';
-        
+
         document.getElementById(`${post._id}-${index}`).style.backgroundColor = 'blue';
         document.getElementById(`${post._id}-${index}`).style.opacity = 1;
         console.log(index);
@@ -57,7 +79,6 @@ const PostImg = ({ post, setPost, handleLikes }) => {
     }
 
     let timer = null;
-    const [isPointerDown,setIsPointerDown] = useState(false);
     const scrollListen = (e) => {
         setCurrentImg(parseInt(e.target.scrollLeft / window.screen.width));
 
@@ -65,9 +86,8 @@ const PostImg = ({ post, setPost, handleLikes }) => {
             clearTimeout(timer);
         }
         timer = setTimeout(() => {
-            if(isPointerDown) return ;
+            if (isPointerDown) return;
             scrollEndFun(e.target)
-            setIsPointerDown(false);
         }, 1000);
     }
 
@@ -78,7 +98,6 @@ const PostImg = ({ post, setPost, handleLikes }) => {
                     className='post-content-list'
                     onDoubleClick={(e) => handleLikes(e, post, setPost)}
                     onScroll={(e) => scrollListen(e)}
-                    onPointerDown={(e)=>{setIsPointerDown(true)}}
                     ref={ref}
                 >
                     {

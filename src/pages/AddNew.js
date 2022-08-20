@@ -23,13 +23,13 @@ const AddNew = () => {
     const [imgData, setImgData] = useState([imgIcon]);
     const [quote, setQuote] = useState('');
 
-    const notUploaded = true
+    const [Upload, setUpload] = useState(true);
 
     const changeHandler = async (e) => {
         setIsSelectedPending(true);
 
         const data = []
-        for(const file of e.target.files){
+        for (const file of e.target.files) {
             data.push(await convertBase64(file));
         };
         // console.log(data);
@@ -41,14 +41,22 @@ const AddNew = () => {
     };
 
     const handleSubmission = async () => {
-        const newPost = {
-            "userId": user._id,
-            "username": user.Username,
-            imgData,
-            "imgName": selectedFile.name,
-            "quote": quote
-        }
-        fetchData({ path: '/posts', method: "POST", payload: newPost });
+        setUpload(false);
+
+        fetchData({
+            path: '/posts',
+            method: "POST",
+            payload: {
+                "userId": user._id,
+                "username": user.Username,
+                imgData,
+                "imgName": selectedFile.name,
+                "quote": quote
+            }
+        }).then(res => {
+            console.log(res);
+            navigate('/posts/' + res._id)
+        })
     };
 
     return (
@@ -67,13 +75,13 @@ const AddNew = () => {
                     {!isSelected ?
                         <div>
                             <p>Select a file to post</p>
-                            <input type='file' 
-                            onChange={changeHandler}
-                            multiple 
+                            <input type='file'
+                                onChange={changeHandler}
+                                multiple
                             />
                         </div> :
                         <div>
-                            {(!Post && !isPending && notUploaded) && <div>
+                            {Upload && <div>
                                 <label htmlFor="qoute">Quote
                                 </label>
                                 <input type="text" name="quote"
@@ -85,15 +93,13 @@ const AddNew = () => {
                                 <button onClick={handleSubmission}>Submit</button>
                             </div>
                             }
-                            {Post ?
-                                navigate('/posts/' + Post._id) :
-                                (isError ? <div className='err-msg'>{isError}</div> :
-                                    (isPending &&
-                                        <div>
-                                            <p>Quote: {quote}</p>
-                                            <h3>Uploading ...</h3>
-                                        </div>
-                                    )
+                            {isError ?
+                                <div className='err-msg' style={{ minHeight: '100px' }}>{isError}</div> :
+                                (isPending &&
+                                    <div>
+                                        <p>Quote: {quote}</p>
+                                        <h3>Uploading ...</h3>
+                                    </div>
                                 )
                             }
                         </div>

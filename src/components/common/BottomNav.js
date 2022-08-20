@@ -10,7 +10,8 @@ import {
     userIcon, userOnIcon
 } from 'helpers/importsIcons';
 
-import {init} from 'components/Post/PostList'
+import {initPostList} from 'components/Post/PostList'
+import {initPostGrid} from 'components/Post/PostGrid'
 
 const BottomNav = () => {
     const navigate = useNavigate();
@@ -21,10 +22,10 @@ const BottomNav = () => {
 
     return (
         <div id="bottom" className='nav-bottom hideOnScroll hideOnScroll-bottom'>
-            <div id="home" className="nav-icons" onClick={() => navigate('/')} onDoubleClick={()=>init()}>
+            <div id="home" className="nav-icons" onClick={() => navigate('/')} onDoubleClick={()=>initPostList()}>
                 <img src={window.location.pathname === '/' ? homeOnIcon : homeIcon} alt="home" />
             </div>
-            <div id='explore' className="nav-icons" onClick={() => navigate('/explore')} onDoubleClick={()=>alert('refresh')}>
+            <div id='explore' className="nav-icons" onClick={() => navigate('/explore')} onDoubleClick={()=>initPostGrid()}>
                 <img src={window.location.pathname === '/explore' ? exploreOnIcon : exploreIcon} alt="explore" />
             </div>
             <div id='reels' className="nav-icons" onClick={() => navigate('/reels')} onDoubleClick={()=>alert('refresh')}>

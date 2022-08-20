@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 
-import PostGrid from 'components/Post/PostGrid';
+import {PostGrid} from 'components/Post/PostGrid';
 
 import { iconPath } from 'helpers/Path'
 

@@ -7,7 +7,7 @@ import { ScrollLoad } from 'helpers/HandleScroll';
 import { usePostListContext } from 'hooks/usePostListContext'
 const Post = lazy(() => import('./Post'));
 
-let init;
+let initPostList;
 
 const PostList = () => {
 
@@ -31,8 +31,8 @@ const PostList = () => {
 
     useEffect(() => {
         ScrollListen(true);
-        init = initialize;
-        if(!posts) LoadMore();
+        initPostList = initialize;
+        if (posts.length === 0) LoadMore();
     }, []);
 
     const LoadMore = async () => {
@@ -58,26 +58,24 @@ const PostList = () => {
     return (
         <div className="post-list">
             {isError ? <div className='err-msg'>{isError}</div> :
-                (posts &&
-                    (posts.length === 0 ? <NoPostAvailable /> :
-                        <div className="post-list-content">
-                            <Suspense fallback={<div className='loading'><h3>Showing Posts ...</h3></div>}>
-                                {posts.map(post =>
-                                    <Post key={post._id} post={post} />
-                                )}
-                            </Suspense>
-                            {!isPending &&
-                                (noMorePosts ? <NoPostAvailable more={'More'} /> :
-                                    ((isScrollLoad || posts.length < 3) &&
-                                        LoadMore()
-                                    )
+                (posts.length === 0 ? <NoPostAvailable /> :
+                    <div className="post-list-content">
+                        <Suspense fallback={<div className='loading'><h3>Showing Posts ...</h3></div>}>
+                            {posts.map(post =>
+                                <Post key={post._id} post={post} />
+                            )}
+                        </Suspense>
+                        {!isPending &&
+                            (noMorePosts ? <NoPostAvailable more={'More'} /> :
+                                ((isScrollLoad || posts.length < 3) &&
+                                    LoadMore()
                                 )
-                            }
-                        </div>
-                    )
+                            )
+                        }
+                    </div>
                 )}
             {isPending && <div className={page === 0 ? 'loading' : 'load-more'}><h3>Fetching {page !== 0 && 'More'} Posts ...</h3></div>}
         </div>
     );
 }
-export { PostList, init };
+export { PostList, initPostList };
