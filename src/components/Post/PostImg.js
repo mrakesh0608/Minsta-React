@@ -63,7 +63,7 @@ const PostImg = ({ post, setPost, handleLikes }) => {
         if (timer !== null) {
             clearTimeout(timer);
         }
-        timer = setTimeout(() => {scrollEndFun(e.target)}, 600);
+        timer = setTimeout(() => {scrollEndFun(e.target)}, 1000);
     }
 
     return (
