@@ -103,7 +103,7 @@ const PostImg = ({ post, setPost, handleLikes }) => {
                             )
                     }
                 </div >
-                {/* Ani Like Comes Here */}
+                <div className='animation-like'></div>
             </div>
             {post.imgDataLength > 1 &&
                 <div className='mul-posts'>

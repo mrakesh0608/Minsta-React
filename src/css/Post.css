@@ -118,10 +118,11 @@
 
 /* Like Animation Start */
 .ani-like {
+    display: block;
     z-index: 2;
     position: absolute;
     top: 0;
-    transform: scale(0.5);
+    transform: scale(0.4);
 }
 
 /* Like Animation Ends */
