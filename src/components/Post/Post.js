@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import PostImg from './PostImg';
 import 'css/Post.css';
-import {userIcon} from 'helpers/importsIcons';
+import { userIcon } from 'helpers/importsIcons';
 
 import { useAuthContext } from 'hooks/useAuthContext'
 import useFetch from 'hooks/useFetch';
@@ -20,9 +20,9 @@ const Post = ({ post: data }) => {
     const { user } = useAuthContext();
     const [post, setPost] = useState(data);
     const [postMore, setPostMore] = useState(false);
-    
-    const {fetchData,isError} = useFetch();
-    const {handleLikes, handleShare, handleSave ,handleDelete}=usePostEvents({fetchData});
+
+    const { fetchData, isError } = useFetch();
+    const { handleLikes, handleShare, handleSave, handleDelete } = usePostEvents({ fetchData });
 
     return (
         <div className="post" id={post._id} key={post._id}>
@@ -41,8 +41,8 @@ const Post = ({ post: data }) => {
                 </div>
             </div>
 
-            <PostImg post={post} setPost={setPost} handleLikes={handleLikes}/>
-            {isError && <div className='err-msg' style={{minHeight:'100px'}}>{isError}</div>}
+            <PostImg post={post} setPost={setPost} handleLikes={handleLikes} />
+            {isError && <div className='err-msg' style={{ minHeight: '100px' }}>{isError}</div>}
             <div className="post-meta post-meta-bottom">
                 <div className="post-meta-bottom-1">
 
@@ -78,12 +78,12 @@ const Post = ({ post: data }) => {
             {postMore &&
                 <div className="PostMore">
                     <div className="list">
-                        <div onClick={(e)=>{
-                            handleDelete(e,post._id);
+                        <div onClick={(e) => {
+                            handleDelete(e, post._id);
                             setPostMore(false);
                             HideScroll(false);
-                            }}>Delete this post</div>
-                        <div onClick={()=>alert('this feature is not working now...')}>Report</div>
+                        }}>Delete this post</div>
+                        <div onClick={() => alert('this feature is not working now...')}>Report</div>
                         <div onClick={() => {
                             setPostMore(false);
                             HideScroll(false);

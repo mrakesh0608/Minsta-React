@@ -1,16 +1,15 @@
 import { createContext, useReducer } from 'react'
 
-import {loadMore} from 'components/Post/PostList'
-
 export const PostListContext = createContext();
 
 export const postListReducer = (state, action) => {
     switch (action.type) {
-        case 'SET_POSTS':
-            return {
-                posts: action.payload
+        case 'ADD_POSTS':{
+            if(!state.posts){
+                return {
+                    posts: action.payload
+                }
             }
-        case 'ADD_MORE_POSTS':{
             let load= [];
             action.payload.forEach(post=>{
                 if((action.payload).indexOf(post) === -1){
@@ -26,7 +25,6 @@ export const postListReducer = (state, action) => {
                 posts: state.posts.filter(post => post._id !== action.payload._id)
             }
         case 'REFRESH':{
-            loadMore();
             return {posts: null}
         }
         default:

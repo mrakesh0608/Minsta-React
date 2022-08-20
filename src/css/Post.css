@@ -64,15 +64,17 @@
 
 /* Post Meta Head End*/
 /* Post Content Start */
-.post-content-img-container{
+.post-content-img-container {
     position: relative;
 }
-.post-content-list{
+
+.post-content-list {
     display: flex;
     width: 100%;
     height: 100%;
     overflow-x: auto;
 }
+
 .post-content {
     position: relative;
     background-color: gray;
@@ -84,10 +86,34 @@
     height: 100%;
     width: 100%;
 }
-.post-content-list .multiple .img-div{
+
+.post-content-list .multiple .img-div {
     width: 100vw;
-    
+
 }
+
+.mul-posts {
+    text-align: center;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.mul-posts div {
+    width: 8px;
+    height: 8px;
+    background-color: gray;
+    border-radius: 50%;
+    margin: 5px;
+    opacity: 0.5;
+    transition: 0.5s opacity;
+}
+
+.mul-posts div:first-child {
+    background-color: blue;
+    opacity: 1;
+}
+
 /* Post Content Ends */
 
 /* Like Animation Start */
@@ -176,7 +202,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -191,7 +217,7 @@
     from {
         opacity: 0%
     }
-    
+
     to {
         opacity: 100%;
     }

@@ -34,7 +34,7 @@ const PostGridImg = ({ post, showPost }) => {
         <div className="Post-Grid-container-content" ref={ref}>
             {image ?
                 <Link to={'/posts/' + post._id}>
-                    {image.imgDataLength > 1 &&
+                    {image.imgData.length > 1 &&
                         <div className='grid-folderPics'>
                             <img src={folderPicsIcon} alt="multiple" />
                         </div>

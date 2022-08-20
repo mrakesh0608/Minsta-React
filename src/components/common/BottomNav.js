@@ -10,10 +10,9 @@ import {
     userIcon, userOnIcon
 } from 'helpers/importsIcons';
 
-import { usePostListContext } from 'hooks/usePostListContext'
+import {init} from 'components/Post/PostList'
 
 const BottomNav = () => {
-    const { dispatch:HomeRefresh } = usePostListContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +21,7 @@ const BottomNav = () => {
 
     return (
         <div id="bottom" className='nav-bottom hideOnScroll hideOnScroll-bottom'>
-            <div id="home" className="nav-icons" onClick={() => navigate('/')} onDoubleClick={()=>HomeRefresh({ type: 'REFRESH' })}>
+            <div id="home" className="nav-icons" onClick={() => navigate('/')} onDoubleClick={()=>init()}>
                 <img src={window.location.pathname === '/' ? homeOnIcon : homeIcon} alt="home" />
             </div>
             <div id='explore' className="nav-icons" onClick={() => navigate('/explore')} onDoubleClick={()=>alert('refresh')}>

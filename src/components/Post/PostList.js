@@ -7,7 +7,7 @@ import { ScrollLoad } from 'helpers/HandleScroll';
 import { usePostListContext } from 'hooks/usePostListContext'
 const Post = lazy(() => import('./Post'));
 
-let loadMore;
+let init;
 
 const PostList = () => {
 
@@ -22,23 +22,28 @@ const PostList = () => {
     const [isScrollLoad, setIsScrollLoad] = useState(false);
     const { ScrollListen } = ScrollLoad(setIsScrollLoad);
 
+    const initialize = () => {
+        console.log('initialized');
+        dispatch({ type: 'REFRESH' })
+        setPage(0);
+        LoadMore();
+    }
+
     useEffect(() => {
         ScrollListen(true);
-        loadMore = LoadMore;
-        if (!posts) LoadMore();
+        init = initialize;
+        if(!posts) LoadMore();
     }, []);
 
     const LoadMore = async () => {
+        console.log('Loading Posts');
         ScrollListen(false);
         fetchData({
             path: '/posts/iFollow?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
         }).then(res => {
             if (res) {
-                if (posts) {
-                    dispatch({ type: 'ADD_MORE_POSTS', payload: [...res] })
-                }
-                else {
-                    dispatch({ type: 'SET_POSTS', payload: [...res] })
+                if (res.length > 0) {
+                    dispatch({ type: 'ADD_POSTS', payload: [...res] });
                 }
                 if (res.length === 0 || res.length < limit) {
                     setNoMorePosts(true);
@@ -75,4 +80,4 @@ const PostList = () => {
         </div>
     );
 }
-export {PostList,loadMore};
+export { PostList, init };

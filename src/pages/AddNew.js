@@ -32,7 +32,7 @@ const AddNew = () => {
         for(const file of e.target.files){
             data.push(await convertBase64(file));
         };
-        console.log(data);
+        // console.log(data);
         setSelectedFile(e.target.files[0]);
         setQuote(e.target.files[0].name);
         setImgData(data);
