@@ -57,13 +57,19 @@ const PostImg = ({ post, setPost, handleLikes }) => {
     }
 
     let timer = null;
+    const [isPointerDown,setIsPointerDown] = useState(false);
     const scrollListen = (e) => {
         setCurrentImg(parseInt(e.target.scrollLeft / window.screen.width));
 
         if (timer !== null) {
             clearTimeout(timer);
         }
-        timer = setTimeout(() => {scrollEndFun(e.target)}, 1000);
+        timer = setTimeout(() => {
+            if(!isPointerDown){
+                scrollEndFun(e.target)
+                setIsPointerDown(false);
+            }
+        }, 1000);
     }
 
     return (
@@ -73,6 +79,7 @@ const PostImg = ({ post, setPost, handleLikes }) => {
                     className='post-content-list'
                     onDoubleClick={(e) => handleLikes(e, post, setPost)}
                     onScroll={(e) => scrollListen(e)}
+                    onPointerDown={(e)=>{setIsPointerDown(true)}}
                     ref={ref}
                 >
                     {
