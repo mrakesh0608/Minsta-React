@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext"
-import {url} from 'helpers/Path'
+import { url } from 'helpers/Path';
+
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from 'hooks/useLogout'
 
 const MethodLoad = (method, payload, token) => {
 
@@ -28,6 +30,7 @@ const MethodLoad = (method, payload, token) => {
 const useFetch = () => {
 
     const { user } = useAuthContext();
+    const { logout } = useLogout();
 
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(false);
@@ -48,8 +51,11 @@ const useFetch = () => {
             const json = await response.json();
             // console.log(json);
             if (!response.ok) {
-                setIsPending(false)
+                if (response.status === 401) {
+                    logout();
+                }
                 setIsError(json.error);
+                setIsPending(false)
             }
             if (response.ok) {
                 setData(json);
@@ -66,7 +72,7 @@ const useFetch = () => {
         }
     }
 
-    const simpleFetch = async ({ path })=>{
+    const simpleFetch = async ({ path }) => {
         // console.log(path, method, payload);
         setIsPending(true);
         // setData(null);
@@ -94,7 +100,7 @@ const useFetch = () => {
         }
     }
 
-    return { fetchData,simpleFetch, data, setData, isPending, isError };
+    return { fetchData, simpleFetch, data, setData, isPending, isError };
 }
 
 export default useFetch;
