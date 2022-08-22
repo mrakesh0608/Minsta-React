@@ -109,7 +109,7 @@ const AddNew = () => {
                                         )
                                 )
                             }
-                        </div>
+                        </div> 
                     }
                 </div>
             </div>
