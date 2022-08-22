@@ -55,7 +55,9 @@ const AddNew = () => {
             }
         }).then(res => {
             console.log(res);
-            navigate('/posts/' + res._id)
+            if(res._id){
+                navigate('/posts/' + res._id)
+            }
         })
     };
 
@@ -95,11 +97,16 @@ const AddNew = () => {
                             }
                             {isError ?
                                 <div className='err-msg' style={{ minHeight: '100px' }}>{isError}</div> :
-                                (isPending &&
+                                (isPending ?
                                     <div>
                                         <p>Quote: {quote}</p>
                                         <h3>Uploading ...</h3>
-                                    </div>
+                                    </div>:
+                                    (Post && 
+                                        <div>
+                                            <Link to={`'/posts/'${Post._id}`}>See Post</Link>
+                                        </div>
+                                        )
                                 )
                             }
                         </div>
