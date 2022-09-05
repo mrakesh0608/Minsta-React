@@ -8,6 +8,7 @@ import BrandLogo from 'components/common/BrandLogo'
 const Tabs = lazy(() => import('components/common/Tabs'));
 const AddNew = lazy(() => import('pages/AddNew'));
 const Messenger = lazy(() => import('pages/Messenger'));
+const Chat = lazy(() => import('pages/Chat'));
 
 const PostDetails = lazy(() => import('components/Post/PostDetails'));
 
@@ -34,6 +35,7 @@ function App() {
                                 <Route exact path={path} element={user ? <Tabs /> : <Navigate to='/login' />} key={index} />
                             )}
                             <Route exact path='/add-new' element={user ? <AddNew /> : <Navigate to='/login' />} />
+                            <Route exact path='/messenger/:id' element={user ? <Chat /> : <Navigate to='/login' />} />
                             <Route exact path='/messenger' element={user ? <Messenger /> : <Navigate to='/login' />} />
                             <Route exact path='/posts/:id' element={user ? <PostDetails /> : <Navigate to='/login' />} />
 

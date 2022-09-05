@@ -82,7 +82,7 @@ const OtherUser = ({ username }) => {
                                     <button onClick={handleFollow} className={isPending ? '' : (user.iFollow ? '' : 'follow')}>
                                         {isPending ? 'Checking ...' : (user.iFollow ? 'Unfollow' : 'Follow')}
                                     </button>
-                                    <button onClick={() => { navigate('/messenger') }}>Message</button>
+                                    <button onClick={() => { navigate(`/messenger/${id}`) }}>Message</button>
                                 </div>
                             }
                         </div>

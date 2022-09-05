@@ -1,0 +1,27 @@
+.chat{
+    padding: 10px;
+    position: relative;
+}
+.myMsg{
+    text-align: right;
+}
+.msg{
+    border-radius: 5px;
+    margin: 20px 0px;
+}
+span{
+    padding: 5px;
+    background-color: lightblue;
+}
+.newMsgSend{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.newMsgSend input{
+    width: 70vw;
+}
