@@ -13,6 +13,9 @@ span{
     padding: 5px;
     background-color: lightblue;
 }
+.myMsg span{
+    background-color: lightgreen;
+}
 .newMsgSend{
     position: fixed;
     bottom: 0;
