@@ -9,25 +9,46 @@
     margin-bottom: 10px;
     width: 100%;
 }
+.chat-day{
+    text-align: center;
+}
+.chat-day span{
+    background-color: burlywood;
+    padding: 5px;
+    border-radius: 10px;
+}
 .msg{
     padding: 0 5px;
     border-radius: 5px;
     margin: 20px 0px;
     display: flex;
+    flex-wrap: wrap;
 }
-.msg span{
+.msg-content{
+    max-width: 70vw;
     border-radius: 10px;
     border-top-left-radius: 0;
     padding: 5px;
     background-color: lightblue;
+    display: flex;
+    flex-wrap: wrap;
+}
+.msg-content span{
+    width: 100%;
+    word-wrap: break-word;
+}
+sub{
+    width: 100%;
+    text-align: right;
+    color: gray;
 }
 .myMsg{
     justify-content: flex-end;
 }
-.myMsg span{
-    background-color: lightgreen;
+.myMsg .msg-content{
     border-top-right-radius: 0;
     border-top-left-radius: 10px;
+    background-color: lightgreen;
 }
 .triangle{
     display: inline-block;
@@ -54,9 +75,10 @@
     background-color:rgb(233, 229, 229);
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .newMsgSend input{
     width: 70vw;
     height: 40px;
+    padding: 10px;
 }

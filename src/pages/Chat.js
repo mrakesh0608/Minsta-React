@@ -13,15 +13,19 @@ const Chat = () => {
     const [newMsg, setNewMsg] = useState('');
     useEffect(() => {
         initialize();
-        setInterval(() => {
+        const interval = setInterval(() => {
             initialize();
         }, 3000)
+        return function cleanup() {
+            // console.log("cleaning up");
+            clearInterval(interval);
+        };
     }, [])
     const initialize = () => {
         fetchData({
             path: `/chat?UserName1=${I.Username}&UserName2=${id}`,
             method: 'GET'
-        }).then(res => console.log(res));
+        }).then(res=>console.log(res))
     }
     const handleMsgSend = (e) => {
         e.preventDefault();
@@ -45,17 +49,30 @@ const Chat = () => {
         <div className='chat'>
             <div className='chat-head'>{id}</div>
             {data ?
-                data.chats.map((chat, key) =>
-                    <div key={key} >{chat.UserName === I.Username ?
-                        <div className='msg myMsg'>
-                            <span>{chat.msg}<sub className='time'>{time(chat.createdAt)}</sub></span>
-                            <div className='triangle triangle-right'></div>
-                        </div> :
-                        <div className='msg'>
-                            <div className='triangle triangle-left'></div>
-                            <span>{chat.msg}<sub className='time'>{time(chat.createdAt)}</sub></span>
-                        </div>
-                    }</div>
+                (data.chats? Object.keys(data.chats).map((day, key) =>
+                    <div key={key}>
+                        <div className='chat-day'><span>{day}</span></div>
+                        {data.chats[day].map((chat, key) =>
+                            <div key={key} >
+                                {chat.UserName === I.Username ?
+                                    <div className='msg myMsg'>
+                                        <div className='msg-content'>
+                                            <span>{chat.msg}</span>
+                                            <sub className='time'>{time(chat.time)}</sub>
+                                        </div>
+                                        <div className='triangle triangle-right'></div>
+                                    </div> :
+                                    <div className='msg'>
+                                        <div className='triangle triangle-left'></div>
+                                        <div className='msg-content'>
+                                            <span>{chat.msg}</span>
+                                            <sub className='time'>{time(chat.time)}</sub>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        )}
+                    </div>):<div className='loading'>Send your first Messege to {id}</div>
                 ) :
                 isError ?
                     <div>{isError}</div> :
