@@ -25,7 +25,7 @@ const Chat = () => {
     }
     const handleMsgSend = (e) => {
         e.preventDefault();
-        if(newMsg){
+        if (newMsg) {
             setNewMsg('');
             fetchData({
                 path: `/chat?id=${data._id}&UserName=${I.Username}&msg=${newMsg}`,
@@ -35,12 +35,17 @@ const Chat = () => {
     }
     return (
         <div className='chat'>
-            {data && data.chats.map((msg, key) =>
-                <div key={key}
-                    className={'msg ' + (msg.UserName === I.Username ? "myMsg" : '')}>
-                    <span>{msg.msg}</span>
-                </div>
-            )}
+            <div className='chat-head'>{id}</div>
+            {data ?
+                data.chats.map((chat, key) =>
+                    <div key={key}
+                        className={'msg ' + (chat.UserName === I.Username ? "myMsg" : '')}>
+                        <span>{chat.msg}</span>
+                    </div>
+                ) :
+                isError ?
+                    <div>{isError}</div> :
+                    (isPending && <div className='loading'><p>Loading ...</p></div>)}
             <form onSubmit={handleMsgSend}>
                 <div className='newMsgSend'>
                     <input

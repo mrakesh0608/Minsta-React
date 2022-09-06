@@ -1,17 +1,28 @@
 .chat{
-    padding: 10px;
     position: relative;
 }
-.myMsg{
-    text-align: right;
+.chat-head{
+    text-align: center;
+    font-weight: 600;
+    background-color: rgb(233, 229, 229);
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    margin-bottom: 10px;
+    width: 100%;
 }
 .msg{
+    padding: 0 10px;
     border-radius: 5px;
     margin: 20px 0px;
 }
-span{
+.chat span{
     padding: 5px;
     background-color: lightblue;
+}
+.myMsg{
+    text-align: right;
 }
 .myMsg span{
     background-color: lightgreen;
@@ -19,8 +30,9 @@ span{
 .newMsgSend{
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
-    background-color: white;
+    background-color:rgb(233, 229, 229);
     padding: 15px;
     display: flex;
     justify-content: space-between;
