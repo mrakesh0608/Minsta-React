@@ -13,9 +13,9 @@ const Chat = () => {
     const [newMsg, setNewMsg] = useState('');
     useEffect(() => {
         initialize();
-        // setInterval(() => {
-        //     initialize();
-        // }, 3000)
+        setInterval(() => {
+            initialize();
+        }, 3000)
     }, [])
     const initialize = () => {
         fetchData({
