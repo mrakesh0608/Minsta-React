@@ -13,15 +13,15 @@ const Chat = () => {
     const [newMsg, setNewMsg] = useState('');
     useEffect(() => {
         initialize();
-        setInterval(() => {
-            initialize();
-        }, 3000)
+        // setInterval(() => {
+        //     initialize();
+        // }, 3000)
     }, [])
     const initialize = () => {
         fetchData({
             path: `/chat?UserName1=${I.Username}&UserName2=${id}`,
             method: 'GET'
-        })
+        }).then(res => console.log(res));
     }
     const handleMsgSend = (e) => {
         e.preventDefault();
@@ -33,15 +33,29 @@ const Chat = () => {
             })
         }
     }
+    const time = (time) => {
+        time = new Date(time)
+        return time.toLocaleString('en-IN', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        })
+    }
     return (
         <div className='chat'>
             <div className='chat-head'>{id}</div>
             {data ?
                 data.chats.map((chat, key) =>
-                    <div key={key}
-                        className={'msg ' + (chat.UserName === I.Username ? "myMsg" : '')}>
-                        <span>{chat.msg}</span>
-                    </div>
+                    <div key={key} >{chat.UserName === I.Username ?
+                        <div className='msg myMsg'>
+                            <span>{chat.msg}<sub className='time'>{time(chat.createdAt)}</sub></span>
+                            <div className='triangle triangle-right'></div>
+                        </div> :
+                        <div className='msg'>
+                            <div className='triangle triangle-left'></div>
+                            <span>{chat.msg}<sub className='time'>{time(chat.createdAt)}</sub></span>
+                        </div>
+                    }</div>
                 ) :
                 isError ?
                     <div>{isError}</div> :

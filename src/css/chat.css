@@ -1,6 +1,3 @@
-.chat{
-    position: relative;
-}
 .chat-head{
     text-align: center;
     font-weight: 600;
@@ -13,19 +10,41 @@
     width: 100%;
 }
 .msg{
-    padding: 0 10px;
+    padding: 0 5px;
     border-radius: 5px;
     margin: 20px 0px;
+    display: flex;
 }
-.chat span{
+.msg span{
+    border-radius: 10px;
+    border-top-left-radius: 0;
     padding: 5px;
     background-color: lightblue;
 }
 .myMsg{
-    text-align: right;
+    justify-content: flex-end;
 }
 .myMsg span{
     background-color: lightgreen;
+    border-top-right-radius: 0;
+    border-top-left-radius: 10px;
+}
+.triangle{
+    display: inline-block;
+	width: 0;
+	height: 0;
+	border-top: 0px solid transparent;
+	border-bottom: 8px solid transparent;
+}
+.triangle-left {
+	border-right: 16px solid lightblue;
+}
+.triangle-right {
+	border-left: 16px solid lightgreen;
+}
+.msg .time{
+    font-size: 12px;
+    margin-left: 10px;
 }
 .newMsgSend{
     position: fixed;
@@ -33,10 +52,11 @@
     left: 0;
     width: 100%;
     background-color:rgb(233, 229, 229);
-    padding: 15px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
 }
 .newMsgSend input{
     width: 70vw;
+    height: 40px;
 }
