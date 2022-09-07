@@ -21,6 +21,7 @@ import msgIcon from 'icons/msg.png';
 import imgIcon from 'icons/img.png';
 import folderPicsIcon from 'icons/folderPics.png';
 import searchIcon from 'icons/search.png';
+import shareIcon from 'icons/share.png';
 //Other Ends
 
 export {
@@ -31,5 +32,6 @@ export {
     userIcon, userOnIcon,
     addNewIcon,msgIcon,
     searchIcon,
-    imgIcon,folderPicsIcon
+    imgIcon,folderPicsIcon,
+    shareIcon
 }
