@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from 'hooks/useAuthContext';
 
 import 'css/chat.css';
-
+import GetTriangle from 'components/common/GetTriangle';
 const Chat = () => {
     const { id } = useParams();
     const { user: I } = useAuthContext();
@@ -25,7 +25,7 @@ const Chat = () => {
         fetchData({
             path: `/chat?UserName1=${I.Username}&UserName2=${id}`,
             method: 'GET'
-        }).then(res=>console.log(res))
+        }).then(res => console.log(res))
     }
     const handleMsgSend = (e) => {
         e.preventDefault();
@@ -45,11 +45,12 @@ const Chat = () => {
             hour12: true
         })
     }
+
     return (
         <div className='chat'>
             <div className='chat-head'>{id}</div>
             {data ?
-                (data.chats? Object.keys(data.chats).map((day, key) =>
+                (data.chats ? Object.keys(data.chats).map((day, key) =>
                     <div key={key}>
                         <div className='chat-day'><span>{day}</span></div>
                         {data.chats[day].map((chat, key) =>
@@ -60,10 +61,10 @@ const Chat = () => {
                                             <span>{chat.msg}</span>
                                             <sub className='time'>{time(chat.time)}</sub>
                                         </div>
-                                        <div className='triangle triangle-right'></div>
+                                        <GetTriangle pos={'right'} />
                                     </div> :
                                     <div className='msg'>
-                                        <div className='triangle triangle-left'></div>
+                                        <GetTriangle pos={'left'} />
                                         <div className='msg-content'>
                                             <span>{chat.msg}</span>
                                             <sub className='time'>{time(chat.time)}</sub>
@@ -72,7 +73,7 @@ const Chat = () => {
                                 }
                             </div>
                         )}
-                    </div>):<div className='loading'>Send your first Messege to {id}</div>
+                    </div>) : <div className='loading'>Send your first Messege to {id}</div>
                 ) :
                 isError ?
                     <div>{isError}</div> :

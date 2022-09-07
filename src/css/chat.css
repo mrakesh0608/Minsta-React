@@ -63,6 +63,9 @@ sub{
 .triangle-right {
 	border-left: 16px solid lightgreen;
 }
+.triangle-empty {
+	border-left: 16px solid transparent;
+}
 .msg .time{
     font-size: 12px;
     margin-left: 10px;
