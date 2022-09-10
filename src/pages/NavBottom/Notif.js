@@ -11,9 +11,9 @@ const Notif = () => {
     const { fetchData, data, isError, isPending } = useFetch();
     useEffect(() => {
         initialize();
+        initNotif = initialize;
     }, [])
     const initialize = () => {
-        initNotif = initialize;
         fetchData({
             path: `/notif?userId=${user._id}`,
             method: 'GET'
