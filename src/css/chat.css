@@ -1,3 +1,6 @@
+body{
+    margin-bottom: 60px;
+}
 .chat-head{
     text-align: center;
     font-weight: 600;
@@ -21,7 +24,7 @@
 .msg{
     padding: 0 5px;
     border-radius: 5px;
-    margin: 20px 0px;
+    margin: 10px 0;
     display: flex;
     flex-wrap: wrap;
 }
@@ -72,24 +75,30 @@ sub{
     margin-left: 10px;
 }
 .newMsgSend{
+    background-color: var(--bgColor);
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--bgLightColor);
-    padding: 5px 8px;
+    padding: 4px 8px;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 .newMsgSend input{
+    background-color: var(--bgLightColor);
     border: none;
     width: 100%;
     height: 40px;
     padding: 10px 20px;
     border-radius: 20px;
     margin-right: 20px;
-    border: 1px solid transparent; 
+    border: 1px solid transparent;
+    color: var(--textColor);
+}
+.newMsgSend input::placeholder{
+    color: var(--textColor);
+    opacity: 0.7;
 }
 .newMsgSend input:focus{
     outline: none;

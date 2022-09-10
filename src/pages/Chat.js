@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import useFetch from 'hooks/useFetch';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from 'hooks/useAuthContext';
-import { shareIcon } from 'helpers/importsIcons';
+import { shareIcon , clockIcon} from 'helpers/importsIcons';
 import { timeHourMin } from 'helpers/time';
 
 import 'css/chat.css';
@@ -11,7 +11,7 @@ const Chat = () => {
 
     const { id } = useParams();
     const { user: I } = useAuthContext();
-    const { fetchData, data, isError, isPending } = useFetch();
+    const { fetchData, data, setData, isError, isPending } = useFetch();
 
     const [newMsg, setNewMsg] = useState('');
     const ref = useRef();
@@ -20,10 +20,7 @@ const Chat = () => {
         initialize();
         const interval = setInterval(() => {
             initialize();
-        }, 3500)
-        setTimeout(() => {
-            ref.current?.scrollIntoView({ behavior: "smooth" })
-        }, 2500);
+        }, 3000)
         return function cleanup() {
             // console.log("cleaning up");
             clearInterval(interval);
@@ -35,18 +32,26 @@ const Chat = () => {
             method: 'GET'
         }).then(res => console.log(res))
     }
+    useEffect(()=>{
+        console.log('sssssss');
+        ref.current?.scrollIntoView({ behavior: "smooth" })
+    },[data]);
     const handleMsgSend = (e) => {
         e.preventDefault();
+        const time = (new Date()).toLocaleString('en-IN', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+        });
+        
         if (newMsg) {
+            if(!data.chats[time]) data.chats[time]=[];
+            data.chats[time].push({ timer:true,UserName: I.Username, msg: newMsg, time: new Date() });
+            setData({...data});
             setNewMsg('');
-            ref.current?.scrollIntoView({ behavior: "smooth" });
             fetchData({
                 path: `/chat?id=${data._id}&UserName=${I.Username}&msg=${newMsg}`,
                 method: 'POST'
-            }).then(res => {
-                setTimeout(()=>{
-                    ref.current?.scrollIntoView({ behavior: "smooth" })
-                },1500)
             })
         }
     }
@@ -64,7 +69,7 @@ const Chat = () => {
                                     <div className='msg myMsg'>
                                         <div className='msg-content'>
                                             <span>{chat.msg}</span>
-                                            <sub className='time'>{timeHourMin(chat.time)}</sub>
+                                            <sub className='time'>{timeHourMin(chat.time)} {chat.timer && <i className='far fa-clock' style={{fontSize:'inherit'}}></i>}</sub>
                                         </div>
                                         <GetTriangle pos={'right'} />
                                     </div> :
@@ -83,7 +88,7 @@ const Chat = () => {
                 isError ?
                     <div>{isError}</div> :
                     (isPending && <div className='loading'><p>Loading Messages ...</p></div>)}
-            <form onSubmit={handleMsgSend} ref={ref}>
+            <form onSubmit={handleMsgSend}>
                 <div className='newMsgSend'>
                     <input
                         type="text" value={newMsg}
@@ -93,6 +98,7 @@ const Chat = () => {
                     <div onClick={handleMsgSend} className='msg-send nav-icons'><img src={shareIcon} alt="" /></div>
                 </div>
             </form>
+            <div ref={ref} />
         </div >
     );
 }

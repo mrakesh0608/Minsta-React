@@ -22,6 +22,7 @@ import imgIcon from 'icons/img.png';
 import folderPicsIcon from 'icons/folderPics.png';
 import searchIcon from 'icons/search.png';
 import shareIcon from 'icons/share.png';
+import clockIcon from 'icons/clock.png';
 //Other Ends
 
 export {
@@ -33,5 +34,5 @@ export {
     addNewIcon,msgIcon,
     searchIcon,
     imgIcon,folderPicsIcon,
-    shareIcon
+    shareIcon,clockIcon
 }
