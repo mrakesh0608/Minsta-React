@@ -11,6 +11,7 @@ const ToggleDarkTheme = () => {
         document.documentElement.style.setProperty('--bgChatLeftColor' ,'#111B21');
         document.documentElement.style.setProperty('--bgChatRightColor' ,'#176b5b');
         document.documentElement.style.setProperty('--bgChatTimeColor' ,'#FFFFFF99');
+        document.documentElement.style.setProperty('--bgNotifLable' ,'darkslategray');
         isDark = false;
     }
     else {
@@ -21,6 +22,7 @@ const ToggleDarkTheme = () => {
         document.documentElement.style.setProperty('--bgChatLeftColor' ,'lightblue');
         document.documentElement.style.setProperty('--bgChatRightColor' ,'lightgreen');
         document.documentElement.style.setProperty('--bgChatTimeColor' ,'gray');
+        document.documentElement.style.setProperty('--bgNotifLable' ,'gainsboro');
         isDark = true;
     }
 }

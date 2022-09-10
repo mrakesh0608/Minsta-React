@@ -44,7 +44,9 @@ const Chat = () => {
                 path: `/chat?id=${data._id}&UserName=${I.Username}&msg=${newMsg}`,
                 method: 'POST'
             }).then(res => {
-                ref.current?.scrollIntoView({ behavior: "smooth" })
+                setTimeout(()=>{
+                    ref.current?.scrollIntoView({ behavior: "smooth" })
+                },1500)
             })
         }
     }
