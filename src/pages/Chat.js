@@ -3,6 +3,7 @@ import useFetch from 'hooks/useFetch';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from 'hooks/useAuthContext';
 import { shareIcon } from 'helpers/importsIcons';
+import { timeHourMin } from 'helpers/time';
 
 import 'css/chat.css';
 import GetTriangle from 'components/common/GetTriangle';
@@ -19,10 +20,10 @@ const Chat = () => {
         initialize();
         const interval = setInterval(() => {
             initialize();
-        }, 3000)
+        }, 3500)
         setTimeout(() => {
             ref.current?.scrollIntoView({ behavior: "smooth" })
-        }, 2000);
+        }, 2500);
         return function cleanup() {
             // console.log("cleaning up");
             clearInterval(interval);
@@ -42,20 +43,12 @@ const Chat = () => {
             fetchData({
                 path: `/chat?id=${data._id}&UserName=${I.Username}&msg=${newMsg}`,
                 method: 'POST'
-            })
-            setTimeout(() => {
+            }).then(res => {
                 ref.current?.scrollIntoView({ behavior: "smooth" })
-            }, 2000);
+            })
         }
     }
-    const time = (time) => {
-        time = new Date(time)
-        return time.toLocaleString('en-IN', {
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true
-        })
-    }
+
     return (
         <div className='chat'>
             <div className='chat-head'>{id}</div>
@@ -69,7 +62,7 @@ const Chat = () => {
                                     <div className='msg myMsg'>
                                         <div className='msg-content'>
                                             <span>{chat.msg}</span>
-                                            <sub className='time'>{time(chat.time)}</sub>
+                                            <sub className='time'>{timeHourMin(chat.time)}</sub>
                                         </div>
                                         <GetTriangle pos={'right'} />
                                     </div> :
@@ -77,7 +70,7 @@ const Chat = () => {
                                         <GetTriangle pos={'left'} />
                                         <div className='msg-content'>
                                             <span>{chat.msg}</span>
-                                            <sub className='time'>{time(chat.time)}</sub>
+                                            <sub className='time'>{timeHourMin(chat.time)}</sub>
                                         </div>
                                     </div>
                                 }

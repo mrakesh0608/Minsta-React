@@ -12,6 +12,7 @@ import {
 
 import {initPostList} from 'components/Post/PostList'
 import {initPostGrid} from 'components/Post/PostGrid'
+import {initNotif} from 'pages/NavBottom/Notif';
 
 const BottomNav = () => {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ const BottomNav = () => {
             <div id='reels' className="nav-icons" onClick={() => navigate('/reels')} onDoubleClick={()=>alert('refresh')}>
                 <img src={window.location.pathname === '/reels' ? reelOnIcon : reelIcon} alt="reels" />
             </div>
-            <div id='notif' className="nav-icons" onClick={() => navigate('/notif')} onDoubleClick={()=>alert('refresh')}>
+            <div id='notif' className="nav-icons" onClick={() => navigate('/notif')} onDoubleClick={()=>initNotif()}>
                 <img src={window.location.pathname === '/notif' ? heartOnIcon : heartIcon} alt="heart" />
             </div>
             <div id='user' className="nav-icons" onClick={() => navigate('/user')} onDoubleClick={()=>alert('refresh')}>

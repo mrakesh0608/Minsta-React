@@ -1,28 +1,34 @@
 import { useNavigate } from 'react-router-dom';
 import { iconPath } from 'helpers/Path';
 import { useAuthContext } from 'hooks/useAuthContext';
-import { usePostListContext } from 'hooks/usePostListContext'
+import { usePostListContext } from 'hooks/usePostListContext';
+import useFetch from 'hooks/useFetch';
 
-const usePostEvents = ({ fetchData }) => {
+const usePostEvents = ({ setPost }) => {
     const { user } = useAuthContext();
     const { dispatch } = usePostListContext();
-    const navigate = useNavigate();
 
+    const { fetchData, isError } = useFetch();
+    const navigate = useNavigate();
     //Like Start
-    const handleLikes = (e, post, setPost) => {
-        if (post.liked_users.includes(user.Username)) {
+    const handleLikes = (e, post) => {
+        if (post.iLiked) {
             ani_Like(e, false);
-            post.liked_users = post.liked_users.filter(username => user.Username !== username)
             post.likes = post.likes - 1;
         }
         else {
             ani_Like(e, true);
             post.likes = post.likes + 1;
-            post.liked_users.push(user.Username);
         }
+        post.iLiked = !post.iLiked;
         // console.log(post);
         setPost({ ...post });
-        update_Post_In_Server(post);
+        update_Post_In_Server({
+            "_id": post._id,
+            "updateAttr": "liked_users",
+            "username": user.Username,
+            "updateAdd": post.iLiked
+        });
     }
 
     //Like Animation Start
@@ -85,27 +91,30 @@ const usePostEvents = ({ fetchData }) => {
     //Share -End
 
     //Save Post - Start
-    const handleSave = (e, post, setPost) => {
-        if (post.saved_users.includes(user.Username)) {
-            post.saved_users = post.saved_users.filter(username => user.Username !== username)
-        }
-        else post.saved_users.push(user.Username);
-
+    const handleSave = (e, post) => {
+        post.iSaved = !post.iSaved;
         setPost({ ...post });
-        update_Post_In_Server(post);
+        update_Post_In_Server({
+            "_id": post._id,
+            "updateAttr": "saved_users",
+            "username": user.Username,
+            "updateAdd": post.iSaved
+        });
     }
     //Save Post -End
-    const update_Post_In_Server = (post) => {
+    const update_Post_In_Server = (payload) => {
 
         fetchData({
-            path: '/posts/' + post._id,
+            path: '/posts/' + payload._id,
             method: 'PATCH',
-            payload: post
+            payload
+        }).then(res => {
+            if (res) {
+                console.log('post updated')
+                setPost(res);
+            }
+            else console.log(res);
         })
-            .then(res => {
-                if (res) console.log('post updated')
-                else console.log(res);
-            })
     }
 
     //Delete Post
@@ -128,6 +137,6 @@ const usePostEvents = ({ fetchData }) => {
             }
         })
     }
-    return { handleLikes, handleShare, handleSave, handleDelete };
+    return { handleLikes, handleShare, handleSave, handleDelete, isError };
 }
 export default usePostEvents;

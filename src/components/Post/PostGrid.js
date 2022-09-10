@@ -38,6 +38,7 @@ const PostGrid = ({ pathname }) => {
         setPosts(null);
         setPage(0);
         LoadMore();
+        setNoMorePosts(false);
     }
 
     useEffect(() => {

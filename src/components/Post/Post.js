@@ -5,24 +5,20 @@ import PostImg from './PostImg';
 import 'css/Post.css';
 import { userIcon } from 'helpers/importsIcons';
 
-import { useAuthContext } from 'hooks/useAuthContext'
-import useFetch from 'hooks/useFetch';
 import usePostEvents from 'hooks/usePostEvents';
 
 import { iconPath } from 'helpers/Path';
-import { timeDiff } from 'helpers/timeDiff';
+import { timeDiff } from 'helpers/time';
 import { HideScroll } from 'helpers/HandleScroll';
 import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
 
 const Post = ({ post: data }) => {
 
-    const { user } = useAuthContext();
     const [post, setPost] = useState(data);
     const [postMore, setPostMore] = useState(false);
 
-    const { fetchData, isError } = useFetch();
-    const { handleLikes, handleShare, handleSave, handleDelete } = usePostEvents({ fetchData });
+    const { handleLikes, handleShare, handleSave, handleDelete, isError } = usePostEvents({ setPost });
 
     return (
         <div className="post" id={post._id} key={post._id}>
@@ -47,8 +43,8 @@ const Post = ({ post: data }) => {
                 <div className="post-meta-bottom-1">
 
                     <div className="post-meta-bottom-1-1">
-                        <div className="post-meta-icons-div" onClick={(e) => handleLikes(e, post, setPost)}>
-                            {post.liked_users.includes(user.Username) ?
+                        <div className="post-meta-icons-div" onClick={(e) => handleLikes(e, post)}>
+                            {post.iLiked ?
                                 <img src={iconPath + 'liked.png'} alt="Like" />
                                 : <img src={iconPath + 'like.png'} alt="Like" className='icons' />
                             }
@@ -64,8 +60,8 @@ const Post = ({ post: data }) => {
                     </div>
 
                     <div>
-                        <div className="post-meta-icons-div no-margin-right" onClick={e => handleSave(e, post, setPost)}>
-                            <img src={iconPath + (post.saved_users.includes(user.Username) ? 'saved' : 'save') + '.png'} alt="Save" className='icons' />
+                        <div className="post-meta-icons-div no-margin-right" onClick={e => handleSave(e, post)}>
+                            <img src={iconPath + (post.iSaved ? 'saved' : 'save') + '.png'} alt="Save" className='icons' />
                         </div>
                     </div>
                 </div>
