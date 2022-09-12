@@ -87,6 +87,7 @@ a {
 .err-msg {
     font-weight: 600;
     color: red;
+    text-align: center;
 }
 
 .load {

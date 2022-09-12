@@ -1,7 +1,8 @@
-body{
-    margin-bottom: 60px;
+body {
+    margin-bottom: 0;
 }
-.chat-head{
+
+.chat-head {
     text-align: center;
     font-weight: 600;
     background-color: var(--bgLightColor);
@@ -9,26 +10,40 @@ body{
     position: sticky;
     top: 0;
     left: 0;
-    margin-bottom: 10px;
     width: 100%;
 }
-.chat-day{
-    text-align: center;
+
+.chat-content {
+    height: calc(100vh - 90px);
+    overflow: auto;
+    padding: 0 5px;
 }
-.chat-day span{
+.chat-content .error{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    background-color: whitesmoke;
+}
+.chat-day {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.chat-day span {
     background-color: var(--bgChatLeftColor);
     color: var(--bgChatTimeColor);
     padding: 5px;
     border-radius: 10px;
 }
-.msg{
-    padding: 0 5px;
+
+.msg {
     border-radius: 5px;
     margin: 10px 0;
     display: flex;
     flex-wrap: wrap;
 }
-.msg-content{
+
+.msg-content {
     max-width: 70vw;
     border-radius: 10px;
     border-top-left-radius: 0;
@@ -37,44 +52,54 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-.msg-content span{
+
+.msg-content span {
     width: 100%;
     word-wrap: break-word;
 }
-sub{
+
+sub {
     width: 100%;
     text-align: right;
     color: var(--bgChatTimeColor);
 }
-.myMsg{
+
+.myMsg {
     justify-content: flex-end;
 }
-.myMsg .msg-content{
+
+.myMsg .msg-content {
     border-top-right-radius: 0;
     border-top-left-radius: 10px;
     background-color: var(--bgChatRightColor);
 }
-.triangle{
+
+.triangle {
     display: inline-block;
-	width: 0;
-	height: 0;
-	border-top: 0px solid transparent;
-	border-bottom: 8px solid transparent;
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 8px solid transparent;
 }
+
 .triangle-left {
-	border-right: 16px solid var(--bgChatLeftColor);
+    border-right: 16px solid var(--bgChatLeftColor);
 }
+
 .triangle-right {
-	border-left: 16px solid var(--bgChatRightColor);
+    border-left: 16px solid var(--bgChatRightColor);
 }
+
 .triangle-empty {
-	border-left: 16px solid transparent;
+    border-left: 16px solid transparent;
 }
-.msg .time{
+
+.msg .time {
     font-size: 12px;
     margin-left: 10px;
 }
-.newMsgSend{
+
+.newMsgSend {
     background-color: var(--bgColor);
     position: fixed;
     bottom: 0;
@@ -85,7 +110,8 @@ sub{
     justify-content: space-around;
     align-items: center;
 }
-.newMsgSend input{
+
+.newMsgSend input {
     background-color: var(--bgLightColor);
     border: none;
     width: 100%;
@@ -96,15 +122,18 @@ sub{
     border: 1px solid transparent;
     color: var(--textColor);
 }
-.newMsgSend input::placeholder{
+
+.newMsgSend input::placeholder {
     color: var(--textColor);
     opacity: 0.7;
 }
-.newMsgSend input:focus{
+
+.newMsgSend input:focus {
     outline: none;
-    border: 1px solid var(--textColor); 
+    border: 1px solid var(--textColor);
 }
-.msg-send{
+
+.msg-send {
     background-color: var(--bgChatRightColor);
     padding: 8px;
     border-radius: 50%;
