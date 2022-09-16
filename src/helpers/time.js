@@ -6,7 +6,13 @@ const timeHourMin = (time) => {
         hour12: true
     })
 }
-
+const todayDate = () => {
+    return (new Date()).toLocaleString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+    });
+}
 const timeDiff = (uploaded) => {
 
     const today = new Date();
@@ -55,4 +61,4 @@ const timeDiff = (uploaded) => {
 
     return timeMsg + ' ago';
 }
-export { timeHourMin,timeDiff };
+export { timeHourMin, timeDiff, todayDate };

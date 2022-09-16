@@ -1,0 +1,13 @@
+.UserImgNameFollow{
+    display: flex;
+    align-items: center;
+}
+.UserImgNameFollow > *{
+    margin-right: 10px;
+}
+.UserImgNameFollow img{
+    display: block;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}

@@ -3,8 +3,8 @@ const Messenger = () => {
         <div id="Messenger">
             <div id="Messenger-content">
                 <div id="soon" className="loading">
-                    <h2>Messenger</h2>
-                    <h5>This feature is currently under development...</h5>
+                    <h1>Messenger</h1><br />
+                    <p>This feature is currently under development...</p>
                 </div>
             </div>
         </div>

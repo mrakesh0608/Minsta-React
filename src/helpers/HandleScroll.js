@@ -22,7 +22,18 @@ const HandleScroll = () => {
         }
     })
 }
-
+const hideBottomInReel = (e) => {
+    if (pre_ScrollY > e.target.scrollTop) {
+        document.documentElement.style.setProperty('--bottomDivH', '30px');
+        document.getElementById('bottom').style.visibility = 'visible';
+        pre_ScrollY = e.target.scrollTop + 5;
+    }
+    else {
+        document.documentElement.style.setProperty('--bottomDivH', '0px');
+        document.getElementById('bottom').style.visibility = 'hidden';
+        pre_ScrollY = e.target.scrollTop - 5;
+    }
+}
 const isPageEnd = () => {
     //-250 to load before end
     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 250))
@@ -31,12 +42,31 @@ const isPageEnd = () => {
 }
 
 const ScrollLoad = (setIsScrollLoad) => {
-    
+
     const ScrollListen = (listen) => {
         if (listen)
             document.addEventListener('scroll', () => setIsScrollLoad(isPageEnd()));
         else document.addEventListener('scroll', () => setIsScrollLoad(false));
         // console.log(listen);
+    };
+    return { ScrollListen };
+}
+const isElementEnd = (ele) => {
+    //-250 to load before end
+    if ((window.innerHeight + window.scrollY) >= (ele.offsetHeight - window.innerHeight))
+        return true;
+    else return false;
+}
+
+const EleScrollLoad = (setIsScrollLoad,query) => {
+    const ScrollListen = (listen) => {
+        const ele = document.querySelector(query);
+        console.log(query,ele);
+        if (ele) {
+            if (listen)
+                ele.addEventListener('scroll', () => setIsScrollLoad(isPageEnd(ele)));
+            else ele.addEventListener('scroll', () => setIsScrollLoad(false));
+        }
     };
     return { ScrollListen };
 }
@@ -50,4 +80,4 @@ const HideScroll = (flag) => {
 
 }
 //Scroll Event - End
-export { HandleScroll, ScrollLoad, HideScroll };
+export { HandleScroll, ScrollLoad, HideScroll, hideBottomInReel, isElementEnd, EleScrollLoad };

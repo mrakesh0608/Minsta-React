@@ -68,7 +68,6 @@ const useFetch = () => {
             setData(null);
             setIsError(error.message);
             setIsPending(false);
-            return error.message;
         }
     }
 

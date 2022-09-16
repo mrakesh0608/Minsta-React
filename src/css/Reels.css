@@ -1,0 +1,139 @@
+body {
+    height: 100vh;
+    margin-bottom: 0;
+}
+
+#Reels{
+    font-size: 14px;
+    background-color: var(--bgColor);
+}
+
+.reel>*,
+.reel a {
+    color: white;
+}
+
+/* reels Header - Starts*/
+.videoHeader {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* reels Header - Ends*/
+/* reels Content - Starts*/
+#fullScreen {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--bgColor);
+    padding: 10px;
+    text-align: center;
+    color : var(--textColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#fullScreen span{
+    color: var(--minBlue) !important;
+    cursor: pointer;
+}
+#reel-list {
+    position: absolute;
+    top: 0;
+    background-color: gray;
+    overflow: auto;
+    height: calc(100% - 30px);
+    width: 100%;
+    scroll-snap-type: y mandatory;
+}
+
+.reel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+}
+
+video {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+@media (max-width:600px){
+    video{
+        object-fit: cover;
+    }
+}
+/* reels Content - Ends*/
+/* reels Footer - Starts*/
+.videoFooter img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    filter: invert(100%);
+}
+
+.leftFooter,
+.rightFooter {
+    padding: 5px 10px;
+}
+
+.leftFooter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 85%;
+}
+
+.leftFooter p {
+    margin: 15px 0;
+}
+
+.leftFooter .music {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.leftFooter .music img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.videoFooter .rightFooter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.rightFooter div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 15px 0;
+}
+
+/* reels Footer - Ends*/
+/* Misc */
+#Reels .load-more,
+#Reels .end-of-reels
+{
+    color: var(--textColor);
+    display:grid;
+    place-items: center; 
+}
+#Reels .end-of-reels{
+    margin-top: 20px;
+    padding:30px;
+}

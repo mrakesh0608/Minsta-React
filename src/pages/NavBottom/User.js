@@ -58,9 +58,9 @@ const User = () => {
 
     return (
         <div id="User">
+            <UserHeadNav username={old.Username} setUserMore={setUserMore} />
             {user ?
                 <div>
-                    <UserHeadNav username={user.Username} setUserMore={setUserMore} />
                     <div id="User-content">
                         <div className='user-meta'>
                             <UserMeta1 user={{
@@ -103,35 +103,6 @@ const User = () => {
                         }
                         <UserPostTag userId={user._id} token={user} />
                     </div>
-                    {userMore &&
-                        <div id='user-more-overlay' onClick={(e) => {
-                            if (e.target.id === 'user-more-overlay') CloseUserMore();
-                        }}>
-                            <div id='user-more-list' className='ani'>
-                                <div id='user-more-close'>
-                                    <div onClick={() => CloseUserMore()}></div>
-                                </div>
-                                <Link to='/user/username/settings'>
-                                    <img className='more-icons' src="icons/settings.png" alt="settings" />Settings
-                                </Link>
-                                <Link to='user/username/activity'>
-                                    <img className='more-icons' src="icons/activity.png" alt="activity" />Your Activity
-                                </Link>
-                                <Link to='user/username/saved'>
-                                    <img className='more-icons' src="icons/save.png" alt="save" />Saved
-                                </Link>
-                                <Link to='user/username/close-friends'>
-                                    <img className='more-icons more-icons-l' src="icons/friends.png" alt="close friends" />Close Friends
-                                </Link>
-                                <div onClick={() => { ToggleDarkTheme() }}>
-                                    <img className='more-icons' src="icons/theme.png" alt="theme" />Toggle Dark Theme
-                                </div>
-                                <div onClick={() => { setUserMore(false); logout(); }}>
-                                    <img className='more-icons' src="icons/logout.png" alt="logout" />Logout
-                                </div>
-                            </div>
-                        </div>
-                    }
                 </div> :
                 (isError ?
                     (isError === 'No Such User' ?
@@ -140,6 +111,35 @@ const User = () => {
                     ) :
                     (isPending && <div className="loading"><h2>Loading ...</h2></div>)
                 )
+            }
+            {userMore &&
+                <div id='user-more-overlay' onClick={(e) => {
+                    if (e.target.id === 'user-more-overlay') CloseUserMore();
+                }}>
+                    <div id='user-more-list' className='ani'>
+                        <div id='user-more-close'>
+                            <div onClick={() => CloseUserMore()}></div>
+                        </div>
+                        <Link to='/user/username/settings'>
+                            <img className='more-icons' src="icons/settings.png" alt="settings" />Settings
+                        </Link>
+                        <Link to='user/username/activity'>
+                            <img className='more-icons' src="icons/activity.png" alt="activity" />Your Activity
+                        </Link>
+                        <Link to='user/username/saved'>
+                            <img className='more-icons' src="icons/save.png" alt="save" />Saved
+                        </Link>
+                        <Link to='user/username/close-friends'>
+                            <img className='more-icons more-icons-l' src="icons/friends.png" alt="close friends" />Close Friends
+                        </Link>
+                        <div onClick={() => { ToggleDarkTheme() }}>
+                            <img className='more-icons' src="icons/theme.png" alt="theme" />Toggle Dark Theme
+                        </div>
+                        <div onClick={() => { setUserMore(false); logout(); }}>
+                            <img className='more-icons' src="icons/logout.png" alt="logout" />Logout
+                        </div>
+                    </div>
+                </div>
             }
         </div>
     )

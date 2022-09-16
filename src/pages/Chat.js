@@ -1,10 +1,14 @@
 import { useParams } from 'react-router-dom';
-import useFetch from 'hooks/useFetch';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from 'hooks/useAuthContext';
+import useFetch from 'hooks/useFetch';
+
 import { shareIcon } from 'helpers/importsIcons';
-import ChatContent from 'components/common/ChatContent';
+import { todayDate } from 'helpers/time';
+import { isEmptyObj } from 'helpers/function';
+
 import 'css/chat.css';
+import ChatContent from 'components/common/ChatContent';
 
 const Chat = () => {
 
@@ -29,7 +33,7 @@ const Chat = () => {
             path: `/chat?UserName1=${I.Username}&UserName2=${id}`,
             method: 'GET'
         }).then(res => {
-            if (res.chats){
+            if (res.chats) {
                 setChats(res.chats);
             }
         });
@@ -37,20 +41,15 @@ const Chat = () => {
     useEffect(() => {
         ref.current?.scrollIntoView({ behavior: "smooth" });
     }, [chats]);
-    const time = (new Date()).toLocaleString('en-IN', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-    });
+
     const handleMsgSend = (e) => {
         e.preventDefault();
 
         if (newMsg) {
-            if (!chats[time]) chats[time] = [];
-            chats[time].push({ timer: true, UserName: I.Username, msg: newMsg, time: new Date() });
+            if (!chats[todayDate()]) chats[todayDate()] = [];
+            chats[todayDate()].push({ timer: true, UserName: I.Username, msg: newMsg, time: new Date() });
             setChats({ ...chats });
-            ref.current?.scrollIntoView({ behavior: "smooth" });
-            if(data){
+            if (data) {
                 fetchData({
                     path: `/chat?id=${data._id}&UserName=${I.Username}&msg=${newMsg}`,
                     method: 'POST'
@@ -61,12 +60,11 @@ const Chat = () => {
             setNewMsg('');
         }
     }
-    const isEmpty = (obj) => Object.keys(obj).length === 0;
     return (
         <div className='chat'>
             <div className='chat-head'>{id}</div>
-            {(data || !isEmpty(chats)) ?
-                (isEmpty(chats) ?
+            {(data || !isEmptyObj(chats)) ?
+                (isEmptyObj(chats) ?
                     <div className='loading'>Send your first Messege to {id}</div> :
                     <div className='chat-content'>
                         {isError && <div className='error'>{isError}</div>}

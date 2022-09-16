@@ -23,6 +23,11 @@ import folderPicsIcon from 'icons/folderPics.png';
 import searchIcon from 'icons/search.png';
 import shareIcon from 'icons/share.png';
 import clockIcon from 'icons/clock.png';
+import likeIcon from 'icons/like.png';
+import likedIcon from 'icons/liked.png';
+import commentIcon from 'icons/comment.png';
+import moreIcon from 'icons/more.png';
+import waveIcon from 'icons/wave.png';
 //Other Ends
 
 export {
@@ -34,5 +39,8 @@ export {
     addNewIcon,msgIcon,
     searchIcon,
     imgIcon,folderPicsIcon,
-    shareIcon,clockIcon
+    shareIcon,clockIcon,
+    likeIcon,likedIcon,
+    commentIcon,moreIcon,
+    waveIcon
 }
