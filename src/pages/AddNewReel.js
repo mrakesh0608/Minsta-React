@@ -30,6 +30,7 @@ const AddNewReel = () => {
         setIsSelectedPending(true);
 
         setSelectedFile(e.target.files[0]);
+        setQuote(e.target.files[0].name);
         setImgData(await convertBase64(e.target.files[0]));
         setIsSelected(true);
         setIsSelectedPending(false);
