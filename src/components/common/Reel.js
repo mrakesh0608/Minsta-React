@@ -19,7 +19,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
         else video.pause();
     }
     return (
-        <div className="reel" id={reel._id}>
+        <div className="reel" id={reel._id} onDoubleClick={(e) => handleLikes(e, reel)}>
             <div className="videoHeader">
                 <h3>Reels</h3>
             </div>
