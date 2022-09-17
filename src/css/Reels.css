@@ -7,9 +7,9 @@ body {
     font-size: 14px;
 }
 
-#Reels,
+#reel-list,
 .reel a {
-    color: white;
+    color: white !important;
 }
 
 /* reels Header - Starts*/
