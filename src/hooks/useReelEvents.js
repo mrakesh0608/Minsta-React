@@ -98,17 +98,17 @@ const useReelEvents = ({ setReel }) => {
     //Save reel -End
     const update_reel_In_Server = (payload) => {
 
-        // fetchData({
-        //     path: '/reel/' + payload._id,
-        //     method: 'PATCH',
-        //     payload
-        // }).then(res => {
-        //     if (res) {
-        //         console.log('reel updated')
-        //         setReel(res);
-        //     }
-        //     else console.log(res);
-        // })
+        fetchData({
+            path: '/reel/' + payload._id,
+            method: 'PATCH',
+            payload
+        }).then(res => {
+            if (res) {
+                console.log(res);
+                // setReel(res);
+            }
+            else console.log(res);
+        })
     }
 
     return { handleLikes, handleShare, handleSave, isError };

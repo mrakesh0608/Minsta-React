@@ -31,7 +31,8 @@ const Notif = () => {
                                 <div key={key} className='notif-lable'>
                                     {(notif.Type === 'Following' || notif.Type === 'UnFollowed') ?
                                         <p><Link to={`/user/${notif.UserName}`}>{notif.UserName}</Link> {notif.Type} you.</p>:
-                                        <p><Link to={`/user/${notif.UserName}`}>{notif.UserName}</Link> is {notif.Type} your <Link to={`/posts/${notif.PostId}`}>post</Link> .</p>
+                                        <p><Link to={`/user/${notif.UserName}`}>{notif.UserName}</Link> is {notif.Type} your {notif.ReelId?<Link to={`/reels/${notif.ReelId}`}>reel</Link>:
+                                        <Link to={`/posts/${notif.PostId}`}>post</Link>} .</p>
                                     }
                                     <div>{timeHourMin(notif.time)}</div>
                                 </div>

@@ -9,7 +9,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
     const [reel, setReel] = useState(data);
     const [reelMore, setReelMore] = useState(false);
 
-    const { handleLikes, handleShare, handleSave, isError } = useReelEvents({ setReel });
+    const { handleLikes, handleShare,isError } = useReelEvents({ setReel });
 
     const handleReel = (video) => {
         if (video.paused) {
