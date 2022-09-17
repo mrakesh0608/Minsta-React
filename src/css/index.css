@@ -19,7 +19,7 @@
 }
 
 .notInvertIcons {
-    filter: invert(0);
+    filter: invert(0) !important;
 }
 
 /* Theme Color Ends */

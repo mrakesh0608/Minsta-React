@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 import { EleScrollLoad } from 'helpers/HandleScroll';
 import Reel from 'components/common/Reel';
+import ReelProgressBar from 'components/common/ReelProgressBar';
 import 'css/Reels.css';
 const Reels = () => {
     const [reels, setReels] = useState(null);
@@ -35,7 +36,10 @@ const Reels = () => {
     }
 
     const [currentPlayingVideo, setCurrentPlayingVideo] = useState(null);
-    const handleReelPause = () => currentPlayingVideo?.pause();
+    const handleReelPause = () => {
+        currentPlayingVideo?.pause();
+        setCurrentPlayingVideo(null);
+    };
     const openFullscreen = () => {
         const element = document.getElementById('reel-list');
         if (element.requestFullscreen) element.requestFullscreen();
@@ -53,6 +57,7 @@ const Reels = () => {
                             {reels.map(reel =>
                                 <Reel key={reel._id} reel={reel} setCurrentPlayingVideo={setCurrentPlayingVideo} />
                             )}
+                            <ReelProgressBar reel={currentPlayingVideo}/>
                             {!isPending && (noMoreReels ?
                                 <div className='end-of-reels'><h2>End of Reels</h2></div> :
                                 ((isScrollLoad || reels.length < 2) && LoadMore())
