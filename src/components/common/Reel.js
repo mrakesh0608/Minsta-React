@@ -37,7 +37,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
                 </div>
                 <div className='rightFooter'>
                     <div>
-                        <img className={'reelIcons '+reel.iLiked?'notInvertIcons':''} src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
+                        <img className={`reelIcons ${reel.iLiked?'notInvertIcons':''}`} src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
                         <span>{reel.likes}</span>
                     </div>
                     <div>
