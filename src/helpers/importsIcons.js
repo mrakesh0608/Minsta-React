@@ -29,7 +29,6 @@ import commentIcon from 'icons/comment.png';
 import moreIcon from 'icons/more.png';
 import waveIcon from 'icons/wave.png';
 //Other Ends
-
 export {
     homeIcon, homeOnIcon,
     exploreIcon, exploreOnIcon,

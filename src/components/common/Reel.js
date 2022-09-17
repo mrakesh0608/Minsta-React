@@ -1,9 +1,10 @@
 import UserImgNameFollow from 'components/User/UserImgNameFollow';
-import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon } from 'helpers/importsIcons';
+import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon} from 'helpers/importsIcons';
 import { useState } from 'react';
 import useReelEvents from 'hooks/useReelEvents';
-
-const Reel = ({reel:data,setCurrentPlayingVideo}) => {
+import { PreLoad } from 'helpers/PreLoad';
+PreLoad();
+const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
 
     const [reel, setReel] = useState(data);
     const [reelMore, setReelMore] = useState(false);
@@ -33,22 +34,23 @@ const Reel = ({reel:data,setCurrentPlayingVideo}) => {
                     </div>
                 </div>
                 <div className='rightFooter'>
-                    <div>   
-                        <img src={reel.iLiked?likedIcon:likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)}/>
+                    <div>
+                        <img className='reelIcons'src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
                         <span>{reel.likes}</span>
                     </div>
                     <div>
-                        <img src={commentIcon} alt="comment" />
+                        <img className='reelIcons' src={commentIcon} alt="comment" />
                         <span>{reel.comments}</span>
                     </div>
-                    <div>
-                        <img src={shareIcon} alt="share" onClick={e => handleShare(e, reel)}/>
+                    <div >
+                        <img className='reelIcons' src={shareIcon} alt="share" onClick={e => handleShare(e, reel)} />
                     </div>
                     <div>
-                        <img src={moreIcon} alt="more" />
+                        <img className='reelIcons' src={moreIcon} alt="more" />
                     </div>
                 </div>
             </div>
+            <div className="animation-like"></div>
         </div>
     );
 }

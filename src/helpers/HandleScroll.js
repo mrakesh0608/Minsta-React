@@ -61,7 +61,7 @@ const isElementEnd = (ele) => {
 const EleScrollLoad = (setIsScrollLoad,query) => {
     const ScrollListen = (listen) => {
         const ele = document.querySelector(query);
-        console.log(query,ele);
+        // console.log(query,ele);
         if (ele) {
             if (listen)
                 ele.addEventListener('scroll', () => setIsScrollLoad(isPageEnd(ele)));

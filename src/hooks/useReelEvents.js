@@ -11,11 +11,11 @@ const useReelEvents = ({ setReel }) => {
     //Like Start
     const handleLikes = (e, reel) => {
         if (reel.iLiked) {
-            // ani_Like(e, false);
+            ani_Like(e, false);
             reel.likes = reel.likes - 1;
         }
         else {
-            // ani_Like(e, true);
+            ani_Like(e, true);
             reel.likes = reel.likes + 1;
         }
         reel.iLiked = !reel.iLiked;
@@ -61,30 +61,24 @@ const useReelEvents = ({ setReel }) => {
     //Share - Start
     const handleShare = async (e, reel) => {
         try {
-            const src = e.target.closest('.reel').querySelector('video').src;
-
-            const response = await fetch(src);
-            const blob = await response.blob();
-            console.log(response);
-            const filesArray = [
-                new File(
-                    [blob],
-                    'reel.mp4',
-                    {
-                        type: blob.type,
-                        lastModified: new Date().getTime()
-                    }
-                )
-            ];
-            console.log(reel);
-            const shareData = {
-                files: filesArray,
+            const res = await fetch(e.target.closest('.reel').querySelector('video').src);
+            const blob = await res.blob(); 
+            await navigator.share({
+                files: [
+                    new File(
+                        [blob],
+                        'reel.mp4',
+                        {
+                            type: blob.type,
+                            lastModified: new Date().getTime()
+                        }
+                    )
+                ],
                 title: `Reel From ${reel.UserName}`,
                 text : reel.quote,
-                url:'https://minsta-react.herokuapp.com/reel'
-            };
-            await navigator.share(shareData);
-            alert('reel shared Successfully');
+                url:'https://minsta-react.herokuapp.com/reels'
+            });
+            alert('reel shared successfully');
         }
         catch (err) {alert('Error Occured\n\n' + err);}
     }
