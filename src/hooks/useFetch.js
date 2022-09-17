@@ -49,7 +49,7 @@ const useFetch = () => {
 
             const response = await fetch(url + path, load);
             const json = await response.json();
-            console.log(json);
+            // console.log(json);
             if (!response.ok) {
                 if (response.status === 401) {
                     logout();

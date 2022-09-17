@@ -1,4 +1,4 @@
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuthContext } from 'hooks/useAuthContext'
 
@@ -22,6 +22,7 @@ const AddNewReel = () => {
 
     const [imgData, setImgData] = useState([imgIcon]);
     const [quote, setQuote] = useState('');
+    const [musicName, setMusicName] = useState('');
 
     const [Upload, setUpload] = useState(true);
 
@@ -29,7 +30,6 @@ const AddNewReel = () => {
         setIsSelectedPending(true);
 
         setSelectedFile(e.target.files[0]);
-        setQuote(e.target.files[0].name);
         setImgData(await convertBase64(e.target.files[0]));
         setIsSelected(true);
         setIsSelectedPending(false);
@@ -37,7 +37,7 @@ const AddNewReel = () => {
 
     const handleSubmission = async () => {
         setUpload(false);
-        console.log(imgData);
+        // console.log(imgData);
         fetchData({
             path: '/reel',
             method: "POST",
@@ -47,12 +47,13 @@ const AddNewReel = () => {
                 imgData,
                 "imgName": selectedFile.name,
                 "quote": quote,
-                "musicName":'Music Name'
+                "musicName": musicName
             }
         }).then(res => {
             console.log(res);
-            if(res._id){
-                navigate('/Reels/' + res._id)
+            if (res._id) {
+                // navigate('/reels/' + res._id)
+                navigate('/reels');
             }
         })
     };
@@ -65,7 +66,7 @@ const AddNewReel = () => {
                     <p>not yet fully featured...</p><br /><br />
                     {!isSelected ?
                         <div>
-                            <p>Select a file to Reel</p>
+                            <p>Select a file to Upload</p>
                             <input type='file'
                                 onChange={changeHandler}
                                 multiple
@@ -75,9 +76,18 @@ const AddNewReel = () => {
                             {Upload && <div>
                                 <label htmlFor="qoute">Quote
                                 </label>
+                                <br /><br />
                                 <input type="text" name="quote"
                                     value={quote}
                                     onChange={e => { setQuote(e.target.value) }}
+                                />
+                                <br /><br />
+                                <label htmlFor="musicName">Music Name
+                                </label>
+                                <br /><br />
+                                <input type="text" name="musicName"
+                                    value={musicName}
+                                    onChange={e => { setMusicName(e.target.value) }}
                                 />
                                 <br />
                                 <br />
@@ -90,15 +100,15 @@ const AddNewReel = () => {
                                     <div>
                                         <p>Quote: {quote}</p>
                                         <h3>Uploading ...</h3>
-                                    </div>:
-                                    (Reel && 
+                                    </div> :
+                                    (Reel &&
                                         <div>
                                             <Link to={`'/reel/'${Reel._id}`}>See Reel</Link>
                                         </div>
-                                        )
+                                    )
                                 )
                             }
-                        </div> 
+                        </div>
                     }
                 </div>
             </div>
