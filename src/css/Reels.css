@@ -145,9 +145,10 @@ video {
 #Reels .end-of-reels
 {
     display:grid;
-    place-items: center; 
+    place-items: center;
 }
 #Reels .end-of-reels{
     margin-top: 20px;
     padding:30px;
+    color: white; 
 }
