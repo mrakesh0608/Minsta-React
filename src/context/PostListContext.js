@@ -3,7 +3,7 @@ import { createContext, useReducer } from 'react'
 export const PostListContext = createContext();
 
 export const postListReducer = (state, action) => {
-    console.log('kk');
+    // console.log('kk');
     switch (action.type) {
         case 'ADD_POSTS': {
             if (state.posts.length === 0) {

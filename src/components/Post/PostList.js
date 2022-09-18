@@ -36,7 +36,7 @@ const PostList = () => {
     }, []);
 
     const LoadMore = async () => {
-        console.log('Loading Posts');
+        // console.log('Loading Posts');
         ScrollListen(false);
         fetchData({
             path: '/posts/iFollow?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"

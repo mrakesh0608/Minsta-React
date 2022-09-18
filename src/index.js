@@ -6,16 +6,19 @@ import 'css/index.css';
 import 'css/NavHeadBottom.css'
 
 import { AuthContextProvider } from 'context/AuthContext';
+import { SocketContextProvider } from 'context/SocketContext';
 import { PostListContextProvider } from 'context/PostListContext';
 import { PostImgContextProvider } from 'context/PostImgContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <AuthContextProvider>
-        <PostListContextProvider>
-            <PostImgContextProvider>
-                <App />
-            </PostImgContextProvider>
-        </PostListContextProvider>
+        <SocketContextProvider>
+            <PostListContextProvider>
+                <PostImgContextProvider>
+                    <App />
+                </PostImgContextProvider>
+            </PostListContextProvider>
+        </SocketContextProvider>
     </AuthContextProvider>
 );
