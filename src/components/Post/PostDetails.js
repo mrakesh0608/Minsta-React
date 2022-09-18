@@ -6,7 +6,7 @@ import NotFound from 'pages/NotFound';
 import useFetch from 'hooks/useFetch';
 import { useEffect } from 'react';
 
-import { usePostListContext } from 'hooks/usePostListContext'
+import { usePostListContext } from 'hooks/context/usePostListContext'
 
 const PostDetails = () => {
 

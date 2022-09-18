@@ -65,11 +65,11 @@ video {
     display: block;
     z-index: 2;
 }
-/* @media (max-width:600px){
+@media (min-width:600px){
     video{
-        object-fit: cover;
+        height: 100%;
     }
-} */
+}
 .animation-like{
     width: inherit;
     height: inherit;

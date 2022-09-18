@@ -1,7 +1,7 @@
 import UserImgNameFollow from 'components/User/UserImgNameFollow';
-import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon } from 'helpers/importsIcons';
-import { useState } from 'react';
-import useReelEvents from 'hooks/useReelEvents';
+import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon } from 'helpers/importIcons';
+import { useState, useEffect, useRef } from 'react';
+import useReelEvents from 'hooks/events/useReelEvents';
 import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
 const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
@@ -18,8 +18,27 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
         }
         else video.pause();
     }
+    const ref = useRef();
+    useEffect(() => {
+        if (!ref.current) return;
+        const options = {
+            root: null,
+            threshold: 1.0
+        };
+        const callback = (entries, observer) => {
+            entries.forEach(entry => {
+                const reel = entry.target.querySelector('video')
+                if (entry.isIntersecting) reel.play();
+                else reel.pause();
+                setCurrentPlayingVideo(reel);
+            })
+        }
+        const observer = new IntersectionObserver(callback, options);
+        observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, [ref.current])
     return (
-        <div className="reel" id={reel._id} onDoubleClick={(e) => handleLikes(e, reel)}>
+        <div className="reel" id={reel._id} onDoubleClick={(e) => handleLikes(e, reel)} ref={ref}>
             <div className="videoHeader">
                 <h3>Reels</h3>
             </div>
@@ -37,7 +56,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
                 </div>
                 <div className='rightFooter'>
                     <div>
-                        <img className={`reelIcons ${reel.iLiked?'notInvertIcons':''}`} src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
+                        <img className={`reelIcons ${reel.iLiked ? 'notInvertIcons' : ''}`} src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
                         <span>{reel.likes}</span>
                     </div>
                     <div>
@@ -56,5 +75,4 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
         </div>
     );
 }
-
 export default Reel;

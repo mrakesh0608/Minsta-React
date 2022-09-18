@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import 'css/UserHeadNav.css';
 
-import {addNewIcon} from 'helpers/importsIcons';
+import {addNewIcon} from 'helpers/importIcons';
 
 import { HideScroll } from 'helpers/HandleScroll';
 

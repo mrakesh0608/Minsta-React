@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { addNewIcon } from 'helpers/importsIcons';
+import { addNewIcon } from 'helpers/importIcons';
 import { useEffect, useState } from 'react';
 
 const NoPostAvailable = ({ more }) => {

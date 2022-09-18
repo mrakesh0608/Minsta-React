@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { userIcon } from 'helpers/importsIcons';
+import { userIcon } from 'helpers/importIcons';
 import 'css/UserImgNameFollow.css';
 
 const UserImgNameFollow = ({ UserName }) => {

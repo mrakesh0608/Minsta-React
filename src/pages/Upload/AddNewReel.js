@@ -1,12 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useAuthContext } from 'hooks/useAuthContext'
+import { useAuthContext } from 'hooks/context/useAuthContext'
 
 import useFetch from 'hooks/useFetch';
 
 import 'css/AddNew.css';
 
-import { imgIcon } from 'helpers/importsIcons';
+import { imgIcon } from 'helpers/importIcons';
 import { convertBase64 } from 'helpers/convertBase64';
 
 const AddNewReel = () => {

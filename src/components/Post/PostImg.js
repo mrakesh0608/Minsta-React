@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import useFetch from 'hooks/useFetch';
 
-import { usePostImgContext } from 'hooks/usePostImgContext';
+import { usePostImgContext } from 'hooks/context/usePostImgContext';
 
 const PostImg = ({ post, setPost, handleLikes }) => {
 

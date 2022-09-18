@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import {addNewIcon,msgIcon} from 'helpers/importsIcons';
+import {addNewIcon,msgIcon} from 'helpers/importIcons';
 
 const HomeHeadNav = () => {
 

@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import { useAuthContext } from 'hooks/useAuthContext';
+import { useAuthContext } from 'hooks/context/useAuthContext';
+import { useSocketContext } from 'hooks/context/useSocketContext';
 import useFetch from 'hooks/useFetch';
-import { useSocketContext } from 'hooks/useSocketContext';
-import { shareIcon } from 'helpers/importsIcons';
+import { shareIcon } from 'helpers/importIcons';
 import { todayDate } from 'helpers/time';
 import { isEmptyObj } from 'helpers/function';
 import 'css/chat.css';

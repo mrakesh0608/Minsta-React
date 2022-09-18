@@ -6,11 +6,11 @@ import UserHeadNav from 'components/User/UserHeadNav';
 import UserMeta1 from 'components/User/UserMeta1';
 import UserPostTag from 'components/User/UserPostTag';
 
-import { useLogout } from 'hooks/useLogout'
-import { useAuthContext } from 'hooks/useAuthContext';
+import { useLogout } from 'hooks/auth/useLogout'
+import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
 
-import { userIcon } from 'helpers/importsIcons';
+import { userIcon } from 'helpers/importIcons';
 import { HideScroll } from 'helpers/HandleScroll';
 import ToggleDarkTheme from 'helpers/ToggleDarkTheme';
 

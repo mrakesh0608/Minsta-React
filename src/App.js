@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import { useAuthContext } from 'hooks/useAuthContext';
+import { useAuthContext } from 'hooks/context/useAuthContext';
 
-import { InitApp } from 'helpers/InitApp';
 import BrandLogo from 'components/common/BrandLogo'
+import { InitApp } from 'helpers/InitApp';
 
 const Tabs = lazy(() => import('components/common/Tabs'));
-const AddNew = lazy(() => import('pages/AddNew'));
-const AddNewReel = lazy(() => import('pages/AddNewReel'));
+const AddNew = lazy(() => import('pages/Upload/AddNew'));
+const AddNewReel = lazy(() => import('pages/Upload/AddNewReel'));
 const Messenger = lazy(() => import('pages/Messenger'));
 const Chat = lazy(() => import('pages/Chat'));
 

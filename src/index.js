@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 
 import App from 'App';
 import 'css/index.css';
-import 'css/NavHeadBottom.css'
+import 'css/NavHeadBottom.css';
 
 import { AuthContextProvider } from 'context/AuthContext';
-import { SocketContextProvider ,isError} from 'context/SocketContext';
+import { SocketContextProvider } from 'context/SocketContext';
 import { PostListContextProvider } from 'context/PostListContext';
 import { PostImgContextProvider } from 'context/PostImgContext';
 

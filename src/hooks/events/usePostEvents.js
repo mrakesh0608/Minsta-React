@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { iconPath } from 'helpers/Path';
-import { useAuthContext } from 'hooks/useAuthContext';
-import { usePostListContext } from 'hooks/usePostListContext';
+import { useAuthContext } from 'hooks/context/useAuthContext';
+import { usePostListContext } from 'hooks/context/usePostListContext';
 import useFetch from 'hooks/useFetch';
 
 const usePostEvents = ({ setPost }) => {

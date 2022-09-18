@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAuthContext } from 'hooks/useAuthContext';
+import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
 import { Link } from 'react-router-dom';
 import {timeHourMin} from 'helpers/time';

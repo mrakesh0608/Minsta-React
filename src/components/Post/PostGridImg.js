@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import useFetch from 'hooks/useFetch';
 import { useRef, useEffect } from 'react';
 
-import { folderPicsIcon } from 'helpers/importsIcons';
+import { folderPicsIcon } from 'helpers/importIcons';
 import eventHoldWait from 'helpers/eventHoldWait';
 
-import { usePostImgContext } from 'hooks/usePostImgContext';
+import { usePostImgContext } from 'hooks/context/usePostImgContext';
 
 const PostGridImg = ({ post, showPost }) => {
 

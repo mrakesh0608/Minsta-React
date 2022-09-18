@@ -4,7 +4,7 @@ import useFetch from 'hooks/useFetch';
 import NoPostAvailable from 'components/Post/NoPostAvailable';
 
 import { ScrollLoad } from 'helpers/HandleScroll';
-import { usePostListContext } from 'hooks/usePostListContext'
+import { usePostListContext } from 'hooks/context/usePostListContext'
 const Post = lazy(() => import('./Post'));
 
 let initPostList;

@@ -1,5 +1,5 @@
-import { useAuthContext } from './useAuthContext'
-import { usePostListContext } from 'hooks/usePostListContext'
+import { useAuthContext } from 'hooks/context/useAuthContext'
+import { usePostListContext } from 'hooks/context/usePostListContext'
 
 export const useLogout = () => {
     const { dispatch } = useAuthContext()

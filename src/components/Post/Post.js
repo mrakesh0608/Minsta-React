@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 import PostImg from './PostImg';
 import 'css/Post.css';
-import { userIcon } from 'helpers/importsIcons';
+import { userIcon } from 'helpers/importIcons';
 
-import usePostEvents from 'hooks/usePostEvents';
+import usePostEvents from 'hooks/events/usePostEvents';
 
 import { iconPath } from 'helpers/Path';
 import { timeDiff } from 'helpers/time';

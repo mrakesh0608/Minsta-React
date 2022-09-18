@@ -1,27 +1,27 @@
 import { useState } from 'react'
-import { useAuthContext } from './useAuthContext';
+import { useAuthContext } from 'hooks/context/useAuthContext';
+
 import {url} from 'helpers/Path'
 
-export const useSignup = () => {
-    
+export const useLogin = () => {
     const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
-    const { dispatch } = useAuthContext()
+    const [isPending, setIsPending] = useState(null)
+    const { dispatch } = useAuthContext();
 
-    const signup = async (newUser) => {
-        console.log(newUser);
-        setIsLoading(true)
+    const login = async (user) => {
+        // console.log(user);
+        setIsPending(true)
         setError(null)
 
-        const response = await fetch(url+'/auth/signup', {
+        const response = await fetch(url+'/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newUser)
+            body: JSON.stringify(user)
         })
         const json = await response.json()
 
         if (!response.ok) {
-            setIsLoading(false)
+            setIsPending(false)
             setError(json.error)
         }
         if (response.ok) {
@@ -32,9 +32,8 @@ export const useSignup = () => {
             dispatch({ type: 'LOGIN', payload: json })
 
             // update loading state
-            setIsLoading(false)
+            setIsPending(false)
         }
     }
-
-    return { signup, isLoading, error }
+    return { login, isPending, error }
 }

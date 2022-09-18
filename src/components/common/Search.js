@@ -1,5 +1,5 @@
 import 'css/Search.css';
-import {searchIcon} from 'helpers/importsIcons';
+import {searchIcon} from 'helpers/importIcons';
 
 const Search = () => {    
     return (

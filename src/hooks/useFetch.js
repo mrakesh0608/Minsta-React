@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { url } from 'helpers/Path';
 
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useLogout } from 'hooks/useLogout'
+import { useAuthContext } from "../hooks/context/useAuthContext";
+import { useLogout } from 'hooks/auth/useLogout'
 
 const MethodLoad = (method, payload, token) => {
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 import { EleScrollLoad } from 'helpers/HandleScroll';
-import Reel from 'components/common/Reel';
-import ReelProgressBar from 'components/common/ReelProgressBar';
+import Reel from 'components/Reel/Reel';
+import ReelProgressBar from 'components/Reel/ReelProgressBar';
 import 'css/Reels.css';
 const Reels = () => {
     const [reels, setReels] = useState(null);
@@ -34,12 +34,7 @@ const Reels = () => {
             }
         })
     }
-
     const [currentPlayingVideo, setCurrentPlayingVideo] = useState(null);
-    const handleReelPause = () => {
-        currentPlayingVideo?.pause();
-        setCurrentPlayingVideo(null);
-    };
     const openFullscreen = () => {
         const element = document.getElementById('reel-list');
         if (element.requestFullscreen) element.requestFullscreen();
@@ -53,7 +48,7 @@ const Reels = () => {
                             <p>for Better Experience, <span onClick={() => openFullscreen()}>open</span> Full Screen Mode .</p>
                             <div onClick={(e) => { e.target.closest('#fullScreen').remove() }}>X</div>
                         </div>
-                        <div id="reel-list" onScroll={handleReelPause}>
+                        <div id="reel-list">
                             {reels.map(reel =>
                                 <Reel key={reel._id} reel={reel} setCurrentPlayingVideo={setCurrentPlayingVideo} />
                             )}

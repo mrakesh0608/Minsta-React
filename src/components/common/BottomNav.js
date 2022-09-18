@@ -8,7 +8,7 @@ import {
     reelIcon, reelOnIcon,
     heartIcon, heartOnIcon,
     userIcon, userOnIcon
-} from 'helpers/importsIcons';
+} from 'helpers/importIcons';
 
 import {initPostList} from 'components/Post/PostList'
 import {initPostGrid} from 'components/Post/PostGrid'

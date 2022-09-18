@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useSignup } from "hooks/useSignup"
+import { useSignup } from "hooks/auth/useSignup"
 
 import 'css/Login_SignUp.css';
 

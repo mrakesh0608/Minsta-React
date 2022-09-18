@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import {userIcon} from 'helpers/importsIcons';
+import {userIcon} from 'helpers/importIcons';
 
 const UserMeta1 = ({ user }) => {
     return (

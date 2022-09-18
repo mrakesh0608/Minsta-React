@@ -2,14 +2,15 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 
-import { useAuthContext } from 'hooks/useAuthContext'
+import { useAuthContext } from 'hooks/context/useAuthContext'
+
 import OtherUserHeadNav from 'components/User/OtherUserHeadNav'
 import UserMeta1 from 'components/User/UserMeta1';
 import UserPostTag from 'components/User/UserPostTag';
-import 'css/User.css';
-import { iconPath } from 'helpers/Path';
 
+import { iconPath } from 'helpers/Path';
 import { HideScroll } from 'helpers/HandleScroll';
+import 'css/User.css';
 
 const OtherUser = ({ username }) => {
 
@@ -35,8 +36,8 @@ const OtherUser = ({ username }) => {
         document.getElementById('user-more-list').classList.remove('ani');
         document.getElementById('user-more-list').classList.add('ani-r');
 
+        HideScroll(false);
         setTimeout(() => {
-            HideScroll(false);
             setUserMore(false);
         }, 500);
     };
