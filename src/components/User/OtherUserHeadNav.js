@@ -1,8 +1,7 @@
-import { Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import 'css/UserHeadNav.css';
 
 import {iconPath} from 'helpers/Path';
-
 import { HideScroll } from 'helpers/HandleScroll';
 
 const OtherUserHeadNav = ({ username, setUserMore }) => {

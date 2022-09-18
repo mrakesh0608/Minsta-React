@@ -1,4 +1,4 @@
-import { useParams ,Link} from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from 'hooks/context/useAuthContext';
 import { useSocketContext } from 'hooks/context/useSocketContext';
@@ -8,6 +8,8 @@ import { todayDate } from 'helpers/time';
 import { isEmptyObj } from 'helpers/function';
 import 'css/chat.css';
 import ChatContent from 'components/common/ChatContent';
+import Back from 'components/common/Back';
+import More from 'components/common/More';
 const Chat = () => {
 
     const { id } = useParams();
@@ -66,9 +68,13 @@ const Chat = () => {
     return (
         <div className='chat'>
             <div className='chat-head'>
-                <Link to={`/user/${id}`}>{id}</Link>
-                <br />
-                <sub>{online}</sub>
+                <Back />
+                <div>
+                    <Link to={`/user/${id}`}>{id}</Link>
+                    <br />
+                    <span>{online}</span>
+                </div>
+                <More />
             </div>
             {(data || !isEmptyObj(chats)) ?
                 (isEmptyObj(chats) ?
