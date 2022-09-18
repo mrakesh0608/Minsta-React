@@ -1,4 +1,4 @@
-import BottomNav from 'components/common/BottomNav';
+import BottomNav from 'components/Nav/BottomNav';
 
 import Home from 'pages/NavBottom/Home';
 import Explore from 'pages/NavBottom/Explore';

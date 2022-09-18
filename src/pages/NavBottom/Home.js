@@ -1,4 +1,4 @@
-import HomeHeadNav from 'components/common/HomeHeadNav';
+import HomeHeadNav from 'components/Nav/HomeHeadNav';
 import {PostList} from 'components/Post/PostList';
 
 const Home = () => {
