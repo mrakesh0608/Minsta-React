@@ -92,7 +92,7 @@ const PostImg = ({ post, setPost, handleLikes }) => {
     }
 
     return (
-        <div>
+        <>
             <div className='post-content-img-container'>
                 <div id={`pcl-${post._id}`}
                     className='post-content-list'
@@ -130,7 +130,7 @@ const PostImg = ({ post, setPost, handleLikes }) => {
                     )}
                 </div>
             }
-        </div>
+        </>
     );
 }
 export default PostImg;

@@ -6,10 +6,9 @@ import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
 const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
 
+    const { handleLikes, handleShare } = useReelEvents({ setReel });
     const [reel, setReel] = useState(data);
-    const [reelMore, setReelMore] = useState(false);
-
-    const { handleLikes, handleShare, isError } = useReelEvents({ setReel });
+    const ref = useRef();
 
     const handleReel = (video) => {
         if (video.paused) {
@@ -18,7 +17,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
         }
         else video.pause();
     }
-    const ref = useRef();
+    
     useEffect(() => {
         if (!ref.current) return;
         const options = {
@@ -37,6 +36,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
         observer.observe(ref.current);
         return () => observer.disconnect();
     }, [ref.current])
+    
     return (
         <div className="reel" id={reel._id} onDoubleClick={(e) => handleLikes(e, reel)} ref={ref}>
             <div className="videoHeader">

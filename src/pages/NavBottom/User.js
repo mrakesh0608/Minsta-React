@@ -60,49 +60,47 @@ const User = () => {
         <div id="User">
             <UserHeadNav username={old.Username} setUserMore={setUserMore} />
             {user ?
-                <div>
-                    <div id="User-content">
-                        <div className='user-meta'>
-                            <UserMeta1 user={{
-                                Posts: user.Posts,
-                                Followers: user.Followers,
-                                Following: user.Following,
-                                Name: user.Name,
-                                Username: user.Username
-                            }} />
-                            <div className='user-meta-2'>
-                                <div className='edit-discover'>
-                                    <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
-                                    <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
-                                </div>
+                <div id="User-content">
+                    <div className='user-meta'>
+                        <UserMeta1 user={{
+                            Posts: user.Posts,
+                            Followers: user.Followers,
+                            Following: user.Following,
+                            Name: user.Name,
+                            Username: user.Username
+                        }} />
+                        <div className='user-meta-2'>
+                            <div className='edit-discover'>
+                                <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
+                                <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
                             </div>
                         </div>
-                        {DisPeo &&
-                            (DisPeodata ?
-                                <div className='discover-people'>
-                                    {DisPeodata.map((user, key) =>
-                                        <div
-                                            onClick={() => navigate(`/user/${user.Username}`)}
-                                            key={key}
-                                            className='discover-people-card'
-                                        >
-                                            <div className='userimg'>
-                                                <img src={userIcon} alt="user" className='icons' />
-                                            </div>
-                                            <div>{user.Name}</div>
-                                            <div>{user.Username}</div>
+                    </div>
+                    {DisPeo &&
+                        (DisPeodata ?
+                            <div className='discover-people'>
+                                {DisPeodata.map((user, key) =>
+                                    <div
+                                        onClick={() => navigate(`/user/${user.Username}`)}
+                                        key={key}
+                                        className='discover-people-card'
+                                    >
+                                        <div className='userimg'>
+                                            <img src={userIcon} alt="user" className='icons' />
                                         </div>
-                                    )}
-                                </div> :
-                                (isDisPeoError ? <div className='load' style={{ color: 'red' }}>{isDisPeoError}</div> :
-                                    (isDisPeoPending &&
-                                        <div className='load'>Loading ...</div>
-                                    )
+                                        <div>{user.Name}</div>
+                                        <div>{user.Username}</div>
+                                    </div>
+                                )}
+                            </div> :
+                            (isDisPeoError ? <div className='load' style={{ color: 'red' }}>{isDisPeoError}</div> :
+                                (isDisPeoPending &&
+                                    <div className='load'>Loading ...</div>
                                 )
                             )
-                        }
-                        <UserPostTag userId={user._id} token={user} />
-                    </div>
+                        )
+                    }
+                    <UserPostTag userId={user._id} token={user} />
                 </div> :
                 (isError ?
                     (isError === 'No Such User' ?
