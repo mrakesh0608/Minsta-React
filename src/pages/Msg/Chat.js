@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams ,Link} from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from 'hooks/context/useAuthContext';
 import { useSocketContext } from 'hooks/context/useSocketContext';
@@ -66,7 +66,9 @@ const Chat = () => {
     return (
         <div className='chat'>
             <div className='chat-head'>
-                {id}<br /><sub>{online}</sub>
+                <Link to={`/user/${id}`}>{id}</Link>
+                <br />
+                <sub>{online}</sub>
             </div>
             {(data || !isEmptyObj(chats)) ?
                 (isEmptyObj(chats) ?
