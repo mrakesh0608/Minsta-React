@@ -1,4 +1,4 @@
-const Messenger = () => {    
+const Messenger = () => {
     return (
         <div id="Messenger">
             <div id="Messenger-content">
