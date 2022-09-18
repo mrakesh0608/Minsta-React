@@ -6,7 +6,7 @@ import 'css/index.css';
 import 'css/NavHeadBottom.css'
 
 import { AuthContextProvider } from 'context/AuthContext';
-import { SocketContextProvider } from 'context/SocketContext';
+import { SocketContextProvider ,isError} from 'context/SocketContext';
 import { PostListContextProvider } from 'context/PostListContext';
 import { PostImgContextProvider } from 'context/PostImgContext';
 

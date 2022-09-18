@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import { useAuthContext } from 'hooks/useAuthContext';
-import { useSocketContext } from 'hooks/useSocketContext';
 
 import { InitApp } from 'helpers/InitApp';
 import BrandLogo from 'components/common/BrandLogo'
@@ -23,18 +22,11 @@ const SignUp = lazy(() => import('pages/Authentication/SignUp'));
 function App() {
 
     const { user, isLoading } = useAuthContext();
-    const { socket } = useSocketContext();
-    useEffect(()=>{
-        if(user) socket.emit('goOnline',{ UserName: user.Username, userId: user.userId });
-    },[user]);
     InitApp();
     return (
         <BrowserRouter>
             <div className="App">
-
-                <Suspense fallback={<BrandLogo />
-
-                }>
+                <Suspense fallback={<BrandLogo />}>
                     {!isLoading &&
                         <Routes>
                             {['/', '/explore', '/reels', '/notif', '/user'].map((path, index) =>

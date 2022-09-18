@@ -38,7 +38,17 @@ body {
     background-color: var(--bgColor);
     color: var(--textColor);
 }
-
+.socket-error{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    background-color: lightgray;
+    padding: 5px;
+    color: red;
+}
 a {
     text-decoration: none;
     color: var(--textColor);

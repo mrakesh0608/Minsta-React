@@ -14,7 +14,7 @@ const Chat = () => {
     const { user: I } = useAuthContext();
     const { socket } = useSocketContext();
     const { fetchData, data, isError, isPending } = useFetch();
-    
+
     const [chats, setChats] = useState({});
     const [newMsg, setNewMsg] = useState('');
     const [online, setOnline] = useState('');
@@ -23,29 +23,16 @@ const Chat = () => {
 
     useEffect(() => {
         initialize();
-        socket.on('message', message => {
-            console.log(message);
-        });
-        socket.on("onlineUsers", ({ users }) => {
-            console.log(users)
-            setOnline('offline');
-            users.forEach(user => {
-                if (user.UserName === id) {
-                    setOnline('online');
-                }
-            })
-        });
-        socket.on('newMsg', ({ chatId }) => {
-            console.log('newMsg', chatId);
-            initialize();
-        })
+        socket.on("onlineUsers", () => socket.emit('isOnline', ({ UserName: id })));
+        socket.on('setOnline', (status) => setOnline(status))
+        socket.on('newMsg', ({ chatId }) => initialize())
     }, [])
     const initialize = () => {
         fetchData({
             path: `/chat?UserName1=${I.Username}&UserName2=${id}`,
             method: 'GET'
         }).then(res => {
-            if (res.chats) {
+            if (res && res.chats) {
                 setChats(res.chats);
             }
         });
@@ -79,13 +66,12 @@ const Chat = () => {
     return (
         <div className='chat'>
             <div className='chat-head'>
-                {id}&nbsp;<sub>{online}</sub>
+                {id}<br /><sub>{online}</sub>
             </div>
             {(data || !isEmptyObj(chats)) ?
                 (isEmptyObj(chats) ?
                     <div className='loading'>Send your first Messege to {id}</div> :
                     <div className='chat-content'>
-                        {isError && <div className='error'>{isError}</div>}
                         <ChatContent chats={chats} myUserName={I.Username} />
                         <div ref={ref} />
                     </div >

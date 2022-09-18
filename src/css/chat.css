@@ -14,16 +14,11 @@ body {
 }
 
 .chat-content {
-    height: calc(100vh - 90px);
+    height: calc(100vh - 50px);
     overflow: auto;
     padding: 0 5px;
 }
-.chat-content .error{
-    width: 100%;
-    position: fixed;
-    left: 0;
-    background-color: whitesmoke;
-}
+
 .chat-day {
     text-align: center;
     padding: 15px 0;
