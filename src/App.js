@@ -8,16 +8,16 @@ import { InitApp } from 'helpers/InitApp';
 const Tabs = lazy(() => import('components/common/Tabs'));
 const AddNew = lazy(() => import('pages/Upload/AddNew'));
 const AddNewReel = lazy(() => import('pages/Upload/AddNewReel'));
-const Messenger = lazy(() => import('pages/Messenger'));
-const Chat = lazy(() => import('pages/Chat'));
+const Messenger = lazy(() => import('pages/Msg/Messenger'));
+const Chat = lazy(() => import('pages/Msg/Chat'));
 
 const PostDetails = lazy(() => import('components/Post/PostDetails'));
 
 const OtherUser = lazy(() => import('pages/OtherUser'));
 const NotFound = lazy(() => import('pages/NotFound'));
 
-const LogIn = lazy(() => import('pages/Authentication/LogIn'));
-const SignUp = lazy(() => import('pages/Authentication/SignUp'));
+const LogIn = lazy(() => import('pages/Auth/LogIn'));
+const SignUp = lazy(() => import('pages/Auth/SignUp'));
 
 function App() {
 
