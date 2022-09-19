@@ -13,15 +13,22 @@ import useFetch from 'hooks/useFetch';
 import { HideScroll } from 'helpers/HandleScroll';
 import ToggleDarkTheme from 'helpers/ToggleDarkTheme';
 import DisPeo from 'components/User/DisPeo';
-
 const User = () => {
 
     const navigate = useNavigate();
     const { logout } = useLogout();
 
-    const { user } = useAuthContext();
-    const userData = JSON.parse(localStorage.getItem('userData'));
+    const { user: old } = useAuthContext();
     const [userMore, setUserMore] = useState(false);
+    const { fetchData, data: user, isError, isPending } = useFetch();
+
+    useEffect(() => {
+        initialize();
+    }, [])
+
+    const initialize = () => {
+        fetchData({ path: '/user?Username=' + old.Username, method: "GET" })
+    }
 
     const CloseUserMore = () => {
         document.getElementById('user-more-list').classList.remove('ani');
@@ -47,26 +54,35 @@ const User = () => {
 
     return (
         <div id="User">
-            <UserHeadNav username={user.Username} setUserMore={setUserMore} />
-            <div id="User-content">
-                <div className='user-meta'>
-                    <UserMeta1 user={{
-                        Posts: userData.Posts,
-                        Followers: userData.Followers_users.length,
-                        Following: userData.Following_users.length,
-                        Name: userData.Name,
-                        Username: userData.Username
-                    }} />
-                    <div className='user-meta-2'>
-                        <div className='edit-discover'>
-                            <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
-                            <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
+            <UserHeadNav username={old.Username} setUserMore={setUserMore} />
+            {user ?
+                <div id="User-content">
+                    <div className='user-meta'>
+                        <UserMeta1 user={{
+                            Posts: user.Posts,
+                            Followers: user.Followers,
+                            Following: user.Following,
+                            Name: user.Name,
+                            Username: user.Username
+                        }} />
+                        <div className='user-meta-2'>
+                            <div className='edit-discover'>
+                                <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
+                                <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {showDisPeo && <DisPeo />}
-                <UserPostTag userId={user._id} token={user} />
-            </div>
+                    {showDisPeo && <DisPeo />}
+                    <UserPostTag userId={user._id} token={user} />
+                </div> :
+                (isError ?
+                    (isError === 'No Such User' ?
+                        navigate('/notfound/No Such User') :
+                        <div className='err-msg'>{isError}</div>
+                    ) :
+                    (isPending && <div className="loading"><h2>Loading ...</h2></div>)
+                )
+            }
             {userMore &&
                 <div id='user-more-overlay' onClick={(e) => {
                     if (e.target.id === 'user-more-overlay') CloseUserMore();
