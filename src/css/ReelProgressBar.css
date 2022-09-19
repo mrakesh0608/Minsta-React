@@ -3,10 +3,10 @@
     bottom: 0;
     left: 0;
     z-index: 5;
-    padding: 6px;
-    /*to make clickable*/
     width: 100% !important;
     border-bottom: 1px solid gray;
+    /*to make clickable*/
+    padding: 6px;
 }
 
 #progress {
