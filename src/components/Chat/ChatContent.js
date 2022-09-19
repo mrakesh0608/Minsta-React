@@ -1,4 +1,4 @@
-import GetTriangle from 'components/common/GetTriangle';
+import { GetTriangle } from 'components/Chat/GetTriangle';
 import { timeHourMin } from 'helpers/time';
 const ChatContent = ({ chats, myUserName }) => {
     return (
@@ -13,10 +13,10 @@ const ChatContent = ({ chats, myUserName }) => {
                                     <span>{chat.msg}</span>
                                     <sub className='time'>{timeHourMin(chat.time)} {chat.timer && <i className='far fa-clock' style={{ fontSize: 'inherit' }} />}</sub>
                                 </div>
-                                <GetTriangle pos={'right'} />
+                                <GetTriangle pos={'right'} UserName={chat.UserName} day={day} />
                             </div> :
                             <div className='msg'>
-                                <GetTriangle pos={'left'} />
+                                <GetTriangle pos={'left'} UserName={chat.UserName} day={day} />
                                 <div className='msg-content'>
                                     <span>{chat.msg}</span>
                                     <sub className='time'>{timeHourMin(chat.time)}</sub>

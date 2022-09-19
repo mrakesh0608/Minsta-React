@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 
 import { useSocketContext } from 'hooks/context/useSocketContext';
 import { useAuthContext } from 'hooks/context/useAuthContext';
@@ -9,9 +9,10 @@ import { shareIcon } from 'helpers/importIcons';
 import { isEmptyObj } from 'helpers/function';
 import { todayDate } from 'helpers/time';
 
-import ChatContent from 'components/common/ChatContent';
+import ChatContent from 'components/Chat/ChatContent';
 import Back from 'components/common/Back';
 import More from 'components/common/More';
+import UserLink from 'components/User/UserLink';
 import 'css/chat.css';
 
 const Chat = () => {
@@ -22,7 +23,6 @@ const Chat = () => {
     const { fetchData, data, isError, isPending } = useFetch();
 
     const [chats, setChats] = useState({});
-    const [newMsg, setNewMsg] = useState('');
     const [online, setOnline] = useState('');
     const [once, setOnce] = useState(true);
     const ref = useRef();
@@ -53,6 +53,8 @@ const Chat = () => {
 
     const handleMsgSend = (e) => {
         e.preventDefault();
+        const newMsg = e.target.newMsgIp.value;
+        e.target.newMsgIp.value = '';
         if (newMsg) {
             if (!chats[todayDate()]) chats[todayDate()] = [];
             chats[todayDate()].push({ timer: true, UserName: I.Username, msg: newMsg, time: new Date() });
@@ -66,7 +68,6 @@ const Chat = () => {
                     if (res.chats) setChats(res.chats);
                 });
             }
-            setNewMsg('');
         }
     }
     return (
@@ -74,7 +75,7 @@ const Chat = () => {
             <div className='chat-head'>
                 <Back />
                 <div>
-                    <Link to={`/user/${id}`}>{id}</Link>
+                    <UserLink UserName={id}/>
                     <br />
                     <span>{online}</span>
                 </div>
@@ -91,11 +92,11 @@ const Chat = () => {
                     }
                     <form onSubmit={handleMsgSend} id='newMsgForm'>
                         <div className='newMsgSend'>
-                            <textarea id='newMsgIp' value={newMsg}
-                                onChange={(e) => setNewMsg(e.target.value)}
-                                placeholder='New Message' autoComplete='off' autoFocus
+                            <textarea id='newMsgIp' name='newMsgIp'
+                                placeholder='New Message' autoComplete='off'
+                                autoFocus
                             />
-                            <button className='msg-send nav-icons'
+                            <button className='msg-send nav-icons' 
                                 onFocus={() => document.getElementById('newMsgIp').focus()}
                             ><img src={shareIcon} alt="" /></button>
                         </div>

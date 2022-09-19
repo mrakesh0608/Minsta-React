@@ -11,6 +11,7 @@ import { iconPath } from 'helpers/Path';
 import { timeDiff } from 'helpers/time';
 import { HideScroll } from 'helpers/HandleScroll';
 import { PreLoad } from 'helpers/PreLoad';
+import UserLink from 'components/User/UserLink';
 PreLoad();
 
 const Post = ({ post: data }) => {
@@ -27,7 +28,7 @@ const Post = ({ post: data }) => {
                     <div className="post-user-img post-meta-icons-div">
                         <img src={userIcon} alt="user" className='icons' />
                     </div>
-                    <div><Link to={`/user/${post.username}`} className='username'>{post.username}</Link></div>
+                    <div><UserLink UserName={post.username}/></div>
                 </div>
                 <div className="post-meta-icons-div no-margin-right" onClick={(e) => {
                     HideScroll(true);
@@ -67,7 +68,7 @@ const Post = ({ post: data }) => {
                 </div>
                 <div className="post-meta-bottom-2">
                     <div><span className="noOfLikes" >{post.likes}</span> likes</div>
-                    <div><a href={"/user/" + post.username} className='username'>{post.username}</a>  {post.quote}</div>
+                    <div><UserLink UserName={post.username}/>  {post.quote}</div>
                     <div className='time'>{timeDiff(post.createdAt)}</div>
                 </div>
             </div>
