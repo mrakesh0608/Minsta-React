@@ -66,30 +66,27 @@ const usePostEvents = ({ setPost }) => {
     //Share - Start
     const handleShare = async (e, post) => {
         try {
-            const post = e.target.closest('.post');
-            const postContent = post.querySelector('.post-content');
+            const res = await fetch(e.target.closest('.post').querySelector('.post-content').querySelector('img').src);
+            const blob = await res.blob();
 
-            const response = await fetch(postContent.querySelector('img').src);
-            const blob = await response.blob();
-
-            const filesArray = [
-                new File(
-                    [blob],
-                    'image.jpg',
-                    {
-                        type: "image/jpeg",
-                        lastModified: new Date().getTime()
-                    }
-                )
-            ];
-            const shareData = { files: filesArray };
-
-            await navigator.share(shareData);
+            await navigator.share({
+                files: [
+                    new File(
+                        [blob],
+                        'image.jpg',
+                        {
+                            type: blob.type,
+                            lastModified: new Date().getTime()
+                        }
+                    )
+                ],
+                title: `Post From ${post.username}`,
+                text: post.quote,
+                url: `https://minsta.vercel.app/posts/${post._id}`
+            });
             alert('post shared Successfully');
         }
-        catch (err) {
-            alert('Error Occured\n\n' + err);
-        }
+        catch (err) {alert('Error Occured\n\n' + err);}
     }
     //Share -End
 
