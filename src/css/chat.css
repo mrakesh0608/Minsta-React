@@ -1,7 +1,8 @@
 body {
     margin-bottom: 0;
 }
-.chat{
+
+.chat {
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -10,6 +11,7 @@ body {
     width: 100%;
     height: 100%;
 }
+
 .chat-head {
     text-align: center;
     font-weight: 600;
@@ -19,15 +21,18 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-.div-msg{
+
+.div-msg {
     height: 100%;
     display: grid;
     place-items: center;
 }
-.chat-head span{
+
+.chat-head span {
     font-size: 12px;
     color: var(--bgChatTimeColor);
 }
+
 .chat-content {
     height: 100%;
     overflow: auto;
@@ -135,6 +140,12 @@ sub {
     color: var(--textColor);
     opacity: 0.7;
 }
+
+/* .newMsgSend textarea::-webkit-resizer {
+    background: var(--bgLightColor);
+    border: 4px solid transparent;
+    outline: 4px solid green;
+} */
 
 .msg-send {
     background-color: var(--bgChatRightColor);
