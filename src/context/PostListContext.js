@@ -34,7 +34,7 @@ export const PostListContextProvider = ({ children }) => {
         posts: []
     })
 
-    console.log('PostListContext state:', state)
+    // console.log('PostListContext state:', state)
     return (
         <PostListContext.Provider value={{ ...state, dispatch }}>
             {children}

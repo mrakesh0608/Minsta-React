@@ -17,6 +17,10 @@ export const SocketContextProvider = ({ children }) => {
                 setIsSockError(false);
                 socket.emit('goOnline', { UserName: user.Username, userId: user.userId });
             });
+            socket.on('updateLocalData',(data)=>{
+                console.log(data);
+                localStorage.setItem('userData', JSON.stringify(data));
+            })
             socket.on('connect_error', err => {
                 setIsSockError('failed to connect to server');
             });

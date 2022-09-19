@@ -10,29 +10,18 @@ import { useLogout } from 'hooks/auth/useLogout'
 import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
 
-import { userIcon } from 'helpers/importIcons';
 import { HideScroll } from 'helpers/HandleScroll';
 import ToggleDarkTheme from 'helpers/ToggleDarkTheme';
+import DisPeo from 'components/User/DisPeo';
 
 const User = () => {
 
     const navigate = useNavigate();
     const { logout } = useLogout();
 
-    const { user: old } = useAuthContext();
+    const { user } = useAuthContext();
+    const userData = JSON.parse(localStorage.getItem('userData'));
     const [userMore, setUserMore] = useState(false);
-    const { fetchData, data: user, isError, isPending } = useFetch();
-
-    const [DisPeo, setDisPeo] = useState(false);
-    const { fetchData: fetchDisPeo, data: DisPeodata, isError: isDisPeoError, isPending: isDisPeoPending } = useFetch();
-
-    useEffect(() => {
-        initialize();
-    }, [])
-
-    const initialize = () => {
-        fetchData({ path: '/user?Username=' + old.Username, method: "GET" })
-    }
 
     const CloseUserMore = () => {
         document.getElementById('user-more-list').classList.remove('ani');
@@ -44,72 +33,40 @@ const User = () => {
         }, 500);
     };
 
+    const [showDisPeo, setShowDisPeo] = useState(false);
     const handleDisPeo = (e) => {
-        if (DisPeo) {
-            setDisPeo(false);
+        if (showDisPeo) {
+            setShowDisPeo(false);
             e.target.style.backgroundColor = '#EFEFEF'
         }
         else {
-            setDisPeo(true);
+            setShowDisPeo(true);
             e.target.style.backgroundColor = 'lightblue'
-            fetchDisPeo({ path: '/user/userAll', method: "GET" })
         }
     }
 
     return (
         <div id="User">
-            <UserHeadNav username={old.Username} setUserMore={setUserMore} />
-            {user ?
-                <div id="User-content">
-                    <div className='user-meta'>
-                        <UserMeta1 user={{
-                            Posts: user.Posts,
-                            Followers: user.Followers,
-                            Following: user.Following,
-                            Name: user.Name,
-                            Username: user.Username
-                        }} />
-                        <div className='user-meta-2'>
-                            <div className='edit-discover'>
-                                <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
-                                <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
-                            </div>
+            <UserHeadNav username={user.Username} setUserMore={setUserMore} />
+            <div id="User-content">
+                <div className='user-meta'>
+                    <UserMeta1 user={{
+                        Posts: userData.Posts,
+                        Followers: userData.Followers_users.length,
+                        Following: userData.Following_users.length,
+                        Name: userData.Name,
+                        Username: userData.Username
+                    }} />
+                    <div className='user-meta-2'>
+                        <div className='edit-discover'>
+                            <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
+                            <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
                         </div>
                     </div>
-                    {DisPeo &&
-                        (DisPeodata ?
-                            <div className='discover-people'>
-                                {DisPeodata.map((user, key) =>
-                                    <div
-                                        onClick={() => navigate(`/user/${user.Username}`)}
-                                        key={key}
-                                        className='discover-people-card'
-                                    >
-                                        <div className='userimg'>
-                                            <img src={userIcon} alt="user" className='icons' />
-                                        </div>
-                                        <div>{user.Name}</div>
-                                        <div>{user.Username}</div>
-                                    </div>
-                                )}
-                            </div> :
-                            (isDisPeoError ? <div className='load' style={{ color: 'red' }}>{isDisPeoError}</div> :
-                                (isDisPeoPending &&
-                                    <div className='load'>Loading ...</div>
-                                )
-                            )
-                        )
-                    }
-                    <UserPostTag userId={user._id} token={user} />
-                </div> :
-                (isError ?
-                    (isError === 'No Such User' ?
-                        navigate('/notfound/No Such User') :
-                        <div className='err-msg'>{isError}</div>
-                    ) :
-                    (isPending && <div className="loading"><h2>Loading ...</h2></div>)
-                )
-            }
+                </div>
+                {showDisPeo && <DisPeo />}
+                <UserPostTag userId={user._id} token={user} />
+            </div>
             {userMore &&
                 <div id='user-more-overlay' onClick={(e) => {
                     if (e.target.id === 'user-more-overlay') CloseUserMore();

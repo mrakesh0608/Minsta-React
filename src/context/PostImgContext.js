@@ -25,7 +25,7 @@ export const PostImgContextProvider = ({ children }) => {
         postImgs: []
     })
 
-    console.log('PostImgContext state:', state)
+    // console.log('PostImgContext state:', state)
     return (
         <PostImgContext.Provider value={{ ...state, dispatch }}>
             {children}
