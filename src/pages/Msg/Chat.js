@@ -1,15 +1,19 @@
-import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import { useAuthContext } from 'hooks/context/useAuthContext';
+import { useParams, Link } from 'react-router-dom';
+
 import { useSocketContext } from 'hooks/context/useSocketContext';
+import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
+
 import { shareIcon } from 'helpers/importIcons';
-import { todayDate } from 'helpers/time';
 import { isEmptyObj } from 'helpers/function';
-import 'css/chat.css';
+import { todayDate } from 'helpers/time';
+
 import ChatContent from 'components/common/ChatContent';
 import Back from 'components/common/Back';
 import More from 'components/common/More';
+import 'css/chat.css';
+
 const Chat = () => {
 
     const { id } = useParams();
@@ -24,10 +28,10 @@ const Chat = () => {
     const ref = useRef();
 
     useEffect(() => {
-        initialize();
         socket.on("onlineUsers", () => socket.emit('isOnline', ({ UserName: id })));
         socket.on('setOnline', (status) => setOnline(status))
         socket.on('newMsg', ({ chatId }) => initialize())
+        initialize();
     }, [])
     const initialize = () => {
         fetchData({
@@ -40,7 +44,7 @@ const Chat = () => {
         });
     }
     useEffect(() => {
-        ref.current?.scrollIntoView({ behavior: "smooth" });
+        ref.current?.scrollIntoView();
         if (once && data && data._id) {
             socket.emit('joinChat', { chatId: data._id });
             setOnce(false);
@@ -77,28 +81,31 @@ const Chat = () => {
                 <More />
             </div>
             {(data || !isEmptyObj(chats)) ?
-                (isEmptyObj(chats) ?
-                    <div className='loading'>Send your first Messege to {id}</div> :
-                    <div className='chat-content'>
-                        <ChatContent chats={chats} myUserName={I.Username} />
-                        <div ref={ref} />
-                    </div >
-                ) :
+                <>
+                    {isEmptyObj(chats) ?
+                        <div className='div-msg'>Send your first Messege to {id}</div> :
+                        <div className='chat-content'>
+                            <ChatContent chats={chats} myUserName={I.Username} />
+                            <div ref={ref} />
+                        </div >
+                    }
+                    <form onSubmit={handleMsgSend} id='newMsgForm'>
+                        <div className='newMsgSend'>
+                            <textarea id='newMsgIp' value={newMsg}
+                                onChange={(e) => setNewMsg(e.target.value)}
+                                placeholder='New Message' autoComplete='off' autoFocus
+                            />
+                            <button className='msg-send nav-icons'
+                                onFocus={() => document.getElementById('newMsgIp').focus()}
+                            ><img src={shareIcon} alt="" /></button>
+                        </div>
+                    </form>
+                </> :
                 (isError ?
                     <div className='err-msg'>{isError}</div> :
                     (isPending && <div className='loading'><p>Loading Messages ...</p></div>)
                 )
             }
-            <form onSubmit={handleMsgSend}>
-                <div className='newMsgSend'>
-                    <input
-                        type="text" value={newMsg}
-                        onChange={(e) => setNewMsg(e.target.value)}
-                        placeholder='New Message'
-                    />
-                    <div onClick={handleMsgSend} className='msg-send nav-icons'><img src={shareIcon} alt="" /></div>
-                </div>
-            </form>
         </div >
     );
 }

@@ -1,10 +1,10 @@
 import { lazy, useEffect, useState, Suspense } from 'react';
-import useFetch from 'hooks/useFetch';
+import { usePostListContext } from 'hooks/context/usePostListContext'
 
+import useFetch from 'hooks/useFetch';
 import NoPostAvailable from 'components/Post/NoPostAvailable';
 
 import { ScrollLoad } from 'helpers/HandleScroll';
-import { usePostListContext } from 'hooks/context/usePostListContext'
 const Post = lazy(() => import('./Post'));
 
 let initPostList;
@@ -24,6 +24,8 @@ const PostList = () => {
 
     const initialize = () => {
         console.log('initialized');
+        setNoMorePosts(false);
+        ScrollListen(true);
         dispatch({ type: 'REFRESH' })
         setPage(0);
         LoadMore();

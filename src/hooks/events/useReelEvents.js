@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { iconPath } from 'helpers/Path';
 import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
+import { iconPath } from 'helpers/Path';
 
 const useReelEvents = ({ setReel }) => {
     const { user } = useAuthContext();
@@ -76,7 +76,7 @@ const useReelEvents = ({ setReel }) => {
                 ],
                 title: `Reel From ${reel.UserName}`,
                 text : reel.quote,
-                url:'https://minsta-react.herokuapp.com/reels'
+                url:'https://minsta.vercel.app/reels'
             });
             alert('reel shared successfully');
         }

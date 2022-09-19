@@ -1,8 +1,8 @@
 import 'css/ReelProgressBar.css';
 import { useEffect } from 'react';
-const ReelProgressBar = ({ reel }) => {
+const ReelProgressBar = ({ currentPlayingVideo }) => {
     useEffect(() => {
-        reel?.addEventListener('timeupdate', (e) => {
+        currentPlayingVideo?.addEventListener('timeupdate', (e) => {
             const val = (e.target.currentTime / e.target.duration) * document.getElementById('bar').offsetWidth;
             document.documentElement.style.setProperty('--progress', `${val}px`);
         })
@@ -11,15 +11,18 @@ const ReelProgressBar = ({ reel }) => {
         //         console.log(e.target.currentTime,e.target.duration,document.getElementById('bar').offsetWidth);
         //     })
         // }
-    }, [reel]);
-    if (reel) {
+    }, [currentPlayingVideo]);
 
+    const handleSeek = (e)=>{
+        currentPlayingVideo.currentTime = (e.clientX/document.getElementById('bar').offsetWidth)*currentPlayingVideo.duration;
+    }
+
+    if (currentPlayingVideo) {
         return (
-            <div id="bar">
+            <div id="bar" onClick={handleSeek}>
                 <div id='progress'></div>
             </div>
         );
     }
 }
-
 export default ReelProgressBar;

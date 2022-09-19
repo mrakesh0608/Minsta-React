@@ -8,7 +8,7 @@ const UserImgNameFollow = ({ UserName }) => {
         <div className='UserImgNameFollow'>
             <img src={userIcon} alt="user" className='icons' />
             <Link to={`/user/${UserName}`} className='username'>{UserName}</Link>
-            {I.Username === UserName &&
+            {I.Username !== UserName &&
                 <>
                     <div>&#183;</div>
                     <div>Follow</div>

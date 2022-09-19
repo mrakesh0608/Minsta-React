@@ -6,9 +6,9 @@ import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
 const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
 
-    const { handleLikes, handleShare } = useReelEvents({ setReel });
     const [reel, setReel] = useState(data);
     const ref = useRef();
+    const { handleLikes, handleShare } = useReelEvents({ setReel });
 
     const handleReel = (video) => {
         if (video.paused) {
@@ -20,19 +20,17 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
     
     useEffect(() => {
         if (!ref.current) return;
-        const options = {
-            root: null,
-            threshold: 1.0
-        };
-        const callback = (entries, observer) => {
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 const reel = entry.target.querySelector('video')
                 if (entry.isIntersecting) reel.play();
                 else reel.pause();
                 setCurrentPlayingVideo(reel);
             })
-        }
-        const observer = new IntersectionObserver(callback, options);
+        },{
+            root: null,
+            threshold: 1.0
+        });
         observer.observe(ref.current);
         return () => observer.disconnect();
     }, [ref.current])

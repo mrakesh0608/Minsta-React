@@ -12,16 +12,13 @@ export const SocketContextProvider = ({ children }) => {
     const socket = io(url);
     useEffect(() => {
         if (user) {
-            socket.emit('goOnline', { UserName: user.Username, userId: user.userId });
-            socket.on('connect_error', err => {
-                console.log('server is down',err);
-                setIsSockError('failed to connect to server');
-            });
             socket.on('connect', async err => {
-                console.log('reconnect');
-                socket.connect();
+                // console.log('connect');
                 setIsSockError(false);
                 socket.emit('goOnline', { UserName: user.Username, userId: user.userId });
+            });
+            socket.on('connect_error', err => {
+                setIsSockError('failed to connect to server');
             });
         }
     }, [user])
