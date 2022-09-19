@@ -1,12 +1,11 @@
 #bar {
-    width: 100% !important;
-    border: 1px solid gray;
-    z-index: 100;
     position: fixed;
     bottom: 0;
     left: 0;
-    margin-top: 20px; /*to make clickable*/
-    background-color: green;
+    z-index: 5;
+    padding: 6px; /*to make clickable*/
+    width: 100% !important;
+    border-bottom: 1px solid gray;
 }
 
 #progress {
@@ -14,7 +13,7 @@
     bottom: 0;
     left: 0;
     z-index: 10;
-    border: 1px solid red;
+    border: 1px solid tomato;
     width: var(--progress);
     transition: linear .3s;
 }
