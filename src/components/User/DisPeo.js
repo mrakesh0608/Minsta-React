@@ -16,7 +16,7 @@ export default () => {
                 {data.reverse().map((user, key) =>
                     <Link to={`/user/${user.Username}`} key={key} className='discover-people-card'>
                         <div className='userimg'><img src={userIcon} alt="user" className='icons' /></div>
-                        <span className='username'>{user.Username}</span>
+                        <span className='Username'>{user.Username}</span>
                         <span className='name'>{user.Name}</span>
                     </Link>
                 )}

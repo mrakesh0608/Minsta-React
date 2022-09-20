@@ -5,10 +5,10 @@ import {addNewIcon} from 'helpers/importIcons';
 
 import { HideScroll } from 'helpers/HandleScroll';
 
-const UserHeadNav = ({ username,setUserMore }) => {
+const UserHeadNav = ({ Username,setUserMore }) => {
     return (
         <div id="user-head" className='nav-head hideOnScroll hideOnScroll-head'>
-            <div className='user-head-1' style={{ fontWeight: 600,fontSize:'20px'}}>{username}</div>
+            <div className='user-head-1' style={{ fontWeight: 600,fontSize:'20px'}}>{Username}</div>
             <div className='user-head-2'>
                 <Link to='/add-new'>
                     <div className='nav-icons'>

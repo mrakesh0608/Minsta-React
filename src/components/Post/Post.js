@@ -6,7 +6,7 @@ import 'css/Post/Post.css';
 import { userIcon } from 'helpers/importIcons';
 
 import usePostEvents from 'hooks/events/usePostEvents';
-
+import { useAuthContext } from 'hooks/context/useAuthContext';
 import { iconPath } from 'helpers/Path';
 import { timeDiff } from 'helpers/time';
 import { HideScroll } from 'helpers/HandleScroll';
@@ -15,7 +15,7 @@ import UserLink from 'components/User/UserLink';
 PreLoad();
 
 const Post = ({ post: data }) => {
-
+    const { user: I } = useAuthContext();
     const [post, setPost] = useState(data);
     const [postMore, setPostMore] = useState(false);
 
@@ -28,7 +28,7 @@ const Post = ({ post: data }) => {
                     <div className="post-user-img post-meta-icons-div">
                         <img src={userIcon} alt="user" className='icons' />
                     </div>
-                    <div><UserLink UserName={post.username}/></div>
+                    <div><UserLink Username={post.Username} /></div>
                 </div>
                 <div className="post-meta-icons-div no-margin-right" onClick={(e) => {
                     HideScroll(true);
@@ -68,18 +68,20 @@ const Post = ({ post: data }) => {
                 </div>
                 <div className="post-meta-bottom-2">
                     <div><span className="noOfLikes" >{post.likes}</span> likes</div>
-                    <div><UserLink UserName={post.username}/>  {post.quote}</div>
+                    <div><UserLink Username={post.Username} />  {post.quote}</div>
                     <div className='time'>{timeDiff(post.createdAt)}</div>
                 </div>
             </div>
             {postMore &&
                 <div className="PostMore">
                     <div className="list">
-                        <div onClick={(e) => {
-                            handleDelete(e, post._id);
-                            setPostMore(false);
-                            HideScroll(false);
-                        }}>Delete this post</div>
+                        {I.Username === post.Username &&
+                            <div onClick={(e) => {
+                                handleDelete(e, post._id);
+                                setPostMore(false);
+                                HideScroll(false);
+                            }}>Delete this post</div>
+                        }
                         <div onClick={() => alert('this feature is not working now...')}>Report</div>
                         <div onClick={() => {
                             setPostMore(false);

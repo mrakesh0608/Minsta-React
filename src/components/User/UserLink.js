@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-const UserLink = ({ UserName }) => {
-    return <Link to={`/user/${UserName}`} className='username'>{UserName}</Link>;
+const UserLink = ({ Username }) => {
+    return <Link to={`/user/${Username}`} className='Username'>{Username}</Link>;
 }
 export default UserLink;

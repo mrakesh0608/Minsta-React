@@ -23,9 +23,9 @@ const LogIn = () => {
                 </div>
                 <div id="login-content">
                     <form onSubmit={handleSubmit} className="auth-form">
-                        <input type="text" name="username" required
+                        <input type="text" name="Username" required
                             value={Username}
-                            placeholder="Phone number, username or email"
+                            placeholder="Phone number, Username or email"
                             onChange={e => { setUsername(e.target.value); }}
                             autoComplete="true" minLength={4} maxLength={15}
                         />

@@ -44,7 +44,7 @@ const AddNewReel = () => {
             method: "POST",
             payload: {
                 "userId": user._id,
-                "username": user.Username,
+                "Username": user.Username,
                 imgData,
                 "imgName": selectedFile.name,
                 "quote": quote,

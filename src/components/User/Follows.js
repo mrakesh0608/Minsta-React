@@ -17,7 +17,7 @@ const Followers = ({ Attr }) => {
         <>
             <div className='follows-list-head'>
                 <Back />
-                <div><UserLink UserName={Username} />'s {Attr === 'Followers_users' ? 'Followers' : 'Following'}</div>
+                <div><UserLink Username={Username} />'s {Attr === 'Followers_users' ? 'Followers' : 'Following'}</div>
                 <More />
             </div>
             {data ?

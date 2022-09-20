@@ -29,7 +29,7 @@ const usePostEvents = ({ setPost }) => {
         update_Post_In_Server({
             "_id": post._id,
             "updateAttr": "liked_users",
-            "username": user.Username,
+            "Username": user.Username,
             "updateAdd": post.iLiked
         });
     }
@@ -80,7 +80,7 @@ const usePostEvents = ({ setPost }) => {
                         }
                     )
                 ],
-                title: `Post From ${post.username}`,
+                title: `Post From ${post.Username}`,
                 text: post.quote,
                 url: `https://minsta.vercel.app/posts/${post._id}`
             });
@@ -97,7 +97,7 @@ const usePostEvents = ({ setPost }) => {
         update_Post_In_Server({
             "_id": post._id,
             "updateAttr": "saved_users",
-            "username": user.Username,
+            "Username": user.Username,
             "updateAdd": post.iSaved
         });
     }

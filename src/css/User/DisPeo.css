@@ -18,7 +18,7 @@
 }
 
 .discover-people-card .name,
-.discover-people-card .username {
+.discover-people-card .Username {
     font-size: 14px;
     font-weight: 600;
     overflow: hidden;
@@ -30,7 +30,7 @@
     color: #8E8E8E;
 }
 
-.discover-people-card .username {
+.discover-people-card .Username {
     color: var(--textColor);
 }
 

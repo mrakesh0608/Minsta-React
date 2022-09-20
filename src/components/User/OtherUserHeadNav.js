@@ -4,7 +4,7 @@ import 'css/User/UserHeadNav.css';
 import { iconPath } from 'helpers/Path';
 import { HideScroll } from 'helpers/HandleScroll';
 
-const OtherUserHeadNav = ({ username, setUserMore }) => {
+const OtherUserHeadNav = ({ Username, setUserMore }) => {
 
     const navigate = useNavigate();
     return (
@@ -13,7 +13,7 @@ const OtherUserHeadNav = ({ username, setUserMore }) => {
                 <div className='nav-icons' onClick={() => { navigate(-1) }}>
                     <img src={iconPath + 'left-arrow.png'} alt="left-arrow" />
                 </div>
-                <div>{username}</div>
+                <div>{Username}</div>
             </div>
             <div className='user-head-2'>
                 <div className='nav-icons' onClick={() => {

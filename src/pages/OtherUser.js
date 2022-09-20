@@ -12,7 +12,7 @@ import { HideScroll } from 'helpers/HandleScroll';
 import { iconPath } from 'helpers/Path';
 import 'css/User/User.css';
 
-const OtherUser = ({ username }) => {
+const OtherUser = () => {
 
     const navigate = useNavigate();
     const { user: I } = useAuthContext();
@@ -21,7 +21,7 @@ const OtherUser = ({ username }) => {
     const { fetchData, simpleFetch, data: user, isError, isPending } = useFetch();
 
     useEffect(() => {
-        if (username === id) navigate('/user');
+        if (I.Username === id) navigate('/user');
         else initialize();
     }, [])
     const initialize = () => {
@@ -69,7 +69,7 @@ const OtherUser = ({ username }) => {
                 ) :
                 (user &&
                     <div id="User-content">
-                        <OtherUserHeadNav username={user.Username} setUserMore={setUserMore} />
+                        <OtherUserHeadNav Username={user.Username} setUserMore={setUserMore} />
                         <div className="user-meta">
                             <UserMeta1 key={user} user={user} />
                             {I &&

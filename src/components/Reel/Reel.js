@@ -44,7 +44,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
             <video src={reel.reelData} loop onClick={(e) => handleReel(e.target)} />
             <div className="videoFooter">
                 <div className='leftFooter'>
-                    <UserImgNameFollow UserName={reel.UserName} userId={reel.userId}  />
+                    <UserImgNameFollow Username={reel.Username} userId={reel.userId}  />
                     <p>{reel.quote}</p>
                     {reel.musicName &&
                         <div className='music'>

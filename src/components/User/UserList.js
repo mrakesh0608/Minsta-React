@@ -12,8 +12,8 @@ export default ({ users }) => {
                 users.map((user, key) =>
                     <div key={key} className='user-card'>
                         <Link to={`/user/${user.Username}`} className='userimg'><img src={userIcon} alt="user" className='icons' /></Link>
-                        <Link to={`/user/${user.Username}`} className='name-username'>
-                            <span className='username'>{user.Username}</span>
+                        <Link to={`/user/${user.Username}`} className='name-Username'>
+                            <span className='Username'>{user.Username}</span>
                             <span className='name'>{user.Name}</span>
                         </Link>
                         <div><FollowBtn user={user} /></div>

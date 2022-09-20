@@ -3,20 +3,16 @@ import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
 
 const FollowBtn = ({ user }) => {
-    const { fetchData, data, isError, isPending } = useFetch();
+    const { fetchData, isError, isPending } = useFetch();
     const { user: I } = useAuthContext();
     const [iFollow, setIFollow] = useState(false);
-    
+
     useEffect(() => {
         const i = JSON.parse(localStorage.getItem('Following_users'));
         const k = i.find((storeuser) => storeuser._id === user._id);
         setIFollow(k);
     }, []);
-    
-    useEffect(() => {
-        if(!isError) setIFollow(!iFollow);
-    }, [data]);
-    
+
     const handleFollow = () => {
         fetchData({
             path: '/user/' + I._id,
@@ -28,6 +24,8 @@ const FollowBtn = ({ user }) => {
                 "Username2": user.Username,
                 "updateAdd": !iFollow
             }
+        }).then((res) => {
+            if (res) setIFollow(res.iFollow);
         })
     };
     if (I.Username !== user.Username) {

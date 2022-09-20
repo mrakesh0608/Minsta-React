@@ -5,17 +5,17 @@ import FollowBtn from 'components/User/FollowBtn';
 import UserLink from 'components/User/UserLink';
 import 'css/User/UserImgNameFollow.css';
 
-const UserImgNameFollow = ({ UserName, userId }) => {
+const UserImgNameFollow = ({ Username, userId }) => {
     const { user: I } = useAuthContext();
     return (
         <div className='UserImgNameFollow'>
             <img src={userIcon} alt="user" className='icons' />
-            <UserLink UserName={UserName} />
-            {I.Username !== UserName &&
+            <UserLink Username={Username} />
+            {I.Username !== Username &&
                 <>
                     <div>&#183;</div>
                     <FollowBtn user={{
-                        Username: UserName,
+                        Username: Username,
                         _id: userId
                     }} />
                 </>

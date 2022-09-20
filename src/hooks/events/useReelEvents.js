@@ -24,7 +24,7 @@ const useReelEvents = ({ setReel }) => {
         update_reel_In_Server({
             "_id": reel._id,
             "updateAttr": "liked_users",
-            "username": user.Username,
+            "Username": user.Username,
             "updateAdd": reel.iLiked
         });
     }
@@ -74,7 +74,7 @@ const useReelEvents = ({ setReel }) => {
                         }
                     )
                 ],
-                title: `Reel From ${reel.UserName}`,
+                title: `Reel From ${reel.Username}`,
                 text : reel.quote,
                 url:'https://minsta.vercel.app/reels'
             });
@@ -91,7 +91,7 @@ const useReelEvents = ({ setReel }) => {
         update_reel_In_Server({
             "_id": reel._id,
             "updateAttr": "saved_users",
-            "username": user.Username,
+            "Username": user.Username,
             "updateAdd": reel.iSaved
         });
     }

@@ -44,13 +44,13 @@ const User = () => {
 
     return (
         <div id="User">
-            <UserHeadNav username={user.Username} setUserMore={setUserMore} />
+            <UserHeadNav Username={user.Username} setUserMore={setUserMore} />
             <div id="User-content">
                 <div className='user-meta'>
                     <UserMeta1 path={`/user?Username=${user.Username}`} />
                     <div className='user-meta-2'>
                         <div className='edit-discover'>
-                            <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
+                            <button className='edit' onClick={() => navigate.push('user/Username/edit-profile')}>Edit Profile</button>
                             <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
                         </div>
                     </div>
@@ -67,16 +67,16 @@ const User = () => {
                         <div id='user-more-close'>
                             <div onClick={() => CloseUserMore()}></div>
                         </div>
-                        <Link to='/user/username/settings'>
+                        <Link to='/user/Username/settings'>
                             <img className='more-icons' src="icons/settings.png" alt="settings" />Settings
                         </Link>
-                        <Link to='user/username/activity'>
+                        <Link to='user/Username/activity'>
                             <img className='more-icons' src="icons/activity.png" alt="activity" />Your Activity
                         </Link>
-                        <Link to='user/username/saved'>
+                        <Link to='user/Username/saved'>
                             <img className='more-icons' src="icons/save.png" alt="save" />Saved
                         </Link>
-                        <Link to='user/username/close-friends'>
+                        <Link to='user/Username/close-friends'>
                             <img className='more-icons more-icons-l' src="icons/friends.png" alt="close friends" />Close Friends
                         </Link>
                         <div onClick={() => { ToggleDarkTheme() }}>

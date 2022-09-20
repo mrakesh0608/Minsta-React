@@ -28,14 +28,14 @@ const Chat = () => {
     const ref = useRef();
 
     useEffect(() => {
-        socket.on("onlineUsers", () => socket.emit('isOnline', ({ UserName: id })));
+        socket.on("onlineUsers", () => socket.emit('isOnline', ({ Username: id })));
         socket.on('setOnline', (status) => setOnline(status))
         socket.on('newMsg', ({ chatId }) => initialize())
         initialize();
     }, [])
     const initialize = () => {
         fetchData({
-            path: `/chat?UserName1=${I.Username}&UserName2=${id}`,
+            path: `/chat?Username1=${I.Username}&Username2=${id}`,
             method: 'GET'
         }).then(res => {
             if (res && res.chats) {
@@ -57,11 +57,11 @@ const Chat = () => {
         e.target.newMsgIp.value = '';
         if (newMsg) {
             if (!chats[todayDate()]) chats[todayDate()] = [];
-            chats[todayDate()].push({ timer: true, UserName: I.Username, msg: newMsg, time: new Date() });
+            chats[todayDate()].push({ timer: true, Username: I.Username, msg: newMsg, time: new Date() });
             setChats({ ...chats });
             if (data) {
                 fetchData({
-                    path: `/chat?id=${data._id}&UserName=${I.Username}&msg=${newMsg}`,
+                    path: `/chat?id=${data._id}&Username=${I.Username}&msg=${newMsg}`,
                     method: 'POST'
                 }).then(res => {
                     socket.emit('newMsgSend', { chatId: data._id });
@@ -75,7 +75,7 @@ const Chat = () => {
             <div className='chat-head'>
                 <Back />
                 <div>
-                    <UserLink UserName={id}/>
+                    <UserLink Username={id}/>
                     <br />
                     <span>{online}</span>
                 </div>
@@ -86,7 +86,7 @@ const Chat = () => {
                     {isEmptyObj(chats) ?
                         <div className='div-msg'>Send your first Messege to {id}</div> :
                         <div className='chat-content'>
-                            <ChatContent chats={chats} myUserName={I.Username} />
+                            <ChatContent chats={chats} myUsername={I.Username} />
                             <div ref={ref} />
                         </div >
                     }

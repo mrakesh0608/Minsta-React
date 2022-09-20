@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
             socket.on('connect', async err => {
                 // console.log('connect');
                 setIsSockError(false);
-                socket.emit('goOnline', { UserName: user.Username, userId: user.userId });
+                socket.emit('goOnline', { Username: user.Username, userId: user.userId });
             });
             socket.on('connect_error', err => {
                 setIsSockError('failed to connect to server');

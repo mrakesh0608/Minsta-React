@@ -37,8 +37,8 @@ const Notif = () => {
                                 {data.notif[day].map((notif, key) =>
                                     <div key={key} className='notif-lable'>
                                         {['Following', 'UnFollowed'].includes(notif.Type) ?
-                                            <p><UserLink UserName={notif.UserName} /> {notif.Type} you.</p> :
-                                            <p><UserLink UserName={notif.UserName} /> is {notif.Type} your {notif.ReelId ? <Link to={`/reels/${notif.ReelId}`}>reel</Link> :
+                                            <p><UserLink Username={notif.Username} /> {notif.Type} you.</p> :
+                                            <p><UserLink Username={notif.Username} /> is {notif.Type} your {notif.ReelId ? <Link to={`/reels/${notif.ReelId}`}>reel</Link> :
                                                 <Link to={`/posts/${notif.PostId}`}>post</Link>} .</p>
                                         }
                                         <div>{timeHourMin(notif.time)}</div>
