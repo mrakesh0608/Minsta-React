@@ -8,7 +8,7 @@ export const SocketContextProvider = ({ children }) => {
     const [isSockError, setIsSockError] = useState(false);
     
     const { user} = useAuthContext();
-
+    
     const socket = io(url);
     useEffect(() => {
         if (user) {
@@ -21,7 +21,7 @@ export const SocketContextProvider = ({ children }) => {
                 setIsSockError('failed to connect to server');
             });
             socket.on('updateFollowingUsers',(users)=>{
-                console.log(users);
+                // console.log(users);
                 localStorage.setItem('Following_users', JSON.stringify(users));
             })
         }

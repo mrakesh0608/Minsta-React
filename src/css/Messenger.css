@@ -1,0 +1,81 @@
+.messenger-head {
+    text-align: center;
+    font-weight: 600;
+    background-color: var(--bgLightColor);
+    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-head span {
+    font-size: 12px;
+    color: var(--bgChatTimeColor);
+}
+
+.msg-list {
+    width: 100%;
+}
+
+.msg-card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.msg-card .meta2 {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.msg-card .Username-time ,
+.msg-card .meta2-2
+{
+    display: grid;
+    grid-template-columns: auto 100px;
+}
+.msg-card span,
+.last-msg
+{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.msg-card .Username {
+    color: var(--textColor);
+    font-size: 18px;
+    padding-right: 30px;
+}
+.msg-card  .last-msg ,
+.msg-card .time{
+    color: #8E8E8E;
+    font-size: 14px;
+}
+.msg-card .time,
+.msg-card .no-of-msg{
+    text-align: right;
+}
+.msg-card .no-of-msg span{
+    padding: 1px 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: lightgreen;
+}
+.msg-card .userimg img {
+    width: 55px;
+}
+.msg-card .online,
+.msg-card .offline{
+    margin-left: 10px;
+}
+.msg-card .online{
+    color: green;
+}
+.msg-card .offline{
+    color: red;  
+}

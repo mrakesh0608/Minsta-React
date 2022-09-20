@@ -9,6 +9,7 @@ export const useLogout = () => {
     const logout = () => {
         // remove user from storage
         localStorage.removeItem('user');
+        localStorage.removeItem('Following_users');
 
         //Clear Data
         dispatchPostList({ type: 'REFRESH' });

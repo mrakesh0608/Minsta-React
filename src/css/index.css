@@ -106,11 +106,13 @@ a {
     text-align: center;
     color: var(--textColor);
 }
+.center-text{
+    text-align: center;
+}
 .center-text-in-viewport{
     display: grid;
     place-items: center;
     height: 100vh;
     font-weight: 600;
     font-size: 20px;
-    letter-spacing: 2px;
 }
