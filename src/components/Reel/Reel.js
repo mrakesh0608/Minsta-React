@@ -19,6 +19,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
     }
     
     useEffect(() => {
+        console.log(reel);
         if (!ref.current) return;
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -43,7 +44,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
             <video src={reel.reelData} loop onClick={(e) => handleReel(e.target)} />
             <div className="videoFooter">
                 <div className='leftFooter'>
-                    <UserImgNameFollow UserName={reel.UserName} />
+                    <UserImgNameFollow UserName={reel.UserName} userId={reel.userId}  />
                     <p>{reel.quote}</p>
                     {reel.musicName &&
                         <div className='music'>

@@ -9,17 +9,20 @@
     margin: 12px 0;
 }
 
-.user-card div {
+.user-card a ,
+.user-card div{
     display: grid;
     place-items: center;
 }
-.follow{
-    background-color: var(--minBlue) !important;
+.follow-unfollow{
     outline: none;
     border: none;
     padding: 6px;
     border-radius: 4px;
     font-weight: 600;
+}
+.follow-active{
+    background-color: var(--minBlue) !important;
 }
 .user-card span {
     width: 100%;

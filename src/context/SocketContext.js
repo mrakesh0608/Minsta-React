@@ -20,6 +20,10 @@ export const SocketContextProvider = ({ children }) => {
             socket.on('connect_error', err => {
                 setIsSockError('failed to connect to server');
             });
+            socket.on('updateFollowingUsers',(users)=>{
+                console.log(users);
+                localStorage.setItem('Following_users', JSON.stringify(users));
+            })
         }
     }, [user])
     return (

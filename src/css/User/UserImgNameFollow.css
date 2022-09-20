@@ -11,3 +11,12 @@
     height: 30px;
     object-fit: contain;
 }
+.UserImgNameFollow .follow-unfollow{
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
+}
+.UserImgNameFollow .follow-active{
+    color: var(--minBlue) !important;
+}
