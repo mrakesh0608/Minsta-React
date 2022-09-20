@@ -151,4 +151,6 @@ sub {
     background-color: var(--bgChatRightColor);
     padding: 8px;
     border-radius: 50%;
+    outline: none;
+    border: none;
 }
