@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import PostImg from './PostImg';
-import 'css/Post.css';
+import 'css/Post/Post.css';
 import { userIcon } from 'helpers/importIcons';
 
 import usePostEvents from 'hooks/events/usePostEvents';

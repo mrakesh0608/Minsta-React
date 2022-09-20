@@ -1,0 +1,43 @@
+.user-list {
+    width: 100%;
+}
+
+.user-card {
+    display: grid;
+    grid-template-columns: 100px auto 100px;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.user-card div {
+    display: grid;
+    place-items: center;
+}
+.follow{
+    background-color: var(--minBlue) !important;
+    outline: none;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.user-card span {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-card .name {
+    color: #8E8E8E;
+}
+
+.user-card .username {
+    color: var(--textColor);
+}
+
+.user-card .userimg img {
+    width: 55px;
+}

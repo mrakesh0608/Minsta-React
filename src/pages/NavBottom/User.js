@@ -1,34 +1,24 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import 'css/User.css';
-import UserHeadNav from 'components/User/UserHeadNav';
-import UserMeta1 from 'components/User/UserMeta1';
-import UserPostTag from 'components/User/UserPostTag';
-
-import { useLogout } from 'hooks/auth/useLogout'
 import { useAuthContext } from 'hooks/context/useAuthContext';
-import useFetch from 'hooks/useFetch';
+import { useLogout } from 'hooks/auth/useLogout'
 
-import { HideScroll } from 'helpers/HandleScroll';
 import ToggleDarkTheme from 'helpers/ToggleDarkTheme';
+import { HideScroll } from 'helpers/HandleScroll';
+
+import UserHeadNav from 'components/User/UserHeadNav';
+import UserPostTag from 'components/User/UserPostTag';
+import UserMeta1 from 'components/User/UserMeta1';
 import DisPeo from 'components/User/DisPeo';
+import 'css/User/User.css';
 const User = () => {
 
     const navigate = useNavigate();
     const { logout } = useLogout();
 
-    const { user: old } = useAuthContext();
+    const { user } = useAuthContext();
     const [userMore, setUserMore] = useState(false);
-    const { fetchData, data: user, isError, isPending } = useFetch();
-
-    useEffect(() => {
-        initialize();
-    }, [])
-
-    const initialize = () => {
-        fetchData({ path: '/user?Username=' + old.Username, method: "GET" })
-    }
 
     const CloseUserMore = () => {
         document.getElementById('user-more-list').classList.remove('ani');
@@ -54,35 +44,21 @@ const User = () => {
 
     return (
         <div id="User">
-            <UserHeadNav username={old.Username} setUserMore={setUserMore} />
-            {user ?
-                <div id="User-content">
-                    <div className='user-meta'>
-                        <UserMeta1 user={{
-                            Posts: user.Posts,
-                            Followers: user.Followers,
-                            Following: user.Following,
-                            Name: user.Name,
-                            Username: user.Username
-                        }} />
-                        <div className='user-meta-2'>
-                            <div className='edit-discover'>
-                                <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
-                                <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
-                            </div>
+            <UserHeadNav username={user.Username} setUserMore={setUserMore} />
+            <div id="User-content">
+                <div className='user-meta'>
+                    <UserMeta1 path={`/user?Username=${user.Username}`} />
+                    <div className='user-meta-2'>
+                        <div className='edit-discover'>
+                            <button className='edit' onClick={() => navigate.push('user/username/edit-profile')}>Edit Profile</button>
+                            <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
                         </div>
                     </div>
-                    {showDisPeo && <DisPeo />}
-                    <UserPostTag userId={user._id} token={user} />
-                </div> :
-                (isError ?
-                    (isError === 'No Such User' ?
-                        navigate('/notfound/No Such User') :
-                        <div className='err-msg'>{isError}</div>
-                    ) :
-                    (isPending && <div className="loading"><h2>Loading ...</h2></div>)
-                )
-            }
+                </div>
+            </div>
+
+            {showDisPeo && <DisPeo />}
+            <UserPostTag userId={user._id} token={user} />
             {userMore &&
                 <div id='user-more-overlay' onClick={(e) => {
                     if (e.target.id === 'user-more-overlay') CloseUserMore();

@@ -3,7 +3,7 @@ import useFetch from 'hooks/useFetch';
 import { EleScrollLoad } from 'helpers/HandleScroll';
 import Reel from 'components/Reel/Reel';
 import ReelProgressBar from 'components/Reel/ReelProgressBar';
-import 'css/Reels.css';
+import 'css/Reel/Reels.css';
 const Reels = () => {
     const [reels, setReels] = useState(null);
     const [noMoreReels, setNoMoreReels] = useState(false);

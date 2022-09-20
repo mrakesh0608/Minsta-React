@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { useAuthContext } from 'hooks/context/useAuthContext';
 
-import BrandLogo from 'components/common/BrandLogo'
+import BrandLogo from 'components/common/BrandLogo';
 import { InitApp } from 'helpers/InitApp';
 
 const Tabs = lazy(() => import('components/common/Tabs'));
@@ -12,6 +12,7 @@ const Messenger = lazy(() => import('pages/Msg/Messenger'));
 const Chat = lazy(() => import('pages/Msg/Chat'));
 
 const PostDetails = lazy(() => import('components/Post/PostDetails'));
+const Follows = lazy(() => import('components/User/Follows'));
 
 const OtherUser = lazy(() => import('pages/OtherUser'));
 const NotFound = lazy(() => import('pages/NotFound'));
@@ -42,6 +43,8 @@ function App() {
                             <Route exact path='/signup' element={!user ? <SignUp /> : <Navigate to='/' />} />
 
                             <Route exact path='/user/:id' element={<OtherUser username={user ? user.Username : ''} />} />
+                            <Route exact path='/user/:id/followers' element={user ? <Follows Attr={'Followers_users'}/> : <Navigate to='/login' />} />
+                            <Route exact path='/user/:id/followings' element={user ? <Follows Attr={'Following_users'}/> : <Navigate to='/login' />} />
                             <Route path='/notfound/:msg' element={<NotFound />} />
                             <Route path='*' element={<NotFound />} />
                         </Routes>

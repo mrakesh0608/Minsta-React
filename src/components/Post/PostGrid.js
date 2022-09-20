@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import useFetch from 'hooks/useFetch';
 
 import NoPostAvailable from 'components/Post/NoPostAvailable';
-import 'css/PostGrid.css';
+import 'css/Post/PostGrid.css';
 
 import { ScrollLoad, HideScroll } from 'helpers/HandleScroll';
 

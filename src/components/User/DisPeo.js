@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useFetch from 'hooks/useFetch';
 import { Link } from 'react-router-dom';
 import { userIcon } from 'helpers/importIcons';
-import 'css/DisPeo.css';
+import 'css/User/DisPeo.css';
 export default () => {
 
     const { fetchData, data, isError, isPending} = useFetch();
@@ -21,7 +21,7 @@ export default () => {
                     </Link>
                 )}
             </div> :
-            (isError ? <div className='load' style={{ color: 'red' }}>{isError}</div> :
+            (isError ? <div className='error'>{isError}</div> :
                 (isPending &&
                     <div className='load'>Loading ...</div>
                 )

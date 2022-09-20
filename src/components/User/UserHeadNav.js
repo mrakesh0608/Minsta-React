@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import 'css/UserHeadNav.css';
+import 'css/User/UserHeadNav.css';
 
 import {addNewIcon} from 'helpers/importIcons';
 

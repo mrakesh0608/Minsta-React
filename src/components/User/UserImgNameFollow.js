@@ -3,7 +3,7 @@ import { useAuthContext } from 'hooks/context/useAuthContext';
 import { userIcon } from 'helpers/importIcons';
 
 import UserLink from 'components/User/UserLink';
-import 'css/UserImgNameFollow.css';
+import 'css/User/UserImgNameFollow.css';
 
 const UserImgNameFollow = ({ UserName }) => {
     const { user: I } = useAuthContext();

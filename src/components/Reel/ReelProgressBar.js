@@ -1,4 +1,4 @@
-import 'css/ReelProgressBar.css';
+import 'css/Reel/ReelProgressBar.css';
 import { useEffect } from 'react';
 const ReelProgressBar = ({ currentPlayingVideo }) => {
     useEffect(() => {

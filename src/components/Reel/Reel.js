@@ -29,7 +29,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
             })
         },{
             root: null,
-            threshold: 1.0
+            threshold: 1
         });
         observer.observe(ref.current);
         return () => observer.disconnect();

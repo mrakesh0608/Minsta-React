@@ -2,15 +2,15 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 
-import { useAuthContext } from 'hooks/context/useAuthContext'
+import { useAuthContext } from 'hooks/context/useAuthContext';
 
-import OtherUserHeadNav from 'components/User/OtherUserHeadNav'
-import UserMeta1 from 'components/User/UserMeta1';
+import OtherUserHeadNav from 'components/User/OtherUserHeadNav';
 import UserPostTag from 'components/User/UserPostTag';
+import UserMeta1 from 'components/User/UserMeta1';
 
-import { iconPath } from 'helpers/Path';
 import { HideScroll } from 'helpers/HandleScroll';
-import 'css/User.css';
+import { iconPath } from 'helpers/Path';
+import 'css/User/User.css';
 
 const OtherUser = ({ username }) => {
 
@@ -61,7 +61,7 @@ const OtherUser = ({ username }) => {
 
     return (
         <div id="otheruser">
-            {!user && isPending && <div className='loading'><p>Loading ...</p></div>}
+            {!user && isPending && <div className='center-text-in-viewport'>Loading ...</div>}
             {isError ?
                 (isError === 'No Such User' ?
                     navigate('/notfound/No Such User') :
@@ -71,13 +71,7 @@ const OtherUser = ({ username }) => {
                     <div id="User-content">
                         <OtherUserHeadNav username={user.Username} setUserMore={setUserMore} />
                         <div className="user-meta">
-                            <UserMeta1 user={{
-                                Posts: user.Posts,
-                                Followers: user.Followers,
-                                Following: user.Following,
-                                Name: user.Name,
-                                Username: user.Username
-                            }} />
+                            <UserMeta1 key={user} user={user} />
                             {I &&
                                 <div className='follow-msg'>
                                     <button onClick={handleFollow} className={isPending ? '' : (user.iFollow ? '' : 'follow')}>
