@@ -1,43 +1,56 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useAuthContext } from 'hooks/context/useAuthContext'
 
 import useFetch from 'hooks/useFetch';
 
 import 'css/AddNew.css';
-
-import { imgIcon } from 'helpers/importIcons';
+import Back from 'components/common/Back';
+import { reelIcon } from 'helpers/importIcons';
 import { convertBase64 } from 'helpers/convertBase64';
 
 const AddNewReel = () => {
-
     const navigate = useNavigate();
     const { user } = useAuthContext();
 
-    const { fetchData, data: Reel, isError, isPending } = useFetch();
+    const { fetchData, isError, isPending } = useFetch();
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [isSelected, setIsSelected] = useState(false);
     const [isSelectedPending, setIsSelectedPending] = useState(false);
 
-    const [imgData, setImgData] = useState([imgIcon]);
+    const [imgData, setImgData] = useState(reelIcon);
     const [quote, setQuote] = useState('');
     const [musicName, setMusicName] = useState('');
-    const [Upload, setUpload] = useState(true);
+    useEffect(() => {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+        console.log(params);
+        if (params) {
+            if(params.quote && params.quote !== 'null'){
+                document.getElementById('quote').value = params.quote;
+            }
+        }
+    }, [window.location.search]);
 
     const changeHandler = async (e) => {
         setIsSelectedPending(true);
-
-        setSelectedFile(e.target.files[0]);
-        setQuote(e.target.files[0].name);
-        setImgData(await convertBase64(e.target.files[0]));
-        setIsSelected(true);
+        setImgData(reelIcon);
+        if (e.target.files[0] && e.target.files[0].type.includes('video')) {
+            setSelectedFile(e.target.files[0]);
+            setQuote(e.target.files[0].name);
+            setImgData(await convertBase64(e.target.files[0]));
+            setIsSelected(true);
+        } else {
+            e.target.value = '';
+            alert('Only video file formats are supported');
+        }
         setIsSelectedPending(false);
     };
 
-    const handleSubmission = async () => {
-        setUpload(false);
-        // console.log(imgData);
+    const handleUpload = async (e) => {
+        e.preventDefault();
+        console.log(imgData);
         fetchData({
             path: '/reel',
             method: "POST",
@@ -51,68 +64,57 @@ const AddNewReel = () => {
             }
         }).then(res => {
             console.log(res);
-            if (res._id) {
-                // navigate('/reels/' + res._id)
-                navigate('/reels');
-            }
+            if (res?._id) navigate('/reels');
         })
     };
 
     return (
         <div id="AddNew">
-            <div id="AddNew-content">
-                <div id="soon" className="loading">
-                    <h3>Upload your Reel</h3><br />
-                    <p>not yet fully featured...</p><br /><br />
-                    {!isSelected ?
-                        <div>
-                            <p>Select a file to upload</p>
-                            <input type='file'
-                                onChange={changeHandler}
-                                multiple
-                            />
-                        </div> :
-                        <div>
-                            {Upload && <div>
-                                <label htmlFor="qoute">Quote
-                                </label>
-                                <br /><br />
-                                <input type="text" name="quote"
-                                    value={quote}
-                                    onChange={e => { setQuote(e.target.value) }}
-                                />
-                                <br /><br />
-                                <label htmlFor="musicName">Music Name
-                                </label>
-                                <br /><br />
-                                <input type="text" name="musicName"
-                                    value={musicName}
-                                    onChange={e => { setMusicName(e.target.value) }}
-                                />
-                                <br />
-                                <br />
-                                <button onClick={handleSubmission}>Submit</button>
-                            </div>
-                            }
-                            {isError ?
-                                <div className='err-msg' style={{ minHeight: '100px' }}>{isError}</div> :
-                                (isPending ?
-                                    <div>
-                                        <p>Quote: {quote}</p>
-                                        <h3>Uploading ...</h3>
-                                    </div> :
-                                    (Reel &&
-                                        <div>
-                                            <Link to={`'/reel/'${Reel._id}`}>See Reel</Link>
-                                        </div>
-                                    )
-                                )
-                            }
-                        </div>
-                    }
-                </div>
+            <div className="head">
+                <Back />
+                <p>New Reel</p>
             </div>
-        </div>
+            <div className='center-div'>
+                <div className='upload-img-div'>
+                    <div className='upload-video'>
+                        {isSelectedPending ?
+                            <div className='img-load'>Getting <br /> Reel ...</div> :
+                            (imgData === reelIcon ?
+                                <img src={reelIcon} alt="" className='icons' />
+                                :
+                                <video src={imgData} alt="" className={isSelected ? '' : 'icons'} controls />
+
+                            )}
+                    </div>
+                </div>
+                {isPending ?
+                    <>
+                        {quote &&
+                            <p className='about-this-post'><span>About this reel : </span>{quote}</p>
+                        }
+                        <div className='ele-center'>
+                            <button className='upload-btn' disabled>Uploading ...</button>
+                        </div>
+                    </> :
+                    <form className='form' onSubmit={handleUpload}>
+                        <input type='file' id='reel-file' onChange={changeHandler} required accept="video/*" />
+                        <label htmlFor="qoute">About this reel</label>
+                        <textarea
+                            name="quote" id="quote"
+                            onChange={(e) => setQuote(e.target.value)}
+                        />
+                        <label htmlFor="musicName">Music Name
+                        </label>
+                        <textarea
+                            name="musicName" id="musicName"
+                            onChange={(e) => setMusicName(e.target.value)}
+                        />
+                        <button type="submit" className='upload-btn'>Upload</button>
+                    </form>
+                }
+            </div>
+            {isError && <p className='error'>{isError}</p>}
+        </div >
     );
 }
 export default AddNewReel;
