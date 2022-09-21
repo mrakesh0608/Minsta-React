@@ -1,64 +1,55 @@
-.auth-div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.auth {
+    display: grid;
+    place-items: center;
+    width: 100%;
     min-height: 100vh;
     text-align: center;
 }
-.auth{
-    padding: 30px 0;
-    max-width: 400px;
+
+.auth-div {
+    width: 100%;
+    padding: 20px;
 }
-.auth h1{
+
+@media(min-width:800px) {
+    .auth-div {
+        width: 600px;
+    }
+}
+
+.auth h1 {
     font-family: cursive;
 }
-.auth a{
+
+.auth a {
     color: #0095F6;
 }
-.auth-form .TC{
+
+.auth-form .TC {
     color: #8E8E8E;
+    font-size: 14px;
     margin: 10px 0;
 }
-.auth-form .TC a{
+
+.auth-form .TC a {
     color: inherit;
     font-weight: 600;
 }
-#login .forgot{
+
+#login .forgot {
     color: #00377B;
 }
-#signSee{
+
+#signSee {
     margin-top: 10px;
     font-size: 17px;
     font-weight: 600;
     color: #8E8E8E;
 }
-.auth-form {
+
+.auth-form button {
     width: 100%;
-    padding: 20px;
-}
-.auth-form input{
-    width: 100%;
-    margin: 10px 0;
     padding: 10px;
-    padding-left: 15px;
-    background-color: var(--bgLightColor);
-    border: 1px gray solid;
-    border-radius: 8px;
-    color: var(--textColor);
-}
-.auth-form input:focus{
-    outline: none;
-    border: 1px solid var(--textColor); 
-    background-color: transparent;
-}
-.auth-form input::placeholder{
-    color: var(--textColor);
-    opacity: 0.8;
-}
-.auth-form button{
-    width: 100%;
-    padding: 8px;
     background-color: #0095F6;
     outline: none;
     border: none;
@@ -67,6 +58,55 @@
     letter-spacing: 1px;
     font-family: Helvetica;
     font-weight: 600;
-    border-radius: 6px;
-    border: 1px solid transparent;
+    border-radius: 8px;
+}
+
+.auth-form input,
+.auth-form label {
+    color: var(--textColor);
+}
+
+.input-lable {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    margin: 20px 0;
+}
+
+.form-input {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bgLightColor);
+    border: 1px solid gray;
+    border-radius: 8px;
+    outline: none;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+.form-label {
+    background-color: transparent;
+    padding: 0 0.5rem;
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+    cursor: text;
+    font-size: 14px;
+}
+
+.form-input:focus {
+    border: 1px solid var(--textColor);
+}
+
+.form-input:focus,
+.form-input:not(:placeholder-shown) {
+    background-color: transparent;
+}
+
+.form-input:focus~.form-label,
+.form-input:not(:placeholder-shown)~.form-label {
+    background-color: var(--bgColor) !important;
+    top: -8px;
+    font-size: 12px;
 }

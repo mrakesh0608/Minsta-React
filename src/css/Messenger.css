@@ -60,11 +60,12 @@
     text-align: right;
 }
 .msg-card .no-of-msg span{
-    padding: 1px 4px;
+    padding: 1px 6px;
     width: 20px;
     height: 20px;
+    font-size: 12px;
     border-radius: 50%;
-    background-color: lightgreen;
+    background-color: var(--bgChatRightColor);
 }
 .msg-card .userimg img {
     width: 55px;

@@ -15,7 +15,7 @@ export default () => {
             (data.length === 0 ?
                 <p className='center-text'>No Users</p> :
                 <div className='discover-people'>
-                    {data.reverse().map((user, key) =>
+                    {data.map((user, key) =>
                         <Link to={`/user/${user.Username}`} key={key} className='discover-people-card'>
                             <div className='userimg'><img src={userIcon} alt="user" className='icons' /></div>
                             <span className='Username'>{user.Username}</span>

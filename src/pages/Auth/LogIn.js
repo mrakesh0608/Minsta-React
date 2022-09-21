@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useLogin } from "hooks/auth/useLogin"
+import { labelFocus } from 'helpers/DOMFun';
+
 import 'css/Login_SignUp.css';
 
 const LogIn = () => {
@@ -15,36 +17,42 @@ const LogIn = () => {
         e.preventDefault();
         await login({ MobEmail: Username, Password })
     }
+    useEffect(() => {
+        labelFocus();
+    }, [])
     return (
-        <div className="auth-div">
-            <div id="login" className="auth">
-                <div>
-                    <h1>Minsta</h1>
-                </div>
-                <div id="login-content">
-                    <form onSubmit={handleSubmit} className="auth-form">
+        <div id="login" className="auth">
+            <div className='auth-div'>
+                <h1>Minsta</h1>
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <div className='input-lable'>
                         <input type="text" name="Username" required
-                            value={Username}
-                            placeholder="Phone number, Username or email"
+                            value={Username} className='form-input'
+                            placeholder=' '
                             onChange={e => { setUsername(e.target.value); }}
                             autoComplete="true" minLength={4} maxLength={15}
                         />
+                        <label className="form-label">Phone number, Username or email</label>
+                    </div>
+                    <div className='input-lable'>
                         <input type="password" name="password" required
-                            value={Password}
-                            placeholder="Password"
+                            value={Password} className='form-input'
+                            placeholder=' '
                             onChange={e => { setPassword(e.target.value); }}
                             autoComplete="true" minLength={4} maxLength={12}
                         />
-                        {error && <div className="error">{error}</div>}
-                        {isPending ?
-                            <button disabled>Logining ...</button> :
-                            <button>Log In</button>
-                        }
-                    </form>
-                    <Link to='/forgot' className='forgot'>Forgot Password?</Link>
-                    <br /><br />
-                    <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
-                </div>
+                        <label className="form-label">Password</label>
+                    </div>
+                    {error && <div className="error">{error}</div>}
+                    {isPending ?
+                        <button disabled>Logining ...</button> :
+                        <button>Log In</button>
+                    }
+                </form>
+                <br />
+                <Link to='/forgot' className='forgot'>Forgot Password?</Link>
+                <br /><br />
+                <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
             </div>
         </div>
     );

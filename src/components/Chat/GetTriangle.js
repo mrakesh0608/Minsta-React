@@ -7,7 +7,7 @@ const updateLet = (Username, day) => {
 }
 const GetTriangle = ({ pos, Username, day }) => {
     // console.log(lastUsername, Username,lastDay,day);
-    if (lastUsername === Username && lastDay === day) {
+    if (lastUsername && (lastUsername === Username && lastDay === day)) {
         updateLet(Username, day);
         return <div className='triangle triangle-empty'></div>
     }

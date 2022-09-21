@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { useSignup } from "hooks/auth/useSignup"
+import { useSignup } from "hooks/auth/useSignup";
+import { labelFocus } from 'helpers/DOMFun';
 
 import 'css/Login_SignUp.css';
 
@@ -18,50 +19,62 @@ const SignUp = () => {
         e.preventDefault();
         await signup({ MobEmail, Name, Password, Username });
     }
+    useEffect(() => {
+        labelFocus();
+    }, [])
     return (
-        <div className='auth-div'>
-            <div id="signup" className="auth">
-                <div>
-                    <h1>Minsta</h1>
-                </div>
-                <div id="signup-content">
-                    <form onSubmit={handleSubmit} className="auth-form">
-                        <p id='signSee'>Sign up to see photos and videos from your friends.</p>
+        <div id="signup" className='auth'>
+            <div className="auth-div">
+                <h1>Minsta</h1>
+                <form onSubmit={handleSubmit} className="auth-form">
+                    <p id='signSee'>Sign up to see photos and videos from your friends.</p>
+                    <div className='input-lable'>
                         <input
                             type="text" name="MobEmail" required
-                            placeholder="Mobile Number or Email"
+                            placeholder=' ' className='form-input'
                             value={MobEmail}
                             onChange={e => { setMobEmail(e.target.value) }}
                             autoComplete="true"
                         />
+                        <label className="form-label">Phone number, Username or email</label>
+                    </div>
+                    <div className='input-lable'>
                         <input
                             type="text" name="fullname" required
-                            placeholder="Full name"
+                            placeholder=' ' className='form-input'
                             value={Name}
                             onChange={e => { setName(e.target.value) }}
                             autoComplete="true"
                         />
+                        <label className="form-label">Full name</label>
+                    </div>
+                    <div className='input-lable'>
                         <input type="text" name="Username" required
-                            placeholder="Username"
+                            placeholder=' ' className='form-input'
                             value={Username}
                             onChange={e => { setUsername(e.target.value) }}
                             autoComplete="true"
                         />
+                        <label className="form-label">Username</label>
+                    </div>
+                    <div className='input-lable'>
                         <input type="password" name="password" required
-                            placeholder="Password"
+                            placeholder=' ' className='form-input'
                             value={Password}
                             onChange={e => { setPassword(e.target.value) }}
                             autoComplete="true"
                         />
-                        <p className="TC">By signing up, you agree to our <Link to='/terms'>Terms</Link> , <Link to='/data-policy'>Data Policy</Link> and <Link to='/cookies-policy'>Cookies Policy</Link> .</p>
-                        {error && <div className="error">{error}</div>}
-                        {isLoading ?
-                            <button disabled>Signing Up ...</button> :
-                            <button>Sign Up</button>
-                        }
-                    </form>
-                    <p>Have an account? <Link to='/login'>Log in</Link></p>
-                </div>
+                        <label className="form-label">Password</label>
+                    </div>
+                    <p className="TC">By signing up, you agree to our <Link to='/terms'>Terms</Link> , <Link to='/data-policy'>Data Policy</Link> and <Link to='/cookies-policy'>Cookies Policy</Link> .</p>
+                    {error && <div className="error">{error}</div>}
+                    {isLoading ?
+                        <button disabled>Signing Up ...</button> :
+                        <button>Sign Up</button>
+                    }
+                </form>
+                <br />
+                <p>Have an account? <Link to='/login'>Log in</Link></p>
             </div>
         </div>
     );

@@ -24,8 +24,8 @@ const User = () => {
         document.getElementById('user-more-list').classList.remove('ani');
         document.getElementById('user-more-list').classList.add('ani-r');
 
+        HideScroll(false);
         setTimeout(() => {
-            HideScroll(false);
             setUserMore(false);
         }, 500);
     };
@@ -50,7 +50,7 @@ const User = () => {
                     <UserMeta1 path={`/user?Username=${user.Username}`} />
                     <div className='user-meta-2'>
                         <div className='edit-discover'>
-                            <button className='edit' onClick={() => navigate.push('user/Username/edit-profile')}>Edit Profile</button>
+                            <button className='edit' onClick={() => navigate('user/Username/edit-profile')}>Edit Profile</button>
                             <button className='dis' onClick={(e) => handleDisPeo(e)}>Discover People</button>
                         </div>
                     </div>
@@ -82,7 +82,7 @@ const User = () => {
                         <div onClick={() => { ToggleDarkTheme() }}>
                             <img className='more-icons' src="icons/theme.png" alt="theme" />Toggle Dark Theme
                         </div>
-                        <div onClick={() => { setUserMore(false); logout(); }}>
+                        <div onClick={() => { CloseUserMore(); logout(); }}>
                             <img className='more-icons' src="icons/logout.png" alt="logout" />Logout
                         </div>
                     </div>

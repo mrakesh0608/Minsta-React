@@ -76,7 +76,7 @@ const AddNew = () => {
                     <br /><br />
                     {!isSelected ?
                         <div>
-                            <p>Select a file to post</p>
+                            <p>Select a file to upload</p>
                             <input type='file'
                                 onChange={changeHandler}
                                 multiple

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { useSocketContext } from 'hooks/context/useSocketContext';
 import { useAuthContext } from 'hooks/context/useAuthContext';
@@ -28,10 +28,19 @@ const Chat = () => {
     const ref = useRef();
 
     useEffect(() => {
+        ref.current?.scrollIntoView();
+        if (once && data && data._id) {
+            socket.emit('joinChat', { chatId: data._id });
+            setOnce(false);
+            socket.on(`newMsg-${data._id}`, ({ chatId }) => initialize())
+        }
+    }, [chats]);
+
+    useEffect(() => {
         socket.on("onlineUsers", () => socket.emit('isOnline', ({ Username: id })));
         socket.on('setOnline', (status) => setOnline(status))
-        socket.on('newMsg', ({ chatId }) => initialize())
         initialize();
+        socket.emit('isOnline', ({ Username: id }));
     }, [])
     const initialize = () => {
         fetchData({
@@ -43,28 +52,25 @@ const Chat = () => {
             }
         });
     }
-    useEffect(() => {
-        ref.current?.scrollIntoView();
-        if (once && data && data._id) {
-            socket.emit('joinChat', { chatId: data._id });
-            setOnce(false);
-        }
-    }, [chats]);
 
     const handleMsgSend = (e) => {
         e.preventDefault();
         const newMsg = e.target.newMsgIp.value;
-        e.target.newMsgIp.value = '';
+
         if (newMsg) {
+            e.target.newMsgIp.value = '';
+
             if (!chats[todayDate()]) chats[todayDate()] = [];
-            chats[todayDate()].push({ timer: true, Username: I.Username, msg: newMsg, time: new Date() });
+            const MsgLoad = { Username: I.Username, msg: newMsg, time: new Date() }
+            chats[todayDate()].push({ timer: true, ...MsgLoad });
             setChats({ ...chats });
+
             if (data) {
                 fetchData({
                     path: `/chat?id=${data._id}&Username=${I.Username}&msg=${newMsg}`,
                     method: 'POST'
                 }).then(res => {
-                    socket.emit('newMsgSend', { chatId: data._id });
+                    socket.emit('newMsgSend', { chatId: data._id, MsgLoad });
                     if (res.chats) setChats(res.chats);
                 });
             }
@@ -75,7 +81,7 @@ const Chat = () => {
             <div className='chat-head'>
                 <Back />
                 <div>
-                    <UserLink Username={id}/>
+                    <UserLink Username={id} />
                     <br />
                     <span>{online}</span>
                 </div>
@@ -96,7 +102,7 @@ const Chat = () => {
                                 placeholder='New Message' autoComplete='off'
                                 autoFocus
                             />
-                            <button className='msg-send nav-icons' 
+                            <button className='msg-send nav-icons'
                                 onFocus={() => document.getElementById('newMsgIp').focus()}
                             ><img src={shareIcon} alt="" /></button>
                         </div>

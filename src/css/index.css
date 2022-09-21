@@ -53,7 +53,9 @@ a {
     text-decoration: none;
     color: var(--textColor);
 }
-
+button{
+    cursor: pointer;
+}
 .logo-text {
     font-family: cursive;
 }
@@ -62,7 +64,7 @@ a {
 .nav-icons:active ,
 .reelIcons:active{
     opacity: 0.8;
-    transition: 0.1s ease-in;
+    transition: ease-out .2s;
     transform: scale(1.1);
 }
 

@@ -23,7 +23,6 @@ const AddNewReel = () => {
     const [imgData, setImgData] = useState([imgIcon]);
     const [quote, setQuote] = useState('');
     const [musicName, setMusicName] = useState('');
-
     const [Upload, setUpload] = useState(true);
 
     const changeHandler = async (e) => {
@@ -67,7 +66,7 @@ const AddNewReel = () => {
                     <p>not yet fully featured...</p><br /><br />
                     {!isSelected ?
                         <div>
-                            <p>Select a file to Upload</p>
+                            <p>Select a file to upload</p>
                             <input type='file'
                                 onChange={changeHandler}
                                 multiple
