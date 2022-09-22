@@ -5,7 +5,7 @@ const appIcon = () => {
 const BrandLogo = () => {
     return (
         <div className='loading'>
-            <img src={appIcon()} alt="app-icon" width='50px' />
+            <img src={appIcon()} className='icons' alt="app-icon" width='50px' />
             <h1 className='logo-text'>Minsta</h1>
         </div>
     );

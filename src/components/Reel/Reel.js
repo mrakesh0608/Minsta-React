@@ -19,7 +19,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
     }
     
     useEffect(() => {
-        console.log(reel);
+        // console.log(reel);
         if (!ref.current) return;
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {

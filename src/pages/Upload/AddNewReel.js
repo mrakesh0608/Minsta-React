@@ -25,9 +25,9 @@ const AddNewReel = () => {
     useEffect(() => {
         const urlSearchParams = new URLSearchParams(window.location.search);
         const params = Object.fromEntries(urlSearchParams.entries());
-        console.log(params);
+        // console.log(params)
         if (params) {
-            if(params.quote && params.quote !== 'null'){
+            if (params.quote && params.quote !== 'null') {
                 document.getElementById('quote').value = params.quote;
             }
         }
@@ -50,7 +50,7 @@ const AddNewReel = () => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        console.log(imgData);
+        // console.log(imgData);
         fetchData({
             path: '/reel',
             method: "POST",
@@ -74,46 +74,48 @@ const AddNewReel = () => {
                 <Back />
                 <p>New Reel</p>
             </div>
-            <div className='center-div'>
-                <div className='upload-img-div'>
-                    <div className='upload-video'>
-                        {isSelectedPending ?
-                            <div className='img-load'>Getting <br /> Reel ...</div> :
-                            (imgData === reelIcon ?
-                                <img src={reelIcon} alt="" className='icons' />
-                                :
-                                <video src={imgData} alt="" className={isSelected ? '' : 'icons'} controls />
+            <div className='add-new-content'>
+                <div className='center-div'>
+                    <div className='upload-img-div'>
+                        <div className='upload-video'>
+                            {isSelectedPending ?
+                                <div className='img-load'>Getting <br /> Reel ...</div> :
+                                (imgData === reelIcon ?
+                                    <img src={reelIcon} alt="" className='reel-icon icons' />
+                                    :
+                                    <video src={imgData} alt="" className={isSelected ? '' : 'icons'} controls />
 
-                            )}
-                    </div>
-                </div>
-                {isPending ?
-                    <>
-                        {quote &&
-                            <p className='about-this-post'><span>About this reel : </span>{quote}</p>
-                        }
-                        <div className='ele-center'>
-                            <button className='upload-btn' disabled>Uploading ...</button>
+                                )}
                         </div>
-                    </> :
-                    <form className='form' onSubmit={handleUpload}>
-                        <input type='file' id='reel-file' onChange={changeHandler} required accept="video/*" />
-                        <label htmlFor="qoute">About this reel</label>
-                        <textarea
-                            name="quote" id="quote"
-                            onChange={(e) => setQuote(e.target.value)}
-                        />
-                        <label htmlFor="musicName">Music Name
-                        </label>
-                        <textarea
-                            name="musicName" id="musicName"
-                            onChange={(e) => setMusicName(e.target.value)}
-                        />
-                        <button type="submit" className='upload-btn'>Upload</button>
-                    </form>
-                }
+                    </div>
+                    {isPending ?
+                        <>
+                            {quote &&
+                                <p className='about-this-post'><span>About this reel : </span>{quote}</p>
+                            }
+                            <div className='ele-center'>
+                                <button className='upload-btn' disabled>Uploading ...</button>
+                            </div>
+                        </> :
+                        <form className='form' onSubmit={handleUpload}>
+                            <input type='file' id='reel-file' onChange={changeHandler} required accept="video/*" />
+                            <label htmlFor="qoute">About this reel</label>
+                            <textarea
+                                name="quote" id="quote"
+                                onChange={(e) => setQuote(e.target.value)}
+                            />
+                            <label htmlFor="musicName">Music Name
+                            </label>
+                            <textarea
+                                name="musicName" id="musicName"
+                                onChange={(e) => setMusicName(e.target.value)}
+                            />
+                            <button type="submit" className='upload-btn'>Upload</button>
+                        </form>
+                    }
+                </div>
+                {isError && <p className='error'>{isError}</p>}
             </div>
-            {isError && <p className='error'>{isError}</p>}
         </div >
     );
 }

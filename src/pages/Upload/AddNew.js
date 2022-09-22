@@ -1,4 +1,4 @@
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuthContext } from 'hooks/context/useAuthContext'
 
@@ -24,7 +24,10 @@ const AddNew = () => {
     const [quote, setQuote] = useState(null);
 
     const changeHandler = async (e) => {
+        // reset Starts
         setImgData([imgIcon]);
+        setIsSelected(false);
+        //reset Ends
         setIsSelectedPending(true);
         const data = [];
         for (const file of e.target.files) {
@@ -83,40 +86,42 @@ const AddNew = () => {
                 <Back />
                 <p>New Post</p>
             </div>
-            <div className='center-div'>
-                <div className='upload-img-div'>
-                    <div className='upload-img'>
-                        {isSelectedPending ?
-                            <div className='img-load'>Getting <br /> Image ...</div> :
-                            <>
-                                <img src={imgData[0]} alt="" className={isSelected ? '' : 'icons'} />
-                                {imgData.length > 1 && <span>{`+${imgData.length - 1} more`}</span>}
-                            </>
-                        }
-                    </div>
-                </div>
-                {isPending ?
-                    <>
-                        {quote &&
-                            <p className='about-this-post'><span>About this post : </span>{quote}</p>
-                        }
-                        <div className='ele-center'>
-                            <button className='upload-btn' disabled>Uploading ...</button>
+            <div className='add-new-content'>
+                <div className='center-div'>
+                    <div className='upload-img-div'>
+                        <div className='upload-img'>
+                            {isSelectedPending ?
+                                <div className='img-load'>Getting <br /> Image ...</div> :
+                                <>
+                                    <img src={imgData[0]} alt='img' className={isSelected ? '' : 'icons'} />
+                                    {imgData.length > 1 && <span>{`+${imgData.length - 1} more`}</span>}
+                                </>
+                            }
                         </div>
-                    </> :
-                    <form className='form' onSubmit={handleUpload}>
-                        <input type='file' onChange={changeHandler} multiple required accept="image/*" />
-                        <label htmlFor="qoute">About this post</label>
-                        <textarea
-                            name="quote" id="quote"
-                            onChange={(e) => setQuote(e.target.value)}
-                        />
-                        <button type="submit" className='upload-btn'>Upload</button>
-                    </form>
-                }
+                    </div>
+                    {isPending ?
+                        <>
+                            {quote &&
+                                <p className='about-this-post'><span>About this post : </span>{quote}</p>
+                            }
+                            <div className='ele-center'>
+                                <button className='upload-btn' disabled>Uploading ...</button>
+                            </div>
+                        </> :
+                        <form className='form' onSubmit={handleUpload}>
+                            <input type='file' onChange={changeHandler} multiple required accept="image/*" />
+                            <label htmlFor="qoute">About this post</label>
+                            <textarea
+                                name="quote" id="quote"
+                                onChange={(e) => setQuote(e.target.value)}
+                            />
+                            <button type="submit" className='upload-btn'>Upload</button>
+                        </form>
+                    }
+                </div>
+                {isError && <p className='error'>{isError}</p>}
+                <p className='center-text'>Want to upload reel? <Link to='/add-new-reel' className='link-blue'>Click Here</Link></p>
             </div>
-            {isError && <p className='error'>{isError}</p>}
-            <p className='center-text'>Want to upload reel? <Link to='/add-new-reel' className='link-blue'>Click Here</Link></p>
         </div>
     );
 }

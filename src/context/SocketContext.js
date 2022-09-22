@@ -9,22 +9,21 @@ export const SocketContextProvider = ({ children }) => {
     
     const { user} = useAuthContext();
     
-    // const socket = io(url);
-    const socket = [];
+    const socket = io(url);
     useEffect(() => {
         if (user) {
-            // socket.on('connect', async err => {
-            //     // console.log('connect');
-            //     setIsSockError(false);
-            //     socket.emit('goOnline', { Username: user.Username, userId: user.userId });
-            // });
-            // socket.on('connect_error', err => {
-            //     setIsSockError('failed to connect to server');
-            // });
-            // socket.on('updateFollowingUsers',(users)=>{
-            //     // console.log(users);
-            //     localStorage.setItem('Following_users', JSON.stringify(users));
-            // })
+            socket.on('connect', async err => {
+                // console.log('connect');
+                setIsSockError(false);
+                socket.emit('goOnline', { Username: user.Username, userId: user.userId });
+            });
+            socket.on('connect_error', err => {
+                setIsSockError('failed to connect to server');
+            });
+            socket.on('updateFollowingUsers',(users)=>{
+                // console.log(users);
+                localStorage.setItem('Following_users', JSON.stringify(users));
+            })
         }
     }, [user])
     return (

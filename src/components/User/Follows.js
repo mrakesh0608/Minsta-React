@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import useFetch from 'hooks/useFetch';
 import { useParams } from 'react-router-dom';
+
 import UserList from "components/User/UserList";
 import UserLink from 'components/User/UserLink';
+
 import Back from 'components/common/Back';
 import More from 'components/common/More';
+
 import 'css/User/Follows.css';
-const Followers = ({ Attr }) => {
+
+export default ({ Attr }) => {
     const { id: Username } = useParams();
     const { fetchData, data, isError, isPending } = useFetch();
     useEffect(() => {
@@ -32,4 +36,3 @@ const Followers = ({ Attr }) => {
         </>
     );
 }
-export default Followers;

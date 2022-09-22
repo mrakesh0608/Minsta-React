@@ -73,8 +73,8 @@
     top: 40px;
     right: 40px;
     border-radius: 50%;
-    background-color: var(--bgColor);
-    color: var(--textColor);
+    background-color: var(--textColor);
+    color: var(--bgColor);
     cursor: pointer;
 }
 @media(min-width:650px) {

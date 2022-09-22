@@ -6,11 +6,13 @@ const timeHourMin = (time) => {
         hour12: true
     })
 }
-const MsgTime = (time)=>{
-    if(todayDate() === getDate(time)) return (timeHourMin(time)).toUpperCase();
-    else getDate(time);
+const MsgTime = (time) => {
+    if (time) {
+        if (todayDate() === getDate(time)) return (timeHourMin(time)).toUpperCase();
+        else return getDate(time);
+    }
 }
-const getDate = (time)=>{
+const getDate = (time) => {
     return (new Date(time)).toLocaleString('en-IN', {
         day: 'numeric',
         month: 'short',
@@ -72,4 +74,4 @@ const timeDiff = (uploaded) => {
 
     return timeMsg + ' ago';
 }
-export { timeHourMin, timeDiff, todayDate ,MsgTime};
+export { timeHourMin, timeDiff, todayDate, MsgTime };
