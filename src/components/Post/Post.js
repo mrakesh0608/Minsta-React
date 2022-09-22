@@ -18,9 +18,10 @@ const Post = ({ post: data }) => {
     const { user: I } = useAuthContext();
     const [post, setPost] = useState(data);
     const [postMore, setPostMore] = useState(false);
-
+    
     const { handleLikes, handleShare, handleSave, handleDelete, isError } = usePostEvents({ setPost });
-
+    console.log(data);
+    
     return (
         <div className="post" id={post._id} key={post._id}>
             <div className="post-meta post-meta-head">

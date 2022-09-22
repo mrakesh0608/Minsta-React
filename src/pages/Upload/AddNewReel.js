@@ -38,7 +38,7 @@ const AddNewReel = () => {
         setImgData(reelIcon);
         if (e.target.files[0] && e.target.files[0].type.includes('video')) {
             setSelectedFile(e.target.files[0]);
-            setQuote(e.target.files[0].name);
+            // setQuote(e.target.files[0].name);
             setImgData(await convertBase64(e.target.files[0]));
             setIsSelected(true);
         } else {
