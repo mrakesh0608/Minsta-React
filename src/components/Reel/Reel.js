@@ -59,7 +59,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
                         <img className={`reelIcons ${reel.iLiked ? 'notInvertIcons' : ''}`} src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
                         <span>{reel.likes}</span>
                     </div>
-                    <div onClick={()=>navigate(`/commnets/${reel.commentId}`)}>
+                    <div onClick={()=>navigate(`/comments/${reel.commentId}`)}>
                         <img className='reelIcons' src={commentIcon} alt="comment" />
                         <span>{reel.comments}</span>
                     </div>
