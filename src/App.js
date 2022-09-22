@@ -30,25 +30,25 @@ function App() {
                 <Suspense fallback={<BrandLogo />}>
                     {!isLoading &&
                         <Routes>
-                            {['/', 'explore', 'reels', 'notif', 'user'].map((path, index) =>
-                                <Route exact path={path} element={user ? <Tabs /> : <Navigate to='login' />} key={index} />
+                            {['/', '/explore', '/reels', '/notif', '/user'].map((path, index) =>
+                                <Route exact path={path} element={user ? <Tabs /> : <Navigate to='/login' />} key={index} />
                             )}
-                            <Route exact path='add-new' element={user ? <AddNew /> : <Navigate to='login' />} />
-                            <Route exact path='add-new-reel' element={user ? <AddNewReel /> : <Navigate to='login' />} />
-                            <Route exact path='messenger/:id' element={user ? <Chat /> : <Navigate to='login' />} />
-                            <Route exact path='comments/:id' element={user ? <Comments /> : <Navigate to='login' />} />
-                            <Route exact path='messenger' element={user ? <Messenger /> : <Navigate to='login' />} />
-                            <Route exact path='posts/:id' element={user ? <PostDetails /> : <Navigate to='login' />} />
+                            <Route exact path='/add-new' element={user ? <AddNew /> : <Navigate to='/login' />} />
+                            <Route exact path='/add-new-reel' element={user ? <AddNewReel /> : <Navigate to='/login' />} />
+                            <Route exact path='/messenger/:id' element={user ? <Chat /> : <Navigate to='/login' />} />
+                            <Route exact path='/comments/:id' element={user ? <Comments /> : <Navigate to='/login' />} />
+                            <Route exact path='/messenger' element={user ? <Messenger /> : <Navigate to='/login' />} />
+                            <Route exact path='/posts/:id' element={user ? <PostDetails /> : <Navigate to='/login' />} />
 
-                            <Route exact path='login' element={!user ? <LogIn /> : <Navigate to='/' />} />
-                            <Route exact path='signup' element={!user ? <SignUp /> : <Navigate to='/' />} />
+                            <Route exact path='/login' element={!user ? <LogIn /> : <Navigate to='/' />} />
+                            <Route exact path='/signup' element={!user ? <SignUp /> : <Navigate to='/' />} />
 
                             <Route exact path='user/:id'>
                                 <Route exact path='' element={<OtherUser />} />
-                                <Route exact path='followers' element={user ? <Follows Attr={'Followers_users'} /> : <Navigate to='login' />} />
-                                <Route exact path='followings' element={user ? <Follows Attr={'Following_users'} /> : <Navigate to='login' />} />
+                                <Route exact path='followers' element={user ? <Follows Attr={'Followers_users'} /> : <Navigate to='/login' />} />
+                                <Route exact path='followings' element={user ? <Follows Attr={'Following_users'} /> : <Navigate to='/login' />} />
                             </Route>
-                            <Route path='notfound/:msg' element={<NotFound />} />
+                            <Route path='/notfound/:msg' element={<NotFound />} />
                             <Route path='*' element={<NotFound />} />
                         </Routes>
                     }
