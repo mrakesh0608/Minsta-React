@@ -35,7 +35,7 @@ const AddNew = () => {
                 data.push(await convertBase64(file));
             }
         };
-        console.log(data);
+        // console.log(data);
         if (data.length) {
             setSelectedFile(e.target.files[0]);
             setImgData(data);
@@ -120,7 +120,9 @@ const AddNew = () => {
                     }
                 </div>
                 {isError && <p className='error'>{isError}</p>}
-                <p className='center-text'>Want to upload reel? <Link to='/add-new-reel' className='link-blue'>Click Here</Link></p>
+                {!isPending &&
+                    <p className='center-text'>Want to upload reel? <Link to='/add-new-reel' className='link-blue'>Click Here</Link></p>
+                }
             </div>
         </div>
     );

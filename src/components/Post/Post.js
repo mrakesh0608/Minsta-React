@@ -50,7 +50,7 @@ const Post = ({ post: data }) => {
                                 : <img src={iconPath + 'like.png'} alt="Like" className='icons' />
                             }
                         </div>
-                        <Link to={'/posts/' + post._id}>
+                        <Link to={'/comments/' + post.commentId}>
                             <div className="post-meta-icons-div comment">
                                 <img src={iconPath + 'comment.png'} alt="Comment" className='icons' />
                             </div>

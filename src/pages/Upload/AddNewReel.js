@@ -93,6 +93,9 @@ const AddNewReel = () => {
                             {quote &&
                                 <p className='about-this-post'><span>About this reel : </span>{quote}</p>
                             }
+                            {musicName &&
+                                <p className='about-this-post'><span>Music Name : </span>{musicName}</p>
+                            }
                             <div className='ele-center'>
                                 <button className='upload-btn' disabled>Uploading ...</button>
                             </div>

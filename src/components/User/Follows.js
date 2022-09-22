@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useFetch from 'hooks/useFetch';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate} from 'react-router-dom';
 
 import UserList from "components/User/UserList";
 import UserLink from 'components/User/UserLink';
@@ -27,7 +27,11 @@ export default ({ Attr }) => {
             {data ?
                 <UserList users={data} />
                 :
-                (isError ? <div className='error'>{isError}</div> :
+                (isError ?
+                    (isError === 'No Such User' ?
+                        <Navigate to='/notfound/No Such User' /> :
+                        <div className='error'>{isError}</div>
+                    ) :
                     (isPending &&
                         <div className='center-text-in-viewport'>Loading ...</div>
                     )

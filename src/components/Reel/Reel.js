@@ -1,3 +1,4 @@
+import {useNavigate} from 'react-router-dom';
 import UserImgNameFollow from 'components/User/UserImgNameFollow';
 import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon } from 'helpers/importIcons';
 import { useState, useEffect, useRef } from 'react';
@@ -5,7 +6,7 @@ import useReelEvents from 'hooks/events/useReelEvents';
 import { PreLoad } from 'helpers/PreLoad';
 PreLoad();
 const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
-
+    const navigate = useNavigate();
     const [reel, setReel] = useState(data);
     const ref = useRef();
     const { handleLikes, handleShare } = useReelEvents({ setReel });
@@ -58,7 +59,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
                         <img className={`reelIcons ${reel.iLiked ? 'notInvertIcons' : ''}`} src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
                         <span>{reel.likes}</span>
                     </div>
-                    <div>
+                    <div onClick={()=>navigate(`/commnets/${reel.commentId}`)}>
                         <img className='reelIcons' src={commentIcon} alt="comment" />
                         <span>{reel.comments}</span>
                     </div>
