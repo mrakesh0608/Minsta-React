@@ -1,0 +1,11 @@
+.cmt{
+    display: grid;
+    grid-template-columns: 40px auto 25px;
+    width: 100%;
+    align-items: center;
+    padding: 8px;
+}
+.cmt img{
+    width: 25px;
+    height: 25px;
+}

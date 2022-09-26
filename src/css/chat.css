@@ -11,7 +11,15 @@ body {
     width: 100%;
     height: 100%;
 }
-
+.cmt-head {
+    text-align: center;
+    font-weight: 600;
+    background-color: var(--bgLightColor);
+    padding: 6px;
+    display: grid;
+    grid-template-columns: 100px auto 100px;
+    align-items: center;
+}
 .chat-head {
     text-align: center;
     font-weight: 600;
@@ -22,15 +30,15 @@ body {
     align-items: center;
 }
 
+.chat-head span {
+    font-size: 12px;
+    color: var(--bgChatTimeColor);
+}
+
 .div-msg {
     height: 100%;
     display: grid;
     place-items: center;
-}
-
-.chat-head span {
-    font-size: 12px;
-    color: var(--bgChatTimeColor);
 }
 
 .chat-content {
@@ -49,108 +57,4 @@ body {
     color: var(--bgChatTimeColor);
     padding: 5px;
     border-radius: 10px;
-}
-
-.msg {
-    border-radius: 5px;
-    margin: 10px 0;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.msg-content {
-    max-width: 70vw;
-    border-radius: 10px;
-    border-top-left-radius: 0;
-    padding: 5px;
-    background-color: var(--bgChatLeftColor);
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.msg-content span {
-    width: 100%;
-    word-wrap: break-word;
-}
-
-sub {
-    width: 100%;
-    text-align: right;
-    color: var(--bgChatTimeColor);
-}
-
-.myMsg {
-    justify-content: flex-end;
-}
-
-.myMsg .msg-content {
-    border-top-right-radius: 0;
-    border-top-left-radius: 10px;
-    background-color: var(--bgChatRightColor);
-}
-
-.triangle {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-top: 0px solid transparent;
-    border-bottom: 8px solid transparent;
-}
-
-.triangle-left {
-    border-right: 16px solid var(--bgChatLeftColor);
-}
-
-.triangle-right {
-    border-left: 16px solid var(--bgChatRightColor);
-}
-
-.triangle-empty {
-    border-left: 16px solid transparent;
-}
-
-.msg .time {
-    font-size: 12px;
-    margin-left: 10px;
-}
-
-.newMsgSend {
-    background-color: var(--bgColor);
-    padding: 4px 8px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.newMsgSend textarea {
-    background-color: var(--bgLightColor);
-    border: none;
-    resize: vertical;
-    width: 100%;
-    height: 40px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    margin-right: 20px;
-    border: 1px solid transparent;
-    color: var(--textColor);
-    outline: none;
-}
-
-.newMsgSend textarea::placeholder {
-    color: var(--textColor);
-    opacity: 0.7;
-}
-
-/* .newMsgSend textarea::-webkit-resizer {
-    background: var(--bgLightColor);
-    border: 4px solid transparent;
-    outline: 4px solid green;
-} */
-
-.msg-send {
-    background-color: var(--bgChatRightColor);
-    padding: 8px;
-    border-radius: 50%;
-    outline: none;
-    border: none;
 }

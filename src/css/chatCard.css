@@ -1,0 +1,62 @@
+.msg {
+    border-radius: 5px;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.msg-content {
+    max-width: 70vw;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    padding: 5px;
+    background-color: var(--bgChatLeftColor);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.msg-content span {
+    width: 100%;
+    word-wrap: break-word;
+}
+
+sub {
+    width: 100%;
+    text-align: right;
+    color: var(--bgChatTimeColor);
+}
+
+.myMsg {
+    justify-content: flex-end;
+}
+
+.myMsg .msg-content {
+    border-top-right-radius: 0;
+    border-top-left-radius: 10px;
+    background-color: var(--bgChatRightColor);
+}
+
+.triangle {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+.triangle-left {
+    border-right: 16px solid var(--bgChatLeftColor);
+}
+
+.triangle-right {
+    border-left: 16px solid var(--bgChatRightColor);
+}
+
+.triangle-empty {
+    border-left: 16px solid transparent;
+}
+
+.msg .time {
+    font-size: 12px;
+    margin-left: 10px;
+}

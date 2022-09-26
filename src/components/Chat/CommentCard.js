@@ -1,9 +1,12 @@
 import { userIcon, heartIcon } from 'helpers/importIcons';
 import { timeDiff } from 'helpers/time';
 import UserLink from 'components/User/UserLink';
+
+import 'css/CommentCard.css';
+
 export default ({ c }) => {
     return (
-        <div className='msg'>
+        <div className='cmt'>
             <div><img src={userIcon} alt="user" /></div>
             <div>
                 <p>
@@ -17,10 +20,6 @@ export default ({ c }) => {
                 </p>
             </div>
             <div><img src={heartIcon} alt="" /></div>
-            {/* {<div className='msg-content'>
-                <span>{c.cmt}</span>
-                <sub className='time'>{timeHourMin(c.time)} {c.timer && <i className='far fa-clock' style={{ fontSize: 'inherit' }} />}</sub>
-            </div>} */}
         </div>
     );
 }

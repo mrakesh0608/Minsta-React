@@ -8,11 +8,12 @@ import BrandLogo from 'components/common/BrandLogo';
 const Tabs = lazy(() => import('components/common/Tabs'));
 const Follows = lazy(() => import('components/User/Follows'));
 const PostDetails = lazy(() => import('components/Post/PostDetails'));
-const Comments = lazy(() => import('components/common/Comments'));
 
 const AddNew = lazy(() => import('pages/Upload/AddNew'));
 const AddNewReel = lazy(() => import('pages/Upload/AddNewReel'));
+
 const Messenger = lazy(() => import('pages/Msg/Messenger'));
+const Comments = lazy(() => import('pages/Msg/Comments'));
 const Chat = lazy(() => import('pages/Msg/Chat'));
 
 const OtherUser = lazy(() => import('pages/OtherUser'));

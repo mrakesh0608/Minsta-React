@@ -4,14 +4,14 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
 
-import { shareIcon } from 'helpers/importIcons';
 import { isEmptyObj } from 'helpers/function';
 import { todayDate } from 'helpers/time';
 
 import Back from 'components/common/Back';
 import CommentCard from 'components/Chat/CommentCard';
-import 'css/Comment.css';
+import NewMsgForm from 'components/common/NewMsgForm';
 
+import 'css/chat.css';
 export default () => {
 
     const { id } = useParams();
@@ -56,7 +56,7 @@ export default () => {
     }
     return (
         <div className='chat'>
-            <div className='chat-head'>
+            <div className='cmt-head'>
                 <Back />
                 <div>
                     {/* <UserLink Username={id} /> */}
@@ -81,17 +81,7 @@ export default () => {
                             )}
                         </div >
                     }
-                    <form onSubmit={handleMsgSend} id='newMsgForm'>
-                        <div className='newMsgSend'>
-                            <textarea id='newMsgIp' name='newMsgIp'
-                                placeholder='New Comment' autoComplete='off'
-                                autoFocus
-                            />
-                            <button className='msg-send nav-icons'
-                                onFocus={() => document.getElementById('newMsgIp').focus()}
-                            ><img src={shareIcon} alt="" /></button>
-                        </div>
-                    </form>
+                    <NewMsgForm  handleMsgSend={handleMsgSend}/>
                 </> :
                 (isError ?
                     <div className='err-msg'>{isError}</div> :

@@ -5,7 +5,6 @@ import { useSocketContext } from 'hooks/context/useSocketContext';
 import { useAuthContext } from 'hooks/context/useAuthContext';
 import useFetch from 'hooks/useFetch';
 
-import { shareIcon } from 'helpers/importIcons';
 import { isEmptyObj } from 'helpers/function';
 import { todayDate } from 'helpers/time';
 
@@ -13,6 +12,7 @@ import ChatContent from 'components/Chat/ChatContent';
 import Back from 'components/common/Back';
 import More from 'components/common/More';
 import UserLink from 'components/User/UserLink';
+import NewMsgForm from 'components/common/NewMsgForm';
 import 'css/chat.css';
 
 const Chat = () => {
@@ -96,17 +96,7 @@ const Chat = () => {
                             <div ref={ref} />
                         </div >
                     }
-                    <form onSubmit={handleMsgSend} id='newMsgForm'>
-                        <div className='newMsgSend'>
-                            <textarea id='newMsgIp' name='newMsgIp'
-                                placeholder='New Message' autoComplete='off'
-                                autoFocus
-                            />
-                            <button className='msg-send nav-icons'
-                                onFocus={() => document.getElementById('newMsgIp').focus()}
-                            ><img src={shareIcon} alt="" /></button>
-                        </div>
-                    </form>
+                    <NewMsgForm  handleMsgSend={handleMsgSend}/>
                 </> :
                 (isError ?
                     <div className='err-msg'>{isError}</div> :
