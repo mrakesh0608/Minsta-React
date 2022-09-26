@@ -10,7 +10,7 @@ import More from 'components/common/More';
 
 import 'css/User/Follows.css';
 
-export default ({ Attr }) => {
+export default function Follows({ Attr }){
     const { id: Username } = useParams();
     const { fetchData, data, isError, isPending } = useFetch();
     useEffect(() => {

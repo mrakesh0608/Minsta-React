@@ -27,7 +27,7 @@ const Notif = () => {
 
     return (
         <div id="Notif">
-            <div className="nav-head hideOnScroll hideOnScroll-head"><h2>Activity</h2></div>
+            <div className="nav-head hideOnScroll hideOnScroll-head"><h3>Notifications</h3></div>
             <div id="Notif-content">
                 {data ?
                     <>

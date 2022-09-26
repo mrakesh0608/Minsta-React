@@ -1,11 +1,12 @@
 .messenger-head {
     text-align: center;
     font-weight: 600;
-    background-color: var(--bgLightColor);
+    background-color: var(--bgColor);
     padding: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid gray;
 }
 
 .chat-head span {
