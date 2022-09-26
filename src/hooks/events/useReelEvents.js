@@ -80,7 +80,10 @@ const useReelEvents = ({ setReel }) => {
             });
             alert('reel shared successfully');
         }
-        catch (err) {alert('Error Occured\n\n' + err);}
+        catch (err) {
+            console.log(err);
+            // alert('Error Occured\n\n' + err);
+        }
     }
     //Share -End
 

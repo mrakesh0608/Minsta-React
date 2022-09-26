@@ -43,11 +43,10 @@ function App() {
                             <Route exact path='/login' element={!user ? <LogIn /> : <Navigate to='/' />} />
                             <Route exact path='/signup' element={!user ? <SignUp /> : <Navigate to='/' />} />
 
-                            <Route exact path='user/:id'>
-                                <Route exact path='' element={<OtherUser />} />
-                                <Route exact path='followers' element={user ? <Follows Attr={'Followers_users'} /> : <Navigate to='/login' />} />
-                                <Route exact path='followings' element={user ? <Follows Attr={'Following_users'} /> : <Navigate to='/login' />} />
+                            <Route exact path='/user/:id' element={<OtherUser />}>
                             </Route>
+                            <Route exact path='/user/:id/followers' element={user ? <Follows Attr={'Followers_users'} /> : <Navigate to='/login' />} />
+                            <Route exact path='/user/:id/followings' element={user ? <Follows Attr={'Following_users'} /> : <Navigate to='/login' />} />
                             <Route path='/notfound/:msg' element={<NotFound />} />
                             <Route path='*' element={<NotFound />} />
                         </Routes>

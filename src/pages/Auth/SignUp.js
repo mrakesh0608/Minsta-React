@@ -34,7 +34,7 @@ const SignUp = () => {
                             placeholder=' ' className='form-input'
                             value={MobEmail}
                             onChange={e => { setMobEmail(e.target.value) }}
-                            autoComplete="true"
+                            minLength={4} autoFocus
                         />
                         <label className="form-label">Phone number, Username or email</label>
                     </div>
@@ -44,7 +44,7 @@ const SignUp = () => {
                             placeholder=' ' className='form-input'
                             value={Name}
                             onChange={e => { setName(e.target.value) }}
-                            autoComplete="true"
+                            minLength={1}
                         />
                         <label className="form-label">Full name</label>
                     </div>
@@ -53,7 +53,7 @@ const SignUp = () => {
                             placeholder=' ' className='form-input'
                             value={Username}
                             onChange={e => { setUsername(e.target.value) }}
-                            autoComplete="true"
+                            minLength={1}
                         />
                         <label className="form-label">Username</label>
                     </div>
@@ -62,7 +62,7 @@ const SignUp = () => {
                             placeholder=' ' className='form-input'
                             value={Password}
                             onChange={e => { setPassword(e.target.value) }}
-                            autoComplete="true"
+                            minLength={1}
                         />
                         <label className="form-label">Password</label>
                     </div>

@@ -30,7 +30,8 @@ const LogIn = () => {
                             value={Username} className='form-input'
                             placeholder=' '
                             onChange={e => { setUsername(e.target.value); }}
-                            autoComplete="true" minLength={4} maxLength={15}
+                            minLength={4}
+                            autoFocus
                         />
                         <label className="form-label">Phone number, Username or email</label>
                     </div>
@@ -39,7 +40,7 @@ const LogIn = () => {
                             value={Password} className='form-input'
                             placeholder=' '
                             onChange={e => { setPassword(e.target.value); }}
-                            autoComplete="true" minLength={4} maxLength={12}
+                            minLength={4}
                         />
                         <label className="form-label">Password</label>
                     </div>
