@@ -7,9 +7,11 @@ import { useAuthContext } from 'hooks/context/useAuthContext';
 import OtherUserHeadNav from 'components/User/OtherUserHeadNav';
 import UserPostTag from 'components/User/UserPostTag';
 import UserMeta1 from 'components/User/UserMeta1';
+import UserMeta2 from 'components/User/UserMeta2';
 
 import { HideScroll } from 'helpers/HandleScroll';
 import { iconPath } from 'helpers/Path';
+
 import 'css/User/User.css';
 
 const OtherUser = () => {
@@ -67,11 +69,12 @@ const OtherUser = () => {
                     navigate('/notfound/No Such User') :
                     <div className='err-msg'>{isError}</div>
                 ) :
-                (user &&
+                (user && <>
+                    <OtherUserHeadNav Username={user.Username} setUserMore={setUserMore} />
                     <div id="User-content">
-                        <OtherUserHeadNav Username={user.Username} setUserMore={setUserMore} />
                         <div className="user-meta">
                             <UserMeta1 key={user} user={user} />
+                            <UserMeta2 Name={user.Name} Bio={user.Bio} />
                             {I &&
                                 <div className='follow-msg'>
                                     <button onClick={handleFollow} className={isPending ? '' : (user.iFollow ? '' : 'follow')}>
@@ -83,6 +86,7 @@ const OtherUser = () => {
                         </div>
                         <UserPostTag userId={user._id} token={I} />
                     </div>
+                </>
                 )
             }
             {userMore &&

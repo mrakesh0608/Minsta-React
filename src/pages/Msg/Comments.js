@@ -73,15 +73,13 @@ export default () => {
                                 <div key={key}>
                                     <div className='chat-day'><span>{day}</span></div>
                                     {cmts[day].map((c, key) =>
-                                        <div key={key} >
-                                            <CommentCard c={c} />
-                                        </div>
+                                        <CommentCard c={c} key={key} />
                                     )}
                                 </div>
                             )}
                         </div >
                     }
-                    <NewMsgForm  handleMsgSend={handleMsgSend}/>
+                    <NewMsgForm handleMsgSend={handleMsgSend} />
                 </> :
                 (isError ?
                     <div className='err-msg'>{isError}</div> :

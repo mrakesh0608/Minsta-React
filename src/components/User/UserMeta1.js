@@ -2,6 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { userIcon } from 'helpers/importIcons';
 import useFetch from 'hooks/useFetch';
+import 'css/User/UserMeta1.css';
+
 const UserMeta1 = ({ path, user: userData }) => {
     const navigate = useNavigate();
     const { fetchData, data: user, setData, isError, isPending } = useFetch();
@@ -23,38 +25,33 @@ const UserMeta1 = ({ path, user: userData }) => {
                 <div className='error'>{isError}</div>
             )}
             <div className='user-meta-1'>
-                <div className="user-meta-1-1">
-                    <div className='userimg'>
-                        <img src={userIcon} alt="user" className='icons' />
-                    </div>
-                    <div className='network'>
-                        {isPending ? <div className="load">Loading ...</div> :
-                            <>
-                                <a href='#user-posts-tags'>
-                                    <div>
-                                        <div className='network-count'>{user ? user.Posts : '-'}</div>
-                                        <div>Posts</div>
-                                    </div>
-                                </a>
-                                <Link to={`/user/${user?.Username}/followers`}>
-                                    <div>
-                                        <div className='network-count'>{user ? user.Followers : '-'}</div>
-                                        <div>Followers</div>
-                                    </div>
-                                </Link>
-                                <Link to={`/user/${user?.Username}/followings`}>
-                                    <div>
-                                        <div className='network-count'>{user ? user.Following : '-'}</div>
-                                        <div>Following</div>
-                                    </div>
-                                </Link >
-                            </>
-                        }
-                    </div>
+                <div className='userimg'>
+                    <img src={userIcon} alt="user" className='icons' />
                 </div>
-                <div className='user-meta-1-2'>
-                    <div style={{ fontWeight: 600 }}>{user?.Name}</div>
-                    <div className='about'>{user?.Bio}</div>
+                <div className='network'>
+                    {isPending ?
+                        <div className="load">Loading ...</div> :
+                        <>
+                            <a href='#user-posts-tags'>
+                                <div>
+                                    <div className='network-count'>{user ? user.Posts : '-'}</div>
+                                    <div>Posts</div>
+                                </div>
+                            </a>
+                            <Link to={`/user/${user?.Username}/followers`}>
+                                <div>
+                                    <div className='network-count'>{user ? user.Followers : '-'}</div>
+                                    <div>Followers</div>
+                                </div>
+                            </Link>
+                            <Link to={`/user/${user?.Username}/followings`}>
+                                <div>
+                                    <div className='network-count'>{user ? user.Following : '-'}</div>
+                                    <div>Following</div>
+                                </div>
+                            </Link >
+                        </>
+                    }
                 </div>
             </div>
         </>

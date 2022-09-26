@@ -1,39 +1,18 @@
-#User-content{
+#User-content {
     width: 100%;
-}
-.user-meta{
     padding: 10px;
 }
-.user-meta-1-1{
-    display: grid;
-    grid-template-columns: 40% 60%;
-    /* background-color: aqua; */
-    align-items: center;
-}
-.user-meta-1-1 .userimg img{
-    border: 1px solid black;
-    padding: 3px;
-    border-radius: 50%;
-}
-.user-meta-1-1 .network{
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-}
-.user-meta-1-1 .network-count{
-    font-weight: 600;
-}
-.user-meta-2 .edit-discover,
-.follow-msg
-{
+
+.edit-discover,
+.follow-msg {
     width: 100%;
     display: grid;
     grid-template-columns: 65% 35%;
     margin: 4px 0;
 }
-.user-meta-2 .edit-discover button,
-.follow-msg button
-{
+
+.edit-discover button,
+.follow-msg button {
     background-color: #EFEFEF;
     padding: 8px 0;
     outline: none;
@@ -43,19 +22,23 @@
     font-weight: 600;
     cursor: pointer;
 }
+
 .follow-msg button:first-child,
-.user-meta-2 .edit-discover .edit{
+.edit-discover .edit {
     margin-right: 10px;
 }
-.follow{
+
+.follow {
     background-color: var(--minBlue) !important;
 }
-.user-posts-tags{
+
+.user-posts-tags {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 2px;
 }
-.user-posts-tags button{
+
+.user-posts-tags button {
     background-color: var(--bgColor);
     color: var(--textColor);
     padding: 8px 0;
@@ -69,24 +52,28 @@
     align-items: center;
     justify-content: center;
 }
-.user-posts-tags button> *{
+
+.user-posts-tags button>* {
     margin: 0 6px;
 }
-.user-posts-tags button img{
+
+.user-posts-tags button img {
     width: 26px;
     height: 26px;
 }
-.user-posts-tags .btn-active{
+
+.user-posts-tags .btn-active {
     border-bottom: 1px solid var(--textColor);
     opacity: 1;
 }
-.user-posts-tags .btn-not-active{
+
+.user-posts-tags .btn-not-active {
     border-bottom: 1px solid gray;
     opacity: 0.4;
 }
 
 /* UserMore Start */
-#user-more-overlay{
+#user-more-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -94,67 +81,85 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-    
+
     display: flex;
     justify-content: center;
 }
-#user-more-list{
+
+#user-more-list {
     min-width: 300px;
     padding: 10px 20px;
     background-color: var(--bgColor);
     border: 1px solid gray;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    
+
     display: flex;
     flex-direction: column;
-    
+
     transition: all .6s;
     animation: bottomup .6s;
     animation-direction: alternate;
-    
+
     position: fixed;
 }
-.ani{
+
+.ani {
     bottom: 0;
 }
-.ani-r{
+
+.ani-r {
     bottom: -100%;
 }
+
 @keyframes bottomup {
-    from{bottom:-100%;opacity: 0;}
-    to{bottom:0;opacity: 0.8;}
+    from {
+        bottom: -100%;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0.8;
+    }
 }
+
 #user-more-list a,
-#user-more-list div{
+#user-more-list div {
     margin: 10px;
     list-style: none;
-    
+
     display: grid;
     grid-template-columns: 35px auto;
     align-items: center;
     cursor: pointer;
 }
+
 #user-more-list a:active,
-#user-more-list div:active{
+#user-more-list div:active {
     opacity: 0.5;
 }
-.more-icons{
+
+.more-icons {
     width: 25px;
     height: 25px;
 }
-.more-icons-l{
+
+.more-icons-l {
     transform: scale(1.25);
 }
-#user-more-close{
+
+#user-more-close {
     display: flex;
     justify-content: center;
 }
-#user-more-close div{
+
+#user-more-close div {
     margin: 0;
     background-color: gray;
     width: 50px;
     height: 4px;
     border-radius: 5px;
 }
+
 /* UserMore Ends */

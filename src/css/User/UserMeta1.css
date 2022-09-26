@@ -1,0 +1,23 @@
+.user-meta-1{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    align-items: center;
+}
+.user-meta-1 .userimg img{
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 50%;
+}
+.user-meta-1 .network{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.user-meta-1 .network-count{
+    font-weight: 600;
+}
+@media (max-width:600px){
+    .user-meta-1 .network-count{
+        font-weight: bold;
+    }
+}

@@ -8,7 +8,7 @@ import useFetch from 'hooks/useFetch';
 import { isEmptyObj } from 'helpers/function';
 import { todayDate } from 'helpers/time';
 
-import ChatContent from 'components/Chat/ChatContent';
+import ChatCard from 'components/Chat/ChatCard';
 import Back from 'components/common/Back';
 import More from 'components/common/More';
 import UserLink from 'components/User/UserLink';
@@ -92,11 +92,18 @@ const Chat = () => {
                     {isEmptyObj(chats) ?
                         <div className='div-msg'>Send your first Messege to {id}</div> :
                         <div className='chat-content'>
-                            <ChatContent chats={chats} myUsername={I.Username} />
+                            {Object.keys(chats).map((day, key) =>
+                                <div key={key}>
+                                    <div className='chat-day'><span>{day}</span></div>
+                                    {chats[day].map((chat, key) =>
+                                        <ChatCard key={key} chat={chat} myUsername={I.Username} day={day} />
+                                    )}
+                                </div>
+                            )}
                             <div ref={ref} />
                         </div >
                     }
-                    <NewMsgForm  handleMsgSend={handleMsgSend}/>
+                    <NewMsgForm handleMsgSend={handleMsgSend} />
                 </> :
                 (isError ?
                     <div className='err-msg'>{isError}</div> :

@@ -35,15 +35,18 @@ export default function App() {
                             {['/', '/explore', '/reels', '/notif', '/user'].map((path, index) =>
                                 <Route exact path={path} element={user ? <Tabs /> : <Navigate to='/login' />} key={index} />
                             )}
+                            
                             <Route exact path='/user/:id'>
                                 <Route index element={<OtherUser />} />
                                 <Route exact path='followers' element={user ? <Follows Attr={'Followers_users'} /> : <Navigate to='/login' />} />
                                 <Route exact path='followings' element={user ? <Follows Attr={'Following_users'} /> : <Navigate to='/login' />} />
                             </Route>
+                            
                             <Route exact path='/messenger'>
                                 <Route index element={user ? <Messenger /> : <Navigate to='/login' />} />
-                                <Route exact path='/messenger/:id' element={user ? <Chat /> : <Navigate to='/login' />} />
+                                <Route exact path=':id' element={user ? <Chat /> : <Navigate to='/login' />} />
                             </Route>
+                            
                             <Route exact path='/add-new' element={user ? <AddNew /> : <Navigate to='/login' />} />
                             <Route exact path='/add-new-reel' element={user ? <AddNewReel /> : <Navigate to='/login' />} />
 
@@ -52,6 +55,7 @@ export default function App() {
 
                             <Route exact path='/login' element={!user ? <LogIn /> : <Navigate to='/' />} />
                             <Route exact path='/signup' element={!user ? <SignUp /> : <Navigate to='/' />} />
+                            
                             <Route path='/notfound/:msg' element={<NotFound />} />
                             <Route path='*' element={<NotFound />} />
                         </Routes>
