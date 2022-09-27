@@ -80,7 +80,7 @@ const Reels = () => {
             root: document.getElementById('reel-list'),
             threshold: 1
         });
-        reels?.map(reel => {
+        reels?.forEach(reel => {
             observer.observe(document.getElementById(reel._id));
         })
         return () => observer.disconnect();
