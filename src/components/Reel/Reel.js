@@ -31,10 +31,13 @@ export default ({ reel: data, setCurrentPlayingVideo }) => {
                 const reel = entry.target.querySelector('video');
                 if (entry.isIntersecting) {
                     reel.play();
+                    console.log(entry.target.id, 'playing');
                     setCurrentPlayingVideo(reel);
                 }
-                else reel.pause();
-                console.log(entry.target,entry.isIntersecting);
+                else {
+                    console.log(entry.target.id, 'paused');
+                    reel.pause();
+                }
             })
         }, {
             root: null,
@@ -42,7 +45,7 @@ export default ({ reel: data, setCurrentPlayingVideo }) => {
         });
         observer.observe(document.getElementById(reel._id));
         return () => observer.disconnect();
-    }, [reel._id])
+    }, [])
     useEffect(() => {
         if (reel._id === lastViewed) {
             document.getElementById(lastViewed).scrollIntoView();
