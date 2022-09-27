@@ -3,18 +3,29 @@ import useFetch from 'hooks/useFetch';
 import { EleScrollLoad } from 'helpers/HandleScroll';
 import Reel from 'components/Reel/Reel';
 import ReelProgressBar from 'components/Reel/ReelProgressBar';
+import { useReelContext } from 'hooks/context/useReelContext'
+
 import 'css/Reel/Reels.css';
+let initReels;
 const Reels = () => {
-    const [reels, setReels] = useState(null);
-    const [noMoreReels, setNoMoreReels] = useState(false);
-    const [page, setPage] = useState(0);
+
+    const { reels, page, noMoreReels, dispatch } = useReelContext();
+
     const limit = 1;
     const { fetchData, isError, isPending } = useFetch();
 
     const [isScrollLoad, setIsScrollLoad] = useState(false);
-    const { ScrollListen } = EleScrollLoad(setIsScrollLoad,'#reel-list');
+    const { ScrollListen } = EleScrollLoad(setIsScrollLoad, '#reel-list');
+
+    const initialize = () => {
+        console.log('initialized');
+        dispatch({ type: 'REFRESH' })
+        ScrollListen(true);
+        LoadMore();
+    }
 
     useEffect(() => {
+        initReels = initialize;
         LoadMore();
     }, [])
     const LoadMore = async () => {
@@ -23,13 +34,13 @@ const Reels = () => {
             path: '/reel?' + new URLSearchParams({ skip: page * limit, limit: limit }), method: "GET"
         }).then(res => {
             if (res) {
-                if (reels) setReels([...reels, ...res]);
-                else setReels(res);
+                if (res.length > 0) {
+                    dispatch({ type: 'ADD_REELS', payload: [...res] });
+                }
                 if (res.length === 0 || res.length < limit) {
-                    setNoMoreReels(true);
+                    dispatch({ type: 'SET_NO_MORE_REELS' });
                     return;
                 }
-                setPage(page + 1);
                 ScrollListen(true);
             }
         })
@@ -41,31 +52,35 @@ const Reels = () => {
     }
     return (
         <div id="Reels">
-            {reels ?
-                (reels.length === 0 ? <div className='loading'><h3>No Reels</h3></div> :
-                    <div id="Reels-content">
-                        <div id='fullScreen'>
-                            <p>for Better Experience, <span onClick={() => openFullscreen()}>open</span> Full Screen mode .</p>
-                            <div onClick={(e) => { e.target.closest('#fullScreen').remove() }}>X</div>
-                        </div>
-                        <div id="reel-list">
-                            {reels.map(reel =>
-                                <Reel key={reel._id} reel={reel} setCurrentPlayingVideo={setCurrentPlayingVideo} />
-                            )}
-                            <ReelProgressBar currentPlayingVideo={currentPlayingVideo}/>
-                            {!isPending && (noMoreReels ?
-                                <div className='end-of-reels'><h2>End of Reels</h2></div> :
-                                ((isScrollLoad || reels.length < 2) && LoadMore())
-                            )}
-                            {isPending && <div className='reel load-more'><h3>Fetching More Reels ...</h3></div>}
-                        </div>
-                    </div>
-                ) : (isError ?
+            {reels.length === 0 ?
+                (isError ?
                     <div className='err-msg'>{isError}</div> :
-                    (page === 0 && isPending && <div className='loading'><h3>Fetching Reels ...</h3></div>)
-                )
+                    (isPending ?
+                        <div className='loading'><h3>Fetching Reels ...</h3></div> :
+                        <div className='loading'><h3>No Reels</h3></div>
+                    )
+                ) :
+                <div id="Reels-content">
+                    <div id='fullScreen'>
+                        <p>for Better Experience, <span onClick={() => openFullscreen()}>open</span> Full Screen mode .</p>
+                        <div onClick={(e) => { e.target.closest('#fullScreen').remove() }}>X</div>
+                    </div>
+                    <div id="reel-list" onScroll={e=>console.log(e)}>
+                        {reels.map(reel =>
+                            <Reel key={reel._id} reel={reel} setCurrentPlayingVideo={setCurrentPlayingVideo} />
+                        )}
+                        <ReelProgressBar currentPlayingVideo={currentPlayingVideo} />
+                        {!isPending && (noMoreReels ?
+                            <div className='end-of-reels'><h2>End of Reels</h2></div> :
+                            ((isScrollLoad || reels.length < 2) && LoadMore())
+                        )}
+                        {isError ?
+                            <div className='end-of-reels error'>{isError}</div> :
+                            (isPending && <div className='reel load-more'><h3>Fetching More Reels ...</h3></div>)}
+                    </div>
+                </div>
             }
-        </div>
+        </div >
     );
 }
-export default Reels;
+export {Reels,initReels};

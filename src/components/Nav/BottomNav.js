@@ -10,8 +10,9 @@ import {
     userIcon, userOnIcon
 } from 'helpers/importIcons';
 
-import { initPostList } from 'components/Post/PostList'
-import { initPostGrid } from 'components/Post/PostGrid'
+import { initPostList } from 'components/Post/PostList';
+import { initPostGrid } from 'components/Post/PostGrid';
+import { initReels } from 'pages/NavBottom/Reels';
 import { initNotif } from 'pages/NavBottom/Notif';
 
 const BottomNav = () => {
@@ -29,7 +30,7 @@ const BottomNav = () => {
             <div id='explore' className="nav-icons" onClick={() => navigate('/explore')} onDoubleClick={() => initPostGrid()}>
                 <img src={window.location.pathname === '/explore' ? exploreOnIcon : exploreIcon} alt="explore" />
             </div>
-            <div id='reels' className="nav-icons" onClick={() => navigate('/reels')} onDoubleClick={() => alert('refresh')}>
+            <div id='reels' className="nav-icons" onClick={() => navigate('/reels')} onDoubleClick={() => initReels()}>
                 <img src={window.location.pathname === '/reels' ? reelOnIcon : reelIcon} alt="reels" />
             </div>
             <div id='notif' className="nav-icons" onClick={() => navigate('/notif')} onDoubleClick={() => initNotif()}>

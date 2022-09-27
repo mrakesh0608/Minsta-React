@@ -8,6 +8,7 @@ import 'css/NavHeadBottom.css';
 import { AuthContextProvider } from 'context/AuthContext';
 import { SocketContextProvider } from 'context/SocketContext';
 import { PostListContextProvider } from 'context/PostListContext';
+import { ReelContextProvider } from 'context/ReelContext';
 import { PostImgContextProvider } from 'context/PostImgContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,9 +16,11 @@ root.render(
     <AuthContextProvider>
         <SocketContextProvider>
             <PostListContextProvider>
-                <PostImgContextProvider>
-                    <App />
-                </PostImgContextProvider>
+                <ReelContextProvider>
+                    <PostImgContextProvider>
+                        <App />
+                    </PostImgContextProvider>
+                </ReelContextProvider>
             </PostListContextProvider>
         </SocketContextProvider>
     </AuthContextProvider>

@@ -11,7 +11,7 @@ export default ({ c }) => {
             <div>
                 <p>
                     <strong><UserLink Username={c.Username} /></strong>
-                    {c.cmt}
+                    <span>{c.cmt}</span>
                 </p>
                 <p>
                     <sub className='time'>{timeDiff(c.time)}</sub>
