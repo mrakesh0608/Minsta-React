@@ -6,7 +6,7 @@ import useReelEvents from 'hooks/events/useReelEvents';
 
 import UserImgNameFollow from 'components/User/UserImgNameFollow';
 
-import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon } from 'helpers/importIcons';
+import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon, playIcon } from 'helpers/importIcons';
 import { PreLoad } from 'helpers/PreLoad';
 
 PreLoad();
@@ -26,29 +26,19 @@ export default ({ reel: data, setCurrentPlayingVideo }) => {
     }
 
     useEffect(() => {
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                const reel = entry.target.querySelector('video');
-                if (entry.isIntersecting) {
-                    reel.play();
-                    console.log(entry.target.id, 'playing');
-                    setCurrentPlayingVideo(reel);
-                }
-                else {
-                    console.log(entry.target.id, 'paused');
-                    reel.pause();
-                }
-            })
-        }, {
-            root: null,
-            threshold: 1
-        });
-        observer.observe(document.getElementById(reel._id));
-        return () => observer.disconnect();
-    }, [])
-    useEffect(() => {
+        const video = document.getElementById(reel._id).querySelector('video');
+        video.addEventListener('pause', () => {
+            document.getElementById(reel._id).querySelector('.pause').style.display = 'block';
+        })
+        video.addEventListener('play', () => {
+            document.getElementById(reel._id).querySelector('.pause').style.display = 'none';
+        })
         if (reel._id === lastViewed) {
             document.getElementById(lastViewed).scrollIntoView();
+        }
+        return () => {
+            video.removeEventListener('pause', () => { });
+            video.removeEventListener('play', () => { });
         }
     }, [])
     return (
@@ -57,6 +47,10 @@ export default ({ reel: data, setCurrentPlayingVideo }) => {
                 <h3>Reels</h3>
             </div>
             <video src={reel.reelData} loop onClick={(e) => handleReel(e.target)} />
+            <button className="pause"
+                onClick={(e) => handleReel(document.getElementById(reel._id).querySelector('video'))}>
+                <img src={playIcon} alt="pause" />
+            </button>
             <div className="videoFooter">
                 <div className='leftFooter'>
                     <UserImgNameFollow Username={reel.Username} userId={reel.userId} />

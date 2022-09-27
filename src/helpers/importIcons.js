@@ -28,6 +28,7 @@ import likedIcon from 'icons/liked.png';
 import commentIcon from 'icons/comment.png';
 import moreIcon from 'icons/more.png';
 import waveIcon from 'icons/wave.png';
+import playIcon from 'icons/play.png';
 //Other Ends
 export {
     homeIcon, homeOnIcon,
@@ -41,5 +42,5 @@ export {
     shareIcon,clockIcon,
     likeIcon,likedIcon,
     commentIcon,moreIcon,
-    waveIcon
+    waveIcon,playIcon
 }

@@ -61,6 +61,30 @@ const Reels = () => {
         const element = document.getElementById('reel-list');
         if (element.requestFullscreen) element.requestFullscreen();
     }
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries, observer) => {
+            // console.log(entries);
+            entries.forEach(entry => {
+                const reel = entry.target.querySelector('video');
+                if (entry.isIntersecting) {
+                    reel.play();
+                    // console.log(entry.target.id, 'playing');
+                    setCurrentPlayingVideo(reel);
+                }
+                else {
+                    // console.log(entry.target.id, 'paused');
+                    reel.pause();
+                }
+            })
+        }, {
+            root: document.getElementById('reel-list'),
+            threshold: 1
+        });
+        reels?.map(reel => {
+            observer.observe(document.getElementById(reel._id));
+        })
+        return () => observer.disconnect();
+    }, [reels])
     return (
         <div id="Reels">
             {reels.length === 0 ?
