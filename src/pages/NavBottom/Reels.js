@@ -14,6 +14,8 @@ const Reels = () => {
     const limit = 1;
     const { fetchData, isError, isPending } = useFetch();
 
+    const [currentPlayingVideo, setCurrentPlayingVideo] = useState(null);
+
     const [isScrollLoad, setIsScrollLoad] = useState(false);
     const { ScrollListen } = EleScrollLoad(setIsScrollLoad, '#reel-list');
 
@@ -26,8 +28,18 @@ const Reels = () => {
 
     useEffect(() => {
         initReels = initialize;
-        LoadMore();
+        if (reels.length === 0) LoadMore();
     }, [])
+    useEffect(() => {
+        return () => {
+            if (currentPlayingVideo) {
+                dispatch({
+                    type: 'SET_LAST_VIEWED',
+                    payload: currentPlayingVideo.closest('.reel').id
+                });
+            }
+        }
+    }, [currentPlayingVideo])
     const LoadMore = async () => {
         ScrollListen(false);
         fetchData({
@@ -45,7 +57,6 @@ const Reels = () => {
             }
         })
     }
-    const [currentPlayingVideo, setCurrentPlayingVideo] = useState(null);
     const openFullscreen = () => {
         const element = document.getElementById('reel-list');
         if (element.requestFullscreen) element.requestFullscreen();
@@ -65,7 +76,7 @@ const Reels = () => {
                         <p>for Better Experience, <span onClick={() => openFullscreen()}>open</span> Full Screen mode .</p>
                         <div onClick={(e) => { e.target.closest('#fullScreen').remove() }}>X</div>
                     </div>
-                    <div id="reel-list" onScroll={e=>console.log(e)}>
+                    <div id='reel-list'>
                         {reels.map(reel =>
                             <Reel key={reel._id} reel={reel} setCurrentPlayingVideo={setCurrentPlayingVideo} />
                         )}
@@ -83,4 +94,4 @@ const Reels = () => {
         </div >
     );
 }
-export {Reels,initReels};
+export { Reels, initReels };

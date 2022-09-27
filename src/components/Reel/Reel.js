@@ -1,14 +1,20 @@
-import {useNavigate} from 'react-router-dom';
-import UserImgNameFollow from 'components/User/UserImgNameFollow';
-import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon } from 'helpers/importIcons';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { useReelContext } from 'hooks/context/useReelContext';
 import useReelEvents from 'hooks/events/useReelEvents';
+
+import UserImgNameFollow from 'components/User/UserImgNameFollow';
+
+import { shareIcon, likeIcon, likedIcon, commentIcon, moreIcon, waveIcon } from 'helpers/importIcons';
 import { PreLoad } from 'helpers/PreLoad';
+
 PreLoad();
-const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
+
+export default ({ reel: data, setCurrentPlayingVideo }) => {
+    const { lastViewed } = useReelContext();
     const navigate = useNavigate();
     const [reel, setReel] = useState(data);
-    const ref = useRef();
     const { handleLikes, handleShare } = useReelEvents({ setReel });
 
     const handleReel = (video) => {
@@ -18,34 +24,39 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
         }
         else video.pause();
     }
-    
+
     useEffect(() => {
-        // console.log(reel);
-        if (!ref.current) return;
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-                const reel = entry.target.querySelector('video')
-                if (entry.isIntersecting) reel.play();
+                const reel = entry.target.querySelector('video');
+                if (entry.isIntersecting) {
+                    reel.play();
+                    setCurrentPlayingVideo(reel);
+                }
                 else reel.pause();
-                setCurrentPlayingVideo(reel);
+                console.log(entry.target,entry.isIntersecting);
             })
-        },{
+        }, {
             root: null,
             threshold: 1
         });
-        observer.observe(ref.current);
+        observer.observe(document.getElementById(reel._id));
         return () => observer.disconnect();
-    }, [ref.current])
-    
+    }, [reel._id])
+    useEffect(() => {
+        if (reel._id === lastViewed) {
+            document.getElementById(lastViewed).scrollIntoView();
+        }
+    }, [])
     return (
-        <div className="reel" id={reel._id} onDoubleClick={(e) => handleLikes(e, reel)} ref={ref}>
+        <div className="reel" id={reel._id} onDoubleClick={(e) => handleLikes(e, reel)}>
             <div className="videoHeader">
                 <h3>Reels</h3>
             </div>
             <video src={reel.reelData} loop onClick={(e) => handleReel(e.target)} />
             <div className="videoFooter">
                 <div className='leftFooter'>
-                    <UserImgNameFollow Username={reel.Username} userId={reel.userId}  />
+                    <UserImgNameFollow Username={reel.Username} userId={reel.userId} />
                     <p>{reel.quote}</p>
                     {reel.musicName &&
                         <div className='music'>
@@ -59,7 +70,7 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
                         <img className={`reelIcons ${reel.iLiked ? 'notInvertIcons' : ''}`} src={reel.iLiked ? likedIcon : likeIcon} alt="like" onClick={(e) => handleLikes(e, reel)} />
                         <span>{reel.likes}</span>
                     </div>
-                    <div onClick={()=>navigate(`/comments/${reel.commentId}`)}>
+                    <div onClick={() => navigate(`/comments/${reel.commentId}`)}>
                         <img className='reelIcons' src={commentIcon} alt="comment" />
                         <span>{reel.comments}</span>
                     </div>
@@ -75,4 +86,3 @@ const Reel = ({ reel: data, setCurrentPlayingVideo }) => {
         </div>
     );
 }
-export default Reel;

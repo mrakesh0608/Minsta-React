@@ -16,6 +16,12 @@ export const reelReducer = (state, action) => {
                 noMoreReels: true
             }
         }
+        case 'SET_LAST_VIEWED': {
+            return {
+                ...state,
+                lastViewed: action.payload
+            }
+        }
         case 'ADD_REELS': {
             if (state.reels.length === 0) {
                 return {
@@ -43,7 +49,8 @@ export const reelReducer = (state, action) => {
             return {
                 reels: [],
                 page: 0,
-                noMorereels: false
+                noMorereels: false,
+                lastViewed:null
             }
         }
         default:
@@ -55,7 +62,8 @@ export const ReelContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reelReducer, {
         reels: [],
         page: 0,
-        noMoreReels: false
+        noMoreReels: false,
+        lastViewed:null
     })
 
     console.log('ReelContext state:', state)
