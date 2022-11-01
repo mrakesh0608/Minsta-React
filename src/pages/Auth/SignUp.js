@@ -36,7 +36,7 @@ const SignUp = () => {
                             onChange={e => { setMobEmail(e.target.value) }}
                             minLength={4} autoFocus
                         />
-                        <label className="form-label">Phone number, Username or email</label>
+                        <label className="form-label">Phone number or email</label>
                     </div>
                     <div className='input-lable'>
                         <input
